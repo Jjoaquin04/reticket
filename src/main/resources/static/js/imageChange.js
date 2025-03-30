@@ -13,6 +13,5 @@ function changeImage(direction) {
 }
 
 window.onload = function() {
-    
     document.getElementById("slide-image").src = images[0];
 }
