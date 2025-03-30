@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
+
+body{
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    background-color: black;
+    color: white;
+    align-items: center;
+    padding: 0 20px;
+    height: 90px;
+}
+.div-left{
+    display: flex;
+    align-items: center;
+    & > h1{
+        border-right: 2px solid white;
+        padding-right: 20px
+    }
+}
+.main-nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding-left: 20px;
+}
+.main-nav li {
+    position: relative;
+    margin-right: 20px;
+}
+.dropbtn {
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    padding: 10px;
+    display: block;
+    transition: background-color 0.3s;
+    &:hover{
+        background-color: #f9f9f9;
+        color: black;
+    }
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    font-size: 20px;
+    z-index: auto;
+    & > a{
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+    & > a:hover {
+        background-color: lightblue;
+    }
+}
+.search-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+}
+.input-text{
+    height: 30px;
+    width: 400px;
+    border-radius: 15px;
+    border: 1px solid black;
+}
+.search-button{
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 5px 10px;
+    margin-left: 10px;
+    transition: all 0.3s;
+    &:hover{
+        background-color: lightblue;
+        color: black;
+    }
+}
+.div-right{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    &:hover{
+        background-color: lightblue;
+        opacity: 0.8;
+    }
+}
+
+.div-right p {
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+.div-right a {
+    display: block;
+    line-height: 0;
+}
+

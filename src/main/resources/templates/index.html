@@ -1,22 +1,55 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ReTicket</title>
-    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/header.css">
+    <link rel="stylesheet" href="../static/css/mainPage.css">
+    <script src="../static/js/imageChange.js"></script>
 </head>
-<body class="body">
+<body>
     <header>
-        <div class="header-left">
+        <div class="div-left">
             <h1>ReTicket</h1>
+            <nav class="main-nav">
+                <ul>
+                    <li class="dropdown">
+                        <a href="/events" class="dropbtn">Events</a>
+                        <div class="dropdown-content">
+                            <a href="/concerts">Concerts</a>
+                            <a href="/festivals">Festivals</a>
+                            <a href="/sports">Sports</a>
+                            <a href="/theater">Theater</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
         </div>
-        <div class="header-right">
+        <div class="div-center">
+            <form action="/search" method="get">
+                <div class="search-container">
+                    <input class="input-text" type="text" placeholder="Busca un artista, evento o recinto" name="q">
+                    <button type="submit" class="search-button">
+                        <img src="../static/img//icons/lupa.webp" alt="Buscar" width="20px" height="20px">
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="div-right">
             <a href="">
-                <img src="../static/img/usuario.webp" alt="Perfil de usuario" height="35px">
+                <img src="../static/img/icons/usuario.webp" alt="Perfil de usuario" height="35px">
             </a>
+            <p>Cuenta</p>
         </div>
     </header>
+    <div class="image-slider">
+        <button class="prev-btn" onclick="changeImage(-1)">❮</button>
+        <img id="slide-image" alt="Imagenes">
+        <button class="next-btn" onclick="changeImage(1)">❯</button>
+        <div class="slider-indicators" id="slider-indicators">
+           
+        </div>
+    </div>
 </body>
 </html>
