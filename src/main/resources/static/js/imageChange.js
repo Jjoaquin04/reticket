@@ -1,12 +1,8 @@
 const images = [
-    "../static/img/cantantes/QuevedoConGafas.webp",
-    "../static/img/festivales/festivalCocaCola.webp",
-    "../static/img/teatros/teatroLara.webp",
     "../img/cantantes/QuevedoBanner.webp",
-    "../img/festivales/festivalCocaCola.webp",
-    "../img/teatros/teatroLara.webp",
-]
-
+    "../img/cantantes/AnnuelAABanner.webp",
+    "../img/cantantes/BadBunnyBanner.webp",
+];
 
 let indiceActual = 0;
 
@@ -17,4 +13,9 @@ function changeImage(direction) {
 
 window.onload = function() {
     document.getElementById("slide-image").src = images[0];
-}
+
+    // Cambiar imagen automáticamente cada 5 segundos
+    setInterval(() => {
+        changeImage(1); // Avanzar a la siguiente imagen
+    }, 5000);
+};
