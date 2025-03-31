@@ -74,17 +74,17 @@ public class DataBaseInicializer {
         eventRepository.saveAll(events);
         
         // Crear usuarios
-        User user1 = new User("juan", "password123", "juan@example.com");
-        User user2 = new User("maria", "securepass", "maria@example.com");
-        User user3 = new User("admin", "admin123", "admin@reticket.com");
+        User_ user1 = new User_("juan", "password123", "juan@example.com");
+        User_ user2 = new User_("maria", "securepass", "maria@example.com");
+        User_ user3 = new User_("admin", "admin123", "admin@reticket.com");
         
         userRepository.saveAll(Arrays.asList(user1, user2, user3));
         
         // Crear tickets
-        Ticket ticket1 = new Ticket(quevedo, "A1", "available", "");
-        Ticket ticket2 = new Ticket(quevedo, "A2", "booked", user1.getId().toString());
-        Ticket ticket3 = new Ticket(cocaColaFest, "VIP1", "available", "");
-        Ticket ticket4 = new Ticket(realMadrid, "Grada 4 - 56", "booked", user2.getId().toString());
+        Ticket ticket1 = new Ticket(quevedo, "A1", "");
+        Ticket ticket2 = new Ticket(quevedo, "A2", user1.getId().toString());
+        Ticket ticket3 = new Ticket(cocaColaFest, "VIP1", "");
+        Ticket ticket4 = new Ticket(realMadrid, "Grada 4 - 56",user2.getId().toString());
         
         ticketRepository.saveAll(Arrays.asList(ticket1, ticket2, ticket3, ticket4));
     }

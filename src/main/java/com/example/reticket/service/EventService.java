@@ -42,13 +42,13 @@ public class EventService {
         return eventRepository.findByEventType(eventType);
     }
     
-    public List<Event> searchEventsByName(String keyword) {
-        return eventRepository.findByNameContainingIgnoreCase(keyword);
+    public Event searchEventsByName(String keyword) {
+        return eventRepository.findByName(keyword);
     }
 
     // Update
     public Event updateEvent(Event event) {
-        return eventRepository.save(event);
+        return eventRepository.saveAndFlush(event);
     }
 
     // Delete
