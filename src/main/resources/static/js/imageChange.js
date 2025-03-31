@@ -2,6 +2,9 @@ const images = [
     "../static/img/cantantes/QuevedoConGafas.webp",
     "../static/img/festivales/festivalCocaCola.webp",
     "../static/img/teatros/teatroLara.webp",
+    "../img/cantantes/QuevedoBanner.webp",
+    "../img/festivales/festivalCocaCola.webp",
+    "../img/teatros/teatroLara.webp",
 ]
 
 

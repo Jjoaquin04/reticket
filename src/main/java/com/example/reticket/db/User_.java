@@ -8,9 +8,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.CascadeType;
 
 @Entity
-public class User {
+public class User_{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -18,9 +20,14 @@ public class User {
     private String username;
     private String password;
     private String email;
+    
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Ticket> tickets = new ArrayList<>();
 
-    public User(String username, String password, String email) {
+    public User_() {
+    }
+
+    public User_(String username, String password, String email) {
         this.username = username;
         this.password = password;
         this.email = email;
