@@ -11,15 +11,14 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    //Hola
     private Event event;
     private String seatNumber;
-    private String status; // e.g., "available", "booked", "cancelled"
     private String userId; 
 
-    public Ticket(Event event, String seatNumber, String status, String userId) {
+    public Ticket(Event event, String seatNumber, String userId) {
         this.event = event;
         this.seatNumber = seatNumber;
-        this.status = status;
         this.userId = userId;
     }
     public Long getId() {
@@ -36,12 +35,6 @@ public class Ticket {
     }
     public void setSeatNumber(String seatNumber) {
         this.seatNumber = seatNumber;
-    }
-    public String getStatus() {
-        return status;
-    }
-    public void setStatus(String status) {
-        this.status = status;
     }
     public String getUserId() {
         return userId;
