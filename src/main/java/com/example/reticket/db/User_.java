@@ -8,6 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.CascadeType;
 
 @Entity
 public class User_{
@@ -18,6 +20,8 @@ public class User_{
     private String username;
     private String password;
     private String email;
+    
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Ticket> tickets = new ArrayList<>();
 
     public User_() {

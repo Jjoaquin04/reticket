@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Ticket {
@@ -11,16 +12,23 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    //Hola
+    @ManyToOne
     private Event event;
+    
     private String seatNumber;
     private String userId; 
+
+    // Constructor vacío necesario para JPA
+    public Ticket() {
+    }
 
     public Ticket(Event event, String seatNumber, String userId) {
         this.event = event;
         this.seatNumber = seatNumber;
         this.userId = userId;
     }
+    
+    // Getters y setters sin cambios
     public Long getId() {
         return id;
     }
