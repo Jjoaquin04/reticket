@@ -35,7 +35,8 @@ public class DataBaseInicializer {
             "Wizink Center, Madrid", 
             "Concierto de Quevedo presentando su nuevo álbum", 
             "../static/img/cantantes/fotoQuevedo.webp",
-            "Live Nation"
+            "Live Nation",
+            Event.EventType.CONCERT
         );
         
         Event cocaColaFest = new Event(
@@ -44,7 +45,8 @@ public class DataBaseInicializer {
             "IFEMA, Madrid", 
             "Festival con los mejores artistas nacionales e internacionales", 
             "../static/img/festivales/festivalCocaCola.webp",
-            "Coca-Cola"
+            "Coca-Cola",
+            Event.EventType.FESTIVAL
         );
         
         Event realMadrid = new Event(
@@ -53,16 +55,18 @@ public class DataBaseInicializer {
             "Santiago Bernabéu, Madrid", 
             "El clásico de la liga española", 
             "../static/img/deportes/clasico.webp",
-            "LaLiga"
+            "LaLiga",
+            Event.EventType.SPORTS
         );
         
         Event teatro = new Event(
-            "El Rey León", 
-            LocalDateTime.of(2024, 6, 30, 20, 0), 
-            "Teatro Lara, Madrid", 
-            "El musical más famoso del mundo", 
-            "../static/img/teatros/teatroLara.webp",
-            "Stage Entertainment"
+            "Hamlet", 
+            LocalDateTime.of(2024, 9, 10, 20, 0), 
+            "Teatro Español, Madrid", 
+            "Representación de la obra clásica de Shakespeare", 
+            "../static/img/teatro/hamlet.webp",
+            "Teatro Nacional",
+            Event.EventType.THEATER
         );
         
         // Guardar eventos
