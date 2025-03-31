@@ -42,10 +42,38 @@
             <p>Cuenta</p>
         </div>
     </header>
+
     <div class="image-slider">
+        <button class="next-btn" onclick="changeImage(1)">❯</button>
         <button class="prev-btn" onclick="changeImage(-1)">❮</button>
         <img id="slide-image" alt="Imagenes">
-        <button class="next-btn" onclick="changeImage(1)">❯</button>
+    </div>
+
+    <div class="eventos">
+        <br>
+        <br>
+        <hr>
+        <h2>Los más recomendados</h2>
+        <div class="recomendados">
+            <div class="recomendado-item evento" onclick="location.href='/event/1'">
+                <img src="../static/img/eventos/concierto1.webp" alt="Concierto 1">
+                <h3>Concierto de Rock</h3>
+                <p>Fecha: 25 de diciembre</p>
+                <p>Ubicación: Estadio Nacional</p>
+            </div>
+            <div class="recomendado-item evento" onclick="location.href='/event/2'">
+                <img src="../static/img/eventos/concierto2.webp" alt="Concierto 2">
+                <h3>Festival de Jazz</h3>
+                <p>Fecha: 15 de enero</p>
+                <p>Ubicación: Centro Cultural</p>
+            </div>
+            <div class="recomendado-item evento" onclick="location.href='/event/3'">
+                <img src="../static/img/eventos/concierto3.webp" alt="Concierto 3">
+                <h3>Teatro Musical</h3>
+                <p>Fecha: 5 de febrero</p>
+                <p>Ubicación: Teatro Municipal</p>
+            </div>
+        </div>
     </div>
     <script src="../static/js/imageChange.js"></script>
 </body>

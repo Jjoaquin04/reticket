@@ -1,5 +1,5 @@
 const images = [
-    "../static/img/cantantes/fotoQuevedo.webp",
+    "../static/img/cantantes/QuevedoConGafas.webp",
     "../static/img/festivales/festivalCocaCola.webp",
     "../static/img/teatros/teatroLara.webp",
 ]
