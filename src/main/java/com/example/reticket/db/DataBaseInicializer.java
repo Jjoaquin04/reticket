@@ -30,12 +30,12 @@ public class DataBaseInicializer {
     public void initDatabase() {
         // Crear eventos de ejemplo
         Event quevedo = new Event(
-            "Quevedo en concierto", 
+            "Conciert Quevedo", 
             LocalDateTime.of(2024, 7, 15, 21, 0), 
-            "Wizink Center, Madrid", 
-            "Concierto de Quevedo presentando su nuevo álbum", 
-            "../static/img/cantantes/fotoQuevedo.webp",
-            "Live Nation",
+            "Movistar Arena, Madrid", 
+            "Ultimas entradas para Quevedo en el Movistar Arena", 
+            "img/cantantes/Quevedo.webp",
+            "Imagen de quevedo",
             Event.EventType.CONCERT
         );
         
@@ -44,8 +44,8 @@ public class DataBaseInicializer {
             LocalDateTime.of(2024, 8, 5, 17, 0), 
             "IFEMA, Madrid", 
             "Festival con los mejores artistas nacionales e internacionales", 
-            "../static/img/festivales/festivalCocaCola.webp",
-            "Coca-Cola",
+            "img/festivales/festivalCocaCola.webp",
+            "Imagen del festival Coca-Cola",
             Event.EventType.FESTIVAL
         );
         
@@ -54,8 +54,8 @@ public class DataBaseInicializer {
             LocalDateTime.of(2024, 10, 20, 21, 0), 
             "Santiago Bernabéu, Madrid", 
             "El clásico de la liga española", 
-            "../static/img/deportes/clasico.webp",
-            "LaLiga",
+            "img/deportes/Real-Madrid.webp",
+            "Imagen del Santiago Bernabéu",
             Event.EventType.SPORTS
         );
         
@@ -64,8 +64,8 @@ public class DataBaseInicializer {
             LocalDateTime.of(2024, 9, 10, 20, 0), 
             "Teatro Español, Madrid", 
             "Representación de la obra clásica de Shakespeare", 
-            "../static/img/teatro/hamlet.webp",
-            "Teatro Nacional",
+            "../img/teatros/teatroLara.webp",
+            "Imagen del teatro Lara de Madrid",
             Event.EventType.THEATER
         );
         

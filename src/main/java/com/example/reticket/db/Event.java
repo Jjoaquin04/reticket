@@ -30,20 +30,20 @@ public class Event {
     private String location;
     private String description;
     private String imageURL;
-    private String organizer;
+    private String altImage;
     
     // Default constructor for JPA
     public Event() {
     }
     
     public Event(String name, LocalDateTime date, String location, String description, 
-                 String imageURL, String organizer, EventType eventType) {
+                 String imageURL,String altImage,EventType eventType) {
         this.name = name;
         this.date = date;
         this.location = location;
         this.description = description;
         this.imageURL = imageURL;
-        this.organizer = organizer;
+        this.altImage = altImage;
         this.eventType = eventType;
     }
 
@@ -90,13 +90,11 @@ public class Event {
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
     }
-    
-    public String getOrganizer() {
-        return organizer;
+    public void setAltImage(String altImage) {
+        this.altImage = altImage;
     }
-    
-    public void setOrganizer(String organizer) {
-        this.organizer = organizer;
+    public String getAltImage() {
+        return altImage;
     }
     
     public EventType getEventType() {

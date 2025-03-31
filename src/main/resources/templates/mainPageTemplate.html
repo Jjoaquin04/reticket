@@ -61,6 +61,21 @@
                 image: string (path to the image)
                 organizer: string (name of the organizer) 
             -->
+            {{#eventos}}
+            <div class="evento">
+                <img src="{{imageURL}}" alt="{{altImage}}" class="evento-imagen">
+                <h3 class="title-event">{{name}}</h3>
+                <p class="description-event">{{description}}</p>
+                <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
+                    <p class="date-event">{{date}}</p>
+                    <p class="location-event">{{location}}</p>
+                </div>
+                <button class="buy-button-event">Comprar</button>
+            </div>
+            {{/eventos}}
+
+            <!-- Estos de abajo se deben borrar pero los dejo para que veais la diferencia-->
+
             <div class="evento">
                 <img src="img/cantantes/AnuelAA.webp" alt="AnuelAA" class="evento-imagen">
                 <h3 class="title-event">Concierto AnuelAA</h3>
