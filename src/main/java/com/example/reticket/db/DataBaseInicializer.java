@@ -83,7 +83,5 @@ public class DataBaseInicializer {
         Ticket ticket4 = new Ticket(realMadrid, "Grada 4 - 56", "booked", user2.getId().toString());
         
         ticketRepository.saveAll(Arrays.asList(ticket1, ticket2, ticket3, ticket4));
-        
-        System.out.println("Base de datos inicializada con datos de ejemplo");
     }
 }

@@ -3,6 +3,8 @@ package com.example.reticket.db;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -13,20 +15,29 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    public enum EventType{
+        CONCERT,
+        FESTIVAL,
+        THEATER,
+        SPORTS
+    }
+
+    @Enumerated(EnumType.STRING)
+    private EventType eventType;
+
     private String name;
     private LocalDateTime date;
     private String location;
     private String description;
     private String imageURL;
-    private String ownerEvent;
+
     
-    public Event(String name,LocalDateTime date, String location,String description,String imageURL,String ownerEvent) {
+    public Event(String name,LocalDateTime date, String location,String description,String imageURL) {
         this.name = name;
         this.date = date;
         this.location = location;
         this.description = description;
         this.imageURL = imageURL;
-        this.ownerEvent = ownerEvent;
     }
 
     public Long getId() {
@@ -63,11 +74,6 @@ public class Event {
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
     }
-    public String getOwnerEvent() {
-        return ownerEvent;
-    }
-    public void setOwnerEvent(String ownerEvent) {
-        this.ownerEvent = ownerEvent;
-    }
+    
     
 }
