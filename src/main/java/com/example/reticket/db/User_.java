@@ -10,7 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class User {
+public class User_{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -20,7 +20,10 @@ public class User {
     private String email;
     private List<Ticket> tickets = new ArrayList<>();
 
-    public User(String username, String password, String email) {
+    public User_() {
+    }
+
+    public User_(String username, String password, String email) {
         this.username = username;
         this.password = password;
         this.email = email;

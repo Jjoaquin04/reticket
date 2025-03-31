@@ -42,5 +42,4 @@ public class Ticket {
     public void setUserId(String userId) {
         this.userId = userId;
     }
-
 }

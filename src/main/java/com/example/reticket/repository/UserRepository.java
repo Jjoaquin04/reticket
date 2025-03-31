@@ -1,18 +1,22 @@
 package com.example.reticket.repository;
 
-
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.example.reticket.db.User;
+import com.example.reticket.db.User_;
 
-public interface UserRepository extends JpaRepository<User,Long>{
+public interface UserRepository extends JpaRepository<User_,Long> {
     
-    List<User> findAll();
-    Optional<User> findByUsername(String username);
-    Optional<User> findByEmail(String email);
+    // Find user by username
+    Optional<User_> findByUsername(String username);
+    
+    // Find user by email
+    Optional<User_> findByEmail(String email);
+    
+    // Check if username exists
     boolean existsByUsername(String username);
+    
+    // Check if email exists
     boolean existsByEmail(String email);
 }
