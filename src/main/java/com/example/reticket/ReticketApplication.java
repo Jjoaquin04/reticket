@@ -9,5 +9,4 @@ public class ReticketApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ReticketApplication.class, args);
 	}
-
 }

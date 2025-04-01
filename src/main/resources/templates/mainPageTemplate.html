@@ -61,7 +61,7 @@
                 image: string (path to the image)
                 organizer: string (name of the organizer) 
             -->
-            {{#eventos}}
+            {{#mainEvents}}
             <div class="evento">
                 <img src="{{imageURL}}" alt="{{altImage}}" class="evento-imagen">
                 <h3 class="title-event">{{name}}</h3>
@@ -72,7 +72,7 @@
                 </div>
                 <button class="buy-button-event">Comprar</button>
             </div>
-            {{/eventos}}
+            {{/mainEvents}}
         </div>
     </div>
     <script src="js/imageChange.js"></script>
