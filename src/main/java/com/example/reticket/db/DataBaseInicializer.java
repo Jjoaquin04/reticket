@@ -30,7 +30,7 @@ public class DataBaseInicializer {
     public void initDatabase() {
         // Crear eventos de ejemplo
         Event quevedo = new Event(
-            "Conciert Quevedo", 
+            "Concierto Quevedo", 
             LocalDateTime.of(2024, 7, 15, 21, 0), 
             "Movistar Arena, Madrid", 
             "Ultimas entradas para Quevedo en el Movistar Arena", 

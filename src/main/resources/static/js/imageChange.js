@@ -19,3 +19,10 @@ window.onload = function() {
         changeImage(1); // Avanzar a la siguiente imagen
     }, 5000);
 };
+
+document.addEventListener("DOMContentLoaded", () => {
+    const dateElements = document.querySelectorAll(".date-event");
+    dateElements.forEach((element) => {
+        element.textContent = element.textContent.replace("T", " ");
+    });
+});

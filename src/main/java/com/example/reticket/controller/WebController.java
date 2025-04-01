@@ -31,7 +31,7 @@ public class WebController {
     @GetMapping("/mainPage")
     public String mainPage(Model model) {
         List<Event> eventos = eventService.getAllEvents();
-        model.addAttribute("eventos",eventos);
+        model.addAttribute("eventos", eventos);
         return "mainPageTemplate";
     }
     
