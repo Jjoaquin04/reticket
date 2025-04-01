@@ -54,7 +54,4 @@ public class WebController {
         model.addAttribute("theaters", theaterEvents);
         return "theaterTemplate";
     }
-    
-    
-    
 }
