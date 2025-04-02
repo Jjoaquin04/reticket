@@ -16,10 +16,10 @@
         <img id="slide-image" alt="Imagenes">
     </div>
 
-    <div class="eventos">
+    <div class="events">
         <hr>
         <h2>Los más recomendados</h2>
-        <div class="recomendados">
+        <div class="recommended-events">
             <!-- Event:
                 name: string
                 date: LocalDateTime
@@ -29,7 +29,7 @@
                 organizer: string (name of the organizer) 
             -->
             {{#mainEvents}}
-            <div class="evento">
+            <div class="event">
                 <img src="{{imageURL}}" alt="{{altImage}}" class="evento-imagen">
                 <h3 class="title-event">{{name}}</h3>
                 <p class="description-event">{{description}}</p>
@@ -43,6 +43,7 @@
         </div>
     </div>
     <script src="js/imageChange.js"></script>
+    <script src="js/main.js"></script>
     {{> footer}}
 </body>
 </html>
