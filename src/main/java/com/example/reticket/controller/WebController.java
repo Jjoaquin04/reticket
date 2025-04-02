@@ -28,30 +28,30 @@ public class WebController {
     public String allEventsPage(Model model)    {
         List<Event> eventos = eventService.getAllEvents();
         model.addAttribute("events", eventos);
-        return "allEventsTemplate";
+        return "eventsTemplate";
     }
     @GetMapping("/concerts")
     public String concertsPage(Model model) {
         List<Event> concertsEvents = eventService.getEventsByType(Event.EventType.CONCERT);
-        model.addAttribute("concerts", concertsEvents);
-        return "concertsTemplate";
+        model.addAttribute("events", concertsEvents);
+        return "eventsTemplate";
     }
     @GetMapping("/festivals")
     public String festivalPage(Model model) {
         List<Event> festivalEvents = eventService.getEventsByType(Event.EventType.FESTIVAL);
-        model.addAttribute("festival",festivalEvents);
-        return "festivalTemplate";
+        model.addAttribute("events",festivalEvents);
+        return "eventsTemplate";
     }
     @GetMapping("/sports")
     public String sportsPage(Model model) {
         List<Event> sportsEvents = eventService.getEventsByType(Event.EventType.SPORTS);
-        model.addAttribute("sports", sportsEvents);
-        return "sportsTemplate";
+        model.addAttribute("events", sportsEvents);
+        return "eventsTemplate";
     }
     @GetMapping("/theater")
     public String theaterPage(Model model)  {
         List<Event> theaterEvents = eventService.getEventsByType(Event.EventType.THEATER);
-        model.addAttribute("theaters", theaterEvents);
-        return "theaterTemplate";
+        model.addAttribute("events", theaterEvents);
+        return "eventsTemplate";
     }
 }
