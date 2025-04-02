@@ -1,6 +1,7 @@
 header{
     position: fixed;
     width: 98%;
+    z-index: 2;
 }
 
 #side-panel{
@@ -12,7 +13,7 @@ header{
     background-color: #f4f4f4;
     padding: 20px;
     box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-    z-index: -1;
+    z-index: 1;
 }
 
 .filter-group {
@@ -29,6 +30,7 @@ header{
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    cursor: pointer;
 }
 
 .filter-group select{
@@ -36,6 +38,7 @@ header{
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    cursor: pointer;
 }
 
 #apply-filters{
@@ -77,8 +80,65 @@ header{
 
 .event img{
     max-width: 100%;
-    height: auto;
+    height: 200px;
     width: 300px;
     object-fit: cover;
     border-radius: 4px;
+}
+
+.event-info h3{
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.event-info p.description-event{
+    font-size: 15px;
+    color: #555;
+    margin-bottom: 0px;
+}
+
+.event-info p.date-event{
+    font-size: 0.9em;
+    color: white;
+    background-color: #d0d0d0;
+    padding: 5px;
+    border-radius: 5px;
+    transition: ease 0.3s;
+    cursor: pointer;
+
+    &:hover{
+        background-color: #c0c0c0;
+    }
+}
+
+.event-info p.location-event{
+    font-size: 0.9em;
+    color: white;
+    background-color: #d0d0d0;
+    padding: 5px;
+    margin-left: 10px;
+    border-radius: 5px;
+    transition: ease 0.3s;
+    cursor: pointer;
+
+    &:hover{
+        background-color: #c0c0c0;
+    }
+}
+
+.event-info button{
+    background-color: #222;
+    color: white;
+    padding: 10px 20px;
+    margin-right: auto;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    transition: all 0.3s;
+
+    &:hover{
+        color: black;
+        background-color: lightblue;
+    }
 }
