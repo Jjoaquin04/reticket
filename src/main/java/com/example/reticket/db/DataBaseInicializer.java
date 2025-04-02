@@ -34,9 +34,11 @@ public class DataBaseInicializer {
             LocalDateTime.of(2024, 7, 15, 21, 0), 
             "Movistar Arena, Madrid", 
             "Ultimas entradas para Quevedo en el Movistar Arena", 
-            "img/cantantes/Quevedo.webp",
+            "/img/cantantes/Quevedo.webp",
             "Imagen de quevedo",
-            Event.EventType.CONCERT
+            Event.EventType.CONCERT,
+            Event.EventStatus.AVAILABLE,
+            200
         );
         
         Event cocaColaFest = new Event(
@@ -44,9 +46,11 @@ public class DataBaseInicializer {
             LocalDateTime.of(2024, 8, 5, 17, 0), 
             "IFEMA, Madrid", 
             "Festival con los mejores artistas nacionales e internacionales", 
-            "img/festivales/festivalCocaCola.webp",
+            "/img/festivales/festivalCocaCola.webp",
             "Imagen del festival Coca-Cola",
-            Event.EventType.FESTIVAL
+            Event.EventType.FESTIVAL,
+            Event.EventStatus.AVAILABLE,
+            1000
         );
         
         Event realMadrid = new Event(
@@ -54,9 +58,11 @@ public class DataBaseInicializer {
             LocalDateTime.of(2024, 10, 20, 21, 0), 
             "Santiago Bernabéu, Madrid", 
             "El clásico de la liga española", 
-            "img/deportes/Real-Madrid.webp",
+            "/img/deportes/Real-Madrid.webp",
             "Imagen del Santiago Bernabéu",
-            Event.EventType.SPORTS
+            Event.EventType.SPORTS,
+            Event.EventStatus.AVAILABLE,
+            10000
         );
         
         Event teatro = new Event(
@@ -64,9 +70,11 @@ public class DataBaseInicializer {
             LocalDateTime.of(2024, 9, 10, 20, 0), 
             "Teatro Español, Madrid", 
             "Representación de la obra clásica de Shakespeare", 
-            "../img/teatros/teatroLara.webp",
+            "/img/teatros/teatroLara.webp",
             "Imagen del teatro Lara de Madrid",
-            Event.EventType.THEATER
+            Event.EventType.THEATER,
+            Event.EventStatus.AVAILABLE,
+            50
         );
         
         // Guardar eventos

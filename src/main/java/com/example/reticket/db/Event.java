@@ -21,9 +21,17 @@ public class Event {
         THEATER,
         SPORTS
     }
+    public enum EventStatus{
+        AVAILABLE,
+        CANCELLED,
+        FINISHED,
+        SOLD_OUT
+    }
 
     @Enumerated(EnumType.STRING)
     private EventType eventType;
+    @Enumerated(EnumType.STRING)
+    private EventStatus eventStatus;
 
     private String name;
     private LocalDateTime date;
@@ -31,13 +39,14 @@ public class Event {
     private String description;
     private String imageURL;
     private String altImage;
+    private int currenNumberOfTickets;
     
     // Default constructor for JPA
     public Event() {
     }
     
     public Event(String name, LocalDateTime date, String location, String description, 
-                 String imageURL,String altImage,EventType eventType) {
+                 String imageURL,String altImage,EventType eventType,EventStatus eventStatus,int currenNumberOfTickets) {
         this.name = name;
         this.date = date;
         this.location = location;
@@ -45,6 +54,8 @@ public class Event {
         this.imageURL = imageURL;
         this.altImage = altImage;
         this.eventType = eventType;
+        this.eventStatus = eventStatus;
+        this.currenNumberOfTickets = currenNumberOfTickets;
     }
 
     public Long getId() {
@@ -103,5 +114,17 @@ public class Event {
     
     public void setEventType(EventType eventType) {
         this.eventType = eventType;
+    }
+    public int getCurrenNumberOfTickets() {
+        return currenNumberOfTickets;
+    }
+    public EventStatus getEventStatus() {
+        return eventStatus;
+    }
+    public void setCurrenNumberOfTickets(int currenNumberOfTickets) {
+        this.currenNumberOfTickets = currenNumberOfTickets;
+    }
+    public void setEventStatus(EventStatus eventStatus) {
+        this.eventStatus = eventStatus;
     }
 }

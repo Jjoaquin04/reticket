@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Events</title>
 
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/eventsPage.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/eventsPage.css">
 </head>
 <body>
     {{> header}}
@@ -52,88 +52,23 @@
                 image: string (path to the image)
                 organizer: string (name of the organizer) 
             -->
-            {{#mainEvents}}
+            {{#events}}
             <div class="event">
                 <img src="{{imageURL}}" alt="{{altImage}}" class="evento-imagen">
-                <h3 class="title-event">{{name}}</h3>
-                <p class="description-event">{{description}}</p>
-                <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
-                    <p class="date-event">{{date}}</p>
-                    <p class="location-event">{{location}}</p>
-                </div>
-                <button class="buy-button-event">Comprar</button>
-            </div>
-            {{/mainEvents}}
-
-            <!-- Eventos de prueba -->
-
-            <div class="event">
-                <img src="img/deportes/Real-Madrid.webp" alt="Partido de Fútbol" class="evento-imagen">
                 <div class="event-info">
-                    <h3 class="title-event">Partido de Fútbol: Real Madrid vs Barcelona</h3>
-                    <p class="description-event">El clásico del fútbol español en vivo.</p>
+                    <h3 class="title-event">{{name}}</h3>
+                    <p class="description-event">{{description}}</p>
                     <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
-                        <p class="date-event">2025-04-25T21:00</p>
-                        <p class="location-event">Madrid, España</p>
+                        <p class="date-event">{{date}}</p>
+                        <p class="location-event">{{location}}</p>
                     </div>
                     <button class="buy-button-event">Comprar</button>
                 </div>
             </div>
-
-            <div class="event">
-                <img src="img/cantantes/Quevedo.webp" alt="Concierto de Quevedo" class="evento-imagen">
-                <div class="event-info">
-                    <h3 class="title-event">Concierto de Quevedo</h3>
-                    <p class="description-event">Vive una noche inolvidable con los mejores éxitos de Quevedo.</p>
-                    <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
-                        <p class="date-event">2025-05-10T20:00</p>
-                        <p class="location-event">Madrid, España</p>
-                    </div>
-                    <button class="buy-button-event">Comprar</button>
-                </div>
-            </div>
-
-            <div class="event">
-                <img src="img/cantantes/BadBunny.webp" alt="Concierto de Bad Bunny" class="evento-imagen">
-                <div class="event-info">
-                    <h3 class="title-event">Concierto de Bad Bunny</h3>
-                    <p class="description-event">Disfruta del fenómeno global en su gira mundial.</p>
-                    <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
-                        <p class="date-event">2025-06-15T21:00</p>
-                        <p class="location-event">Barcelona, España</p>
-                    </div>
-                    <button class="buy-button-event">Comprar</button>
-                </div>
-            </div>
-
-            <div class="event">
-                <img src="img/teatros/TeatroLara.webp" alt="Obra de Teatro: Hamlet" class="evento-imagen">
-                <div class="event-info">
-                    <h3 class="title-event">Obra de Teatro: Hamlet</h3>
-                    <p class="description-event">Una interpretación moderna del clásico de Shakespeare.</p>
-                    <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
-                        <p class="date-event">2025-07-01T19:30</p>
-                        <p class="location-event">Sevilla, España</p>
-                    </div>
-                    <button class="buy-button-event">Comprar</button>
-                </div>
-            </div>
-
-            <div class="event">
-                <img src="img/festivales/festivalCocaCola.webp" alt="Festival de Música Electrónica" class="evento-imagen">
-                <div class="event-info">
-                    <h3 class="title-event">Festival de Música Electrónica</h3>
-                    <p class="description-event">Los mejores DJs del mundo en un solo lugar.</p>
-                    <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
-                        <p class="date-event">2025-08-20T18:00</p>
-                        <p class="location-event">Valencia, España</p>
-                    </div>
-                    <button class="buy-button-event">Comprar</button>
-                </div>
-            </div>
+            {{/events}}
         </div>
     </div>
 
-    <script src="js/main.js"></script>
+    <script src="/js/main.js"></script>
 </body>
 </html>
