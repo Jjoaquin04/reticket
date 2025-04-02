@@ -2,54 +2,54 @@ package com.example.reticket.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;  
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 import com.example.reticket.db.Event;
 import com.example.reticket.service.EventService;
 
 
-@Controller
+@RestController
 public class WebController {
-    
+
     @Autowired
     private EventService eventService;
 
     @GetMapping("/")
-    public String mainPage(Model model) {
+    public ModelAndView mainPage(Model model) {
         List<Event> eventos = eventService.getAllEvents();
         model.addAttribute("mainEvents",eventos);
-        return "mainPageTemplate";
+        return new ModelAndView("mainPageTemplate");
     }
     @GetMapping("/events")
-    public String allEventsPage(Model model)    {
+    public ModelAndView allEventsPage(Model model)    {
         List<Event> eventos = eventService.getAllEvents();
         model.addAttribute("events", eventos);
-        return "eventsTemplate";
+        return new ModelAndView("eventsTemplate");
     }
     @GetMapping("/concerts")
-    public String concertsPage(Model model) {
+    public ModelAndView concertsPage(Model model) {
         List<Event> concertsEvents = eventService.getEventsByType(Event.EventType.CONCERT);
         model.addAttribute("events", concertsEvents);
-        return "eventsTemplate";
+        return new ModelAndView("eventsTemplate");
     }
     @GetMapping("/festivals")
-    public String festivalPage(Model model) {
+    public ModelAndView festivalPage(Model model) {
         List<Event> festivalEvents = eventService.getEventsByType(Event.EventType.FESTIVAL);
         model.addAttribute("events",festivalEvents);
-        return "eventsTemplate";
+        return new ModelAndView("eventsTemplate");
     }
     @GetMapping("/sports")
-    public String sportsPage(Model model) {
+    public ModelAndView sportsPage(Model model) {
         List<Event> sportsEvents = eventService.getEventsByType(Event.EventType.SPORTS);
         model.addAttribute("events", sportsEvents);
-        return "eventsTemplate";
+        return new ModelAndView("eventsTemplate");
     }
     @GetMapping("/theater")
-    public String theaterPage(Model model)  {
+    public ModelAndView theaterPage(Model model)  {
         List<Event> theaterEvents = eventService.getEventsByType(Event.EventType.THEATER);
         model.addAttribute("events", theaterEvents);
-        return "eventsTemplate";
+        return new ModelAndView("eventsTemplate");
     }
 }
