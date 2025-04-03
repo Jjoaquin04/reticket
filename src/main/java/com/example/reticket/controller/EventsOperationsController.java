@@ -21,14 +21,5 @@ public class EventsOperationsController {
     
     @Autowired
     private EventService eventService;
-
-    @PostMapping("")
-    public ResponseEntity<?> postNewEvent(@RequestBody Event event) {
-        Optional<Event> existingEvent = eventService.getEventById(event.getId());
-        if(existingEvent.isPresent())   {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Ya existe un evento con esta información");
-        }
-    }
-    
 }
     

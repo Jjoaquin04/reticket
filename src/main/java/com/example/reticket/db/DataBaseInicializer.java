@@ -31,8 +31,9 @@ public class DataBaseInicializer {
         // Crear eventos de ejemplo
         Event quevedo = new Event(
             "Concierto Quevedo", 
-            LocalDateTime.of(2024, 7, 15, 21, 0), 
-            "Movistar Arena, Madrid", 
+            LocalDateTime.of(2024, 7, 15, 21, 0),
+            "Movistar Arena",
+            "Madrid", 
             "Ultimas entradas para Quevedo en el Movistar Arena", 
             "/img/cantantes/Quevedo.webp",
             "Imagen de quevedo",
@@ -43,8 +44,9 @@ public class DataBaseInicializer {
         
         Event cocaColaFest = new Event(
             "Festival Coca-Cola Music", 
-            LocalDateTime.of(2024, 8, 5, 17, 0), 
-            "IFEMA, Madrid", 
+            LocalDateTime.of(2024, 8, 5, 17, 0),
+            "IFEMA",
+            "Madrid", 
             "Festival con los mejores artistas nacionales e internacionales", 
             "/img/festivales/festivalCocaCola.webp",
             "Imagen del festival Coca-Cola",
@@ -56,7 +58,8 @@ public class DataBaseInicializer {
         Event realMadrid = new Event(
             "Real Madrid vs Barcelona", 
             LocalDateTime.of(2024, 10, 20, 21, 0), 
-            "Santiago Bernabéu, Madrid", 
+            "Santiago Bernabéu",
+            "Madrid", 
             "El clásico de la liga española", 
             "/img/deportes/Real-Madrid.webp",
             "Imagen del Santiago Bernabéu",
@@ -67,8 +70,9 @@ public class DataBaseInicializer {
         
         Event teatro = new Event(
             "Hamlet", 
-            LocalDateTime.of(2024, 9, 10, 20, 0), 
-            "Teatro Español, Madrid", 
+            LocalDateTime.of(2024, 9, 10, 20, 0),
+            "Teatro Español",
+            "Madrid", 
             "Representación de la obra clásica de Shakespeare", 
             "/img/teatros/teatroLara.webp",
             "Imagen del teatro Lara de Madrid",

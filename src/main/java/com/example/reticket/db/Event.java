@@ -35,20 +35,22 @@ public class Event {
 
     private String name;
     private LocalDateTime date;
+    private String venue;
     private String location;
     private String description;
     private String imageURL;
     private String altImage;
     private int currenNumberOfTickets;
     
-    // Default constructor for JPA
+
     public Event() {
     }
     
-    public Event(String name, LocalDateTime date, String location, String description, 
+    public Event(String name, LocalDateTime date,String venue, String location, String description, 
                  String imageURL,String altImage,EventType eventType,EventStatus eventStatus,int currenNumberOfTickets) {
         this.name = name;
         this.date = date;
+        this.venue = venue;
         this.location = location;
         this.description = description;
         this.imageURL = imageURL;
@@ -76,6 +78,13 @@ public class Event {
     
     public void setDate(LocalDateTime date) {
         this.date = date;
+    }
+
+    public void setVenue(String venue) {
+        this.venue = venue;
+    }
+    public String getVenue() {
+        return venue;
     }
     
     public String getLocation() {

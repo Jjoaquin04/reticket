@@ -36,7 +36,7 @@
                     <!-- Agregar más tipos de eventos según sea necesario -->
                 </select>
             </div>
-            <button id="apply-filters">Aplicar Filtros</button>
+            <button id="apply-filters" onclick=" ">Aplicar Filtros</button>
         </div>
 
         <div id="event-list">
@@ -60,7 +60,7 @@
                     <p class="description-event">{{description}}</p>
                     <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
                         <p class="date-event">{{date}}</p>
-                        <p class="location-event">{{location}}</p>
+                        <p class="location-event">{{venue}}, {{location}}</p>
                     </div>
                     <button class="buy-button-event">Comprar</button>
                 </div>

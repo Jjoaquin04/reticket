@@ -33,6 +33,9 @@ public class EventService {
     public List<Event> getEventsByLocation(String location) {
         return eventRepository.findByLocation(location);
     }
+    public List<Event> getEventsByVenue(String venue)   {
+        return eventRepository.findByVenue(venue);
+    }
     
     public List<Event> getEventsByDateRange(LocalDateTime startDate, LocalDateTime endDate) {
         return eventRepository.findByDateBetween(startDate, endDate);

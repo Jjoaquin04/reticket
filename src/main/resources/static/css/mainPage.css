@@ -113,7 +113,7 @@
 }
 
 .buy-button-event{
-    background-color: #007bff;
+    background-color: #222;
     width: 100%;
     color: white;
     border: none;
@@ -124,6 +124,7 @@
     transition: ease 0.3s;
 
     &:hover{
-        background-color: #0056b3;
+        color: black;
+        background-color: lightblue;
     }
 }
