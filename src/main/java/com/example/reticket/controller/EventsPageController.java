@@ -23,10 +23,10 @@ public class EventsPageController {
 
     @GetMapping("")
     public ModelAndView getFilteredEvents(
-        @RequestParam(required = false) Event.EventType eventType,
-        @RequestParam(required = false) String location,
         @RequestParam(required = false) LocalDateTime startDate,
         @RequestParam(required = false) LocalDateTime endDate,
+        @RequestParam(required = false) String location,
+        @RequestParam(required = false) Event.EventType eventType,
         Model model) {
 
         List<Event> filteredEvents = eventService.getAllEvents();

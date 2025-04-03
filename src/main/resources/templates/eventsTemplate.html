@@ -13,30 +13,32 @@
 
     <div id="events-page">
         <div id="side-panel">
-            <br>
-            <br>
-            <br>
-            <h2>Filtros</h2>
-            <div class="filter-group">
-                <h3>Fecha</h3>
-                <input type="date" id="start-date" name="start-date">
-                <input type="date" id="end-date" name="end-date">
-            </div>
-            <div class="filter-group">
-                <h3>Ubicación</h3>
-                <input type="text" id="location" name="location" placeholder="Ciudad, Estado...">
-            </div>
-            <div class="filter-group">
-                <h3>Tipo de Evento</h3>
-                <select id="event-type" name="event-type">
-                    <option value="">Todos</option>
-                    <option value="concierto">Concierto</option>
-                    <option value="teatro">Teatro</option>
-                    <option value="deporte">Deporte</option>
-                    <!-- Agregar más tipos de eventos según sea necesario -->
-                </select>
-            </div>
-            <button id="apply-filters" onclick=" ">Aplicar Filtros</button>
+            <form action="/events">
+                <br>
+                <br>
+                <br>
+                <h2>Filtros</h2>
+                <div class="filter-group">
+                    <h3>Fecha</h3>
+                    <input type="date" id="start-date" name="start-date">
+                    <input type="date" id="end-date" name="end-date">
+                </div>
+                <div class="filter-group">
+                    <h3>Ubicación</h3>
+                    <input type="text" id="location" name="location" placeholder="Ciudad, Estado...">
+                </div>
+                <div class="filter-group">
+                    <h3>Tipo de Evento</h3>
+                    <select id="event-type" name="eventType" >
+                        <option value="">Todos</option>
+                        <option value="CONCERT">Conciertos</option>
+                        <option value="FESTIVAL">Festivales</option>
+                        <option value="SPORTS">Deportes</option>
+                        <option value="THEATER">Teatros</option>
+                    </select>
+                </div>
+                <button id="apply-filters" type="submit">Aplicar Filtros</button>
+            </form>
         </div>
 
         <div id="event-list">
