@@ -126,3 +126,9 @@ a{
     display: block;
     line-height: 0;
 }
+
+@media (max-width: 920px) {
+    .search-container{
+        display: none;
+    }
+}
