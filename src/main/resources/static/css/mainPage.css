@@ -128,3 +128,24 @@
         background-color: lightblue;
     }
 }
+
+@media (max-width: 768px) {
+    .recommended-events {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+    .event img {
+        height: 150px;
+    }
+    .title-event {
+        font-size: 1.5em;
+    }
+    .description-event {
+        font-size: 0.9em;
+    }
+    .date-event, .location-event {
+        font-size: 0.8em;
+    }
+    .buy-button-event {
+        font-size: 0.9em;
+    }
+}
