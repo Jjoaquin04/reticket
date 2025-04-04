@@ -25,6 +25,9 @@ public class EventService {
     public Optional<Event> getEventById(Long id) {
         return eventRepository.findById(id);
     }
+    public Event getEventByName(String name) {
+        return eventRepository.findByName(name);
+    }
 
     public List<Event> getAllEvents() {
         return eventRepository.findAll();
@@ -51,7 +54,7 @@ public class EventService {
 
     // Update
     public Event updateEvent(Event event) {
-        return eventRepository.saveAndFlush(event);
+        return eventRepository.save(event);
     }
 
     // Delete
