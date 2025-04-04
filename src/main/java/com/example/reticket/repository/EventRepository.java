@@ -11,8 +11,8 @@ import com.example.reticket.db.Event;
 public interface EventRepository extends JpaRepository<Event, Long> {
     
     Event findByName(String name);
-    List<Event> findByLocation(String location);
-    List<Event> findByVenue(String venue);
+    List<Event> findByLocationIgnoringCase(String location);
+    List<Event> findByVenueIgnoringCase(String venue);
     List<Event> findByDateBetween(LocalDateTime startDate, LocalDateTime endDate);
     List<Event> findByEventType(Event.EventType eventType);
 }

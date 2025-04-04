@@ -31,10 +31,10 @@ public class EventService {
     }
     
     public List<Event> getEventsByLocation(String location) {
-        return eventRepository.findByLocation(location);
+        return eventRepository.findByLocationIgnoringCase(location);
     }
     public List<Event> getEventsByVenue(String venue)   {
-        return eventRepository.findByVenue(venue);
+        return eventRepository.findByVenueIgnoringCase(venue);
     }
     
     public List<Event> getEventsByDateRange(LocalDateTime startDate, LocalDateTime endDate) {

@@ -1,6 +1,9 @@
 package com.example.reticket.controller;
 
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,50 +26,39 @@ public class EventsPageController {
 
     @GetMapping("")
     public ModelAndView getFilteredEvents(
-        @RequestParam(required = false) LocalDateTime startDate,
-        @RequestParam(required = false) LocalDateTime endDate,
+        @RequestParam(required = false) String startDateTime,
+        @RequestParam(required = false) String endDateTime,
         @RequestParam(required = false) String location,
         @RequestParam(required = false) Event.EventType eventType,
-        Model model) {
-
+        Model model
+    ){
         List<Event> filteredEvents = eventService.getAllEvents();
-        
-        if (eventType != null) {
-            filteredEvents = filteredEvents.stream()
-                .filter(event -> event.getEventType() == eventType)
-                .collect(Collectors.toList());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        if (startDateTime != null   && !startDateTime.isEmpty() && endDateTime != null && !endDateTime.isEmpty()) {
+            try {
+                LocalDateTime start = LocalDate.parse(startDateTime, formatter).atStartOfDay();
+                LocalDateTime end = LocalDate.parse(endDateTime, formatter).atTime(23, 59);
+                filteredEvents = filteredEvents.stream()
+                    .filter(event -> eventService.getEventsByDateRange(start, end).contains(event))
+                    .collect(Collectors.toList());
+            } catch (Exception e) {
+                System.out.println("Error al parsear fechas: " + e.getMessage());
+            }
         }
-        
         if (location != null && !location.isEmpty()) {
             filteredEvents = filteredEvents.stream()
-                .filter(event -> 
-                    event.getLocation().toLowerCase().contains(location.toLowerCase()) || 
-                    event.getVenue().toLowerCase().contains(location.toLowerCase()))
+                .filter((event -> eventService.getEventsByLocation(location).contains(event) || eventService.getEventsByVenue(location).contains(event)))
                 .collect(Collectors.toList());
         }
-        
-        if (startDate != null && endDate != null) {
+        if (eventType != null) {
             filteredEvents = filteredEvents.stream()
-                .filter(event -> 
-                    (event.getDate().isEqual(startDate) || event.getDate().isAfter(startDate)) &&
-                    (event.getDate().isEqual(endDate) || event.getDate().isBefore(endDate)))
+                .filter(event -> eventService.getEventsByType(eventType).contains(event))
                 .collect(Collectors.toList());
-        } else if (startDate != null) {
-            // Si solo se proporciona la fecha de inicio
-            filteredEvents = filteredEvents.stream()
-                .filter(event -> event.getDate().isEqual(startDate) || event.getDate().isAfter(startDate))
-                .collect(Collectors.toList());
-        } else if (endDate != null) {
-            // Si solo se proporciona la fecha de fin
-            filteredEvents = filteredEvents.stream()
-                .filter(event -> event.getDate().isEqual(endDate) || event.getDate().isBefore(endDate))
-                .collect(Collectors.toList());
-        }
-        
-        model.addAttribute("events", filteredEvents);
-        return new ModelAndView("eventsTemplate");
     }
-    
+    model.addAttribute("events", filteredEvents);
+    return new ModelAndView("eventsTemplate");
+    }
+
     @GetMapping("/")
     public ModelAndView mainPage(Model model) {
         List<Event> allEventos = eventService.getAllEvents();
