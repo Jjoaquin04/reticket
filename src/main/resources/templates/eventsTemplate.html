@@ -43,6 +43,11 @@
         </div>
 
         <div id="event-list">
+            {{#searchQuery}}
+            <div class="search-results-header">
+                <h2>Resultados de búsqueda para: "{{searchQuery}}"</h2>
+            </div>
+            {{/searchQuery}}
             <br>
             <br>
             <br>

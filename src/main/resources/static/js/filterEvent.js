@@ -17,4 +17,11 @@ document.addEventListener("DOMContentLoaded",function() {
     if(endDate != null)     {
         document.getElementById("end-date").value = endDate;
     }
+    if(searchQuery != null) {
+        const searchInput = document.createElement('input');
+        searchInput.type = 'hidden';
+        searchInput.name = 'q';
+        searchInput.value = searchQuery;
+        document.querySelector('#side-panel form').appendChild(searchInput);
+    }
 });

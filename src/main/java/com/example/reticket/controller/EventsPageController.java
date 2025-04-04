@@ -30,11 +30,25 @@ public class EventsPageController {
         @RequestParam(required = false) String endDateTime,
         @RequestParam(required = false) String location,
         @RequestParam(required = false) Event.EventType eventType,
+        @RequestParam(required = false) String q,
         Model model
     ){
         List<Event> filteredEvents = eventService.getAllEvents();
+        
+        if (q != null && !q.isEmpty()) {
+            String searchTerm = q.toLowerCase();
+            filteredEvents = filteredEvents.stream()
+                .filter(event -> 
+                    (event.getName() != null && event.getName().toLowerCase().contains(searchTerm)) || 
+                    (event.getDescription() != null && event.getDescription().toLowerCase().contains(searchTerm)) ||
+                    (event.getVenue() != null && event.getVenue().toLowerCase().contains(searchTerm)) ||
+                    (event.getLocation() != null && event.getLocation().toLowerCase().contains(searchTerm))
+                )
+                .collect(Collectors.toList());
+        }
+        
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        if (startDateTime != null   && !startDateTime.isEmpty() && endDateTime != null && !endDateTime.isEmpty()) {
+        if (startDateTime != null && !startDateTime.isEmpty() && endDateTime != null && !endDateTime.isEmpty()) {
             try {
                 LocalDateTime start = LocalDate.parse(startDateTime, formatter).atStartOfDay();
                 LocalDateTime end = LocalDate.parse(endDateTime, formatter).atTime(23, 59);
@@ -54,9 +68,10 @@ public class EventsPageController {
             filteredEvents = filteredEvents.stream()
                 .filter(event -> eventService.getEventsByType(eventType).contains(event))
                 .collect(Collectors.toList());
-    }
-    model.addAttribute("events", filteredEvents);
-    return new ModelAndView("eventsTemplate");
+        }
+        model.addAttribute("events", filteredEvents);
+        model.addAttribute("searchQuery", q); // Añadir el término de búsqueda al modelo
+        return new ModelAndView("eventsTemplate");
     }
 
     @GetMapping("/")
