@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/eventsPage.css">
-    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/cart.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
@@ -56,7 +56,7 @@
                 organizer: string (name of the organizer) 
             -->
             {{#events}}
-            <div class="event">
+            <div class="event" data-event-id="{{id}}">
                 <img src="{{imageURL}}" alt="{{altImage}}" class="evento-imagen">
                 <div class="event-info">
                     <h3 class="title-event">{{name}}</h3>
@@ -73,5 +73,6 @@
     </div>
     <script src="/js/filterEvent.js"></script>
     <script src="/js/main.js"></script>
+    <script src="/js/cart.js"></script>
 </body>
 </html>

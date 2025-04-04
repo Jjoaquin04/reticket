@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar compra - ReTicket</title>
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/cart.css">
+    <link rel="stylesheet" href="/css/checkout.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    {{> header}}
+    
+    <div class="checkout-container">
+        <h1>Finalizar compra</h1>
+        
+        <div class="checkout-grid">
+            <div class="checkout-items">
+                <h2>Resumen de tu pedido</h2>
+                <div id="checkout-items-list">
+                    <!-- Los items se cargarán dinámicamente -->
+                </div>
+            </div>
+            
+            <div class="checkout-summary">
+                <h2>Resumen</h2>
+                <div class="summary-item">
+                    <span>Subtotal:</span>
+                    <span id="checkout-subtotal">0.00 €</span>
+                </div>
+                <div class="summary-item">
+                    <span>Gastos de gestión:</span>
+                    <span id="checkout-fee">3.95 €</span>
+                </div>
+                <div class="summary-item summary-total">
+                    <span>Total:</span>
+                    <span id="checkout-total">0.00 €</span>
+                </div>
+                
+                <button id="proceed-payment" class="checkout-button">Continuar al pago</button>
+                <p class="payment-notice">Esta es una simulación. No se realizará ningún cargo real.</p>
+            </div>
+        </div>
+    </div>
+    
+    {{> footer}}
+    
+    <script src="/js/cart.js"></script>
+    <script src="/js/checkout.js"></script>
+</body>
+</html>
