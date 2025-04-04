@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded",function() {
     const location = urlParams.get("location");
     const startDate = urlParams.get("startDate");
     const endDate = urlParams.get("endDate");
+    const searchString = urlParams.get("searchString");
 
     if(eventType != null)   {
         document.getElementById("event-type").value = eventType;
@@ -17,11 +18,7 @@ document.addEventListener("DOMContentLoaded",function() {
     if(endDate != null)     {
         document.getElementById("end-date").value = endDate;
     }
-    if(searchQuery != null) {
-        const searchInput = document.createElement('input');
-        searchInput.type = 'hidden';
-        searchInput.name = 'q';
-        searchInput.value = searchQuery;
-        document.querySelector('#side-panel form').appendChild(searchInput);
+    if(searchString != null) {
+        document.getElementById("input-text").value = searchString;
     }
 });

@@ -30,19 +30,18 @@ public class EventsPageController {
         @RequestParam(required = false) String endDateTime,
         @RequestParam(required = false) String location,
         @RequestParam(required = false) Event.EventType eventType,
-        @RequestParam(required = false) String q,
+        @RequestParam(required = false) String searchString,
         Model model
     ){
         List<Event> filteredEvents = eventService.getAllEvents();
         
-        if (q != null && !q.isEmpty()) {
-            String searchTerm = q.toLowerCase();
+        if (searchString != null && !searchString.isEmpty()) {
+
             filteredEvents = filteredEvents.stream()
                 .filter(event -> 
-                    (event.getName() != null && event.getName().toLowerCase().contains(searchTerm)) || 
-                    (event.getDescription() != null && event.getDescription().toLowerCase().contains(searchTerm)) ||
-                    (event.getVenue() != null && event.getVenue().toLowerCase().contains(searchTerm)) ||
-                    (event.getLocation() != null && event.getLocation().toLowerCase().contains(searchTerm))
+                    (event.getName() != null && event.getName().toLowerCase().contains(searchString.toLowerCase()))  || 
+                    eventService.getEventsByLocation(searchString).contains(event) ||
+                    eventService.getEventsByVenue(searchString).contains(event)
                 )
                 .collect(Collectors.toList());
         }
@@ -70,14 +69,13 @@ public class EventsPageController {
                 .collect(Collectors.toList());
         }
         model.addAttribute("events", filteredEvents);
-        model.addAttribute("searchQuery", q); // Añadir el término de búsqueda al modelo
-        return new ModelAndView("eventsTemplate");
+        return new ModelAndView("eventsPage");
     }
 
     @GetMapping("/")
     public ModelAndView mainPage(Model model) {
         List<Event> allEventos = eventService.getAllEvents();
         model.addAttribute("events",allEventos);
-        return new ModelAndView("eventsTemplate");
+        return new ModelAndView("eventsPage");
     }
 }

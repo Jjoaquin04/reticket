@@ -22,6 +22,6 @@ public class MainPageController {
     public ModelAndView mainPage(Model model)    {
         List<Event> eventos = eventService.getAllEvents();
         model.addAttribute("mainEvents", eventos);
-        return new ModelAndView("mainPageTemplate");
+        return new ModelAndView("mainPage");
     }
 }

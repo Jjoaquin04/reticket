@@ -1,6 +1,7 @@
 package com.example.reticket.controller;
 
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.example.reticket.db.Event;
 import com.example.reticket.db.Event.EventStatus;
@@ -8,11 +9,12 @@ import com.example.reticket.db.Event.EventType;
 import com.example.reticket.service.EventService;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +22,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 
  
@@ -94,6 +98,18 @@ public class EventsOperationsController {
             return ResponseEntity.notFound().build();
         }
     }
+    @GetMapping("/")
+    public String getCreateEventPage() {
+        return "newEventPage";
+    }
+    
+    @GetMapping("/myEvents")
+    public ModelAndView getMethodName(Model model) {
+        List<Event> allEvents = eventService.getAllEvents();
+        model.addAttribute("events", allEvents);
+        return new ModelAndView("myEventsPage");
+    }
+    
 
 }
     

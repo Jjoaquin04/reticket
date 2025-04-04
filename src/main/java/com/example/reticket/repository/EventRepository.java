@@ -10,7 +10,7 @@ import com.example.reticket.db.Event;
 
 public interface EventRepository extends JpaRepository<Event, Long> {
     
-    Event findByName(String name);
+    Event findByNameIgnoringCase(String name);
     List<Event> findByLocationIgnoringCase(String location);
     List<Event> findByVenueIgnoringCase(String venue);
     List<Event> findByDateBetween(LocalDateTime startDate, LocalDateTime endDate);

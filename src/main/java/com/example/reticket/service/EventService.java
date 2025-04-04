@@ -26,7 +26,7 @@ public class EventService {
         return eventRepository.findById(id);
     }
     public Event getEventByName(String name) {
-        return eventRepository.findByName(name);
+        return eventRepository.findByNameIgnoringCase(name);
     }
 
     public List<Event> getAllEvents() {
@@ -46,10 +46,6 @@ public class EventService {
     
     public List<Event> getEventsByType(Event.EventType eventType) {
         return eventRepository.findByEventType(eventType);
-    }
-    
-    public Event searchEventsByName(String keyword) {
-        return eventRepository.findByName(keyword);
     }
 
     // Update
