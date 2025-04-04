@@ -39,7 +39,13 @@
                     <p class="date-event">{{date}}</p>
                     <p class="location-event">{{venue}}, {{location}}</p>
                 </div>
-                <button class="buy-button-event">Comprar</button>
+                <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
+                    <p class="tickets-info">{{currenNumberOfTickets}} tickets disponibles</p>
+                    <button class="buy-button-event" {{^currenNumberOfTickets}}disabled{{/currenNumberOfTickets}}>
+                        {{#currenNumberOfTickets}}Añadir al carrito{{/currenNumberOfTickets}}
+                        {{^currenNumberOfTickets}}Agotado{{/currenNumberOfTickets}}
+                    </button>
+                </div>
             </div>
             {{/mainEvents}}
         </div>

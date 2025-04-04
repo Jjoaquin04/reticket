@@ -1,5 +1,6 @@
 package com.example.reticket.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,9 @@ public class UserService {
     public User_ createUser(User_ user) {
         return userRepository.save(user);
     }
-
+    public List<User_> getAllUsers(){
+        return userRepository.findAll();
+    }
     public Optional<User_> getUserByName(String username) {
         return userRepository.findByUsername(username);
     }

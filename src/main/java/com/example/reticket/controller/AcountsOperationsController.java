@@ -6,11 +6,16 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.reticket.db.Event;
 import com.example.reticket.db.Event.EventStatus;
 import com.example.reticket.db.Event.EventType;
+import com.example.reticket.db.User_;
 import com.example.reticket.service.EventService;
+import com.example.reticket.service.UserService;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,11 +34,13 @@ import org.springframework.web.bind.annotation.GetMapping;
  
 
 @RestController
-@RequestMapping("/acount")
-public class EventsOperationsController {
+@RequestMapping("/acounts")
+public class AcountsOperationsController {
     
     @Autowired
     private EventService eventService;
+    @Autowired
+    private UserService userService;
 
     @PostMapping("/newEvent")
     public ResponseEntity<?> createEvent(
@@ -88,7 +95,7 @@ public class EventsOperationsController {
         return ResponseEntity.notFound().build();
     }
     @PutMapping("/{id}")
-    public ResponseEntity<?> putMethodName(@PathVariable long id, @RequestBody Event newEvent) {
+    public ResponseEntity<?> updateEvent(@PathVariable long id, @RequestBody Event newEvent) {
         Optional<Event> event = eventService.getEventById(id);
         if(event != null)   {
             newEvent.setId(id);
@@ -104,11 +111,19 @@ public class EventsOperationsController {
     }
     
     @GetMapping("/myEvents")
-    public ModelAndView getMethodName(Model model) {
+    public ModelAndView getEvents(Model model) {
         List<Event> allEvents = eventService.getAllEvents();
         model.addAttribute("events", allEvents);
         return new ModelAndView("myEventsPage");
     }
+
+    @GetMapping("/users")
+    public ModelAndView getUsers(Model model) {
+        List<User_> allUsers = userService.getAllUsers();
+        model.addAttribute("users", allUsers);
+        return new ModelAndView("allUsersPage");
+    }
+    
     
 
 }
