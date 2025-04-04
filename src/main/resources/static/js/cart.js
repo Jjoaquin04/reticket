@@ -1,5 +1,8 @@
 // Objeto para manejar las funciones del carrito
 const shoppingCart = {
+    // Propiedades para el estado del carrito
+    isCartMenuOpen: false, // Nueva propiedad para rastrear el estado
+    
     // Inicializa el carrito en localStorage o crea uno vacío
     init: function() {
         this.cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
@@ -18,6 +21,7 @@ const shoppingCart = {
                 !cartMenu.contains(event.target) && 
                 !cartIcon.contains(event.target)) {
                 cartMenu.style.display = 'none';
+                shoppingCart.isCartMenuOpen = false; // Actualizar el estado
             }
         });
 
@@ -29,8 +33,10 @@ const shoppingCart = {
                 const cartMenu = document.getElementById('cart-menu');
                 if (cartMenu.style.display === 'block') {
                     cartMenu.style.display = 'none';
+                    shoppingCart.isCartMenuOpen = false; // Actualizar el estado
                 } else {
                     cartMenu.style.display = 'block';
+                    shoppingCart.isCartMenuOpen = true; // Actualizar el estado
                     shoppingCart.renderCartItems();
                 }
             });
@@ -75,14 +81,22 @@ const shoppingCart = {
 
     // Eliminar un evento del carrito
     removeFromCart: function(eventId) {
+        // Guardar el estado antes de modificar
+        const wasOpen = this.isCartMenuOpen;
+        
         this.cartItems = this.cartItems.filter(item => item.id !== eventId);
         this.saveCart();
         this.updateCartCount();
-        this.renderCartItems();
+        
+        // Forzar que el menú permanezca abierto durante el renderizado
+        this.renderCartItemsKeepOpen(wasOpen);
     },
 
     // Cambiar la cantidad de un item
     updateQuantity: function(eventId, change) {
+        // Guardar el estado antes de modificar
+        const wasOpen = this.isCartMenuOpen;
+        
         const index = this.cartItems.findIndex(item => item.id === eventId);
         if (index !== -1) {
             this.cartItems[index].quantity += change;
@@ -93,7 +107,9 @@ const shoppingCart = {
             
             this.saveCart();
             this.updateCartCount();
-            this.renderCartItems();
+            
+            // Forzar que el menú permanezca abierto durante el renderizado
+            this.renderCartItemsKeepOpen(wasOpen);
         }
     },
 
@@ -112,17 +128,54 @@ const shoppingCart = {
         }
     },
 
+    // Renderizar los items del carrito manteniendo el estado abierto
+    renderCartItemsKeepOpen: function(keepOpen) {
+        const cartMenu = document.getElementById('cart-menu');
+        // Guardar la referencia al carrito antes de renderizar
+        if (cartMenu) {
+            // Forzar que permanezca abierto
+            if (keepOpen) {
+                cartMenu.style.display = 'block';
+                this.isCartMenuOpen = true;
+            }
+        }
+        
+        // Renderizar normalmente
+        this.renderCartItems();
+        
+        // Asegurar que el estado se mantenga después del renderizado
+        if (cartMenu && keepOpen) {
+            setTimeout(() => {
+                cartMenu.style.display = 'block';
+                this.isCartMenuOpen = true;
+            }, 10); // Un pequeño retraso para asegurar que se aplique después del renderizado
+        }
+    },
+
     // Renderizar los items del carrito en el menú desplegable
     renderCartItems: function() {
         const cartItemsContainer = document.getElementById('cart-items');
         if (!cartItemsContainer) return;
-
+        
+        // Guardar el estado de visibilidad actual del menú
+        const cartMenu = document.getElementById('cart-menu');
+        const wasVisible = cartMenu && cartMenu.style.display === 'block';
+        
+        // Actualizar el estado interno
+        this.isCartMenuOpen = wasVisible;
+        
         cartItemsContainer.innerHTML = '';
         
         if (this.cartItems.length === 0) {
             cartItemsContainer.innerHTML = '<p class="empty-cart">Tu carrito está vacío</p>';
             document.getElementById('checkout-button').style.display = 'none';
             document.getElementById('cart-total').textContent = '0.00 €';
+            
+            // Aunque esté vacío, mantener el menú visible si estaba visible
+            if (wasVisible && cartMenu) {
+                cartMenu.style.display = 'block';
+                this.isCartMenuOpen = true;
+            }
             return;
         }
         
@@ -159,27 +212,42 @@ const shoppingCart = {
         
         // Agregar event listeners a los botones
         cartItemsContainer.querySelectorAll('.remove-item-btn').forEach(button => {
-            button.addEventListener('click', function() {
+            button.addEventListener('click', function(event) {
+                // Detener la propagación del evento para evitar que el menú se cierre
+                event.stopPropagation();
                 const eventId = this.getAttribute('data-id');
                 shoppingCart.removeFromCart(eventId);
             });
         });
         
         cartItemsContainer.querySelectorAll('.quantity-btn').forEach(button => {
-            button.addEventListener('click', function() {
+            button.addEventListener('click', function(event) {
+                // Detener la propagación del evento para evitar que el menú se cierre
+                event.stopPropagation();
                 const eventId = this.getAttribute('data-id');
                 const change = this.classList.contains('plus') ? 1 : -1;
                 shoppingCart.updateQuantity(eventId, change);
             });
         });
+        
+        // Restaurar la visibilidad del menú si estaba visible antes
+        if (wasVisible && cartMenu) {
+            cartMenu.style.display = 'block';
+            this.isCartMenuOpen = true;
+        }
     },
 
     // Vaciar el carrito
     clearCart: function() {
+        // Guardar el estado antes de modificar
+        const wasOpen = this.isCartMenuOpen;
+        
         this.cartItems = [];
         this.saveCart();
         this.updateCartCount();
-        this.renderCartItems();
+        
+        // Forzar que el menú permanezca abierto durante el renderizado
+        this.renderCartItemsKeepOpen(wasOpen);
     }
 };
 
