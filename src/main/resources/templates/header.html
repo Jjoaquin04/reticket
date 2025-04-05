@@ -50,10 +50,36 @@
             </div>
         </div>
         <div id="perfil" style="position: relative;">
-            <a href="/acounts">
-                <img src="/img/icons/usuario.webp" alt="Perfil de usuario" height="35px">
-            </a>
-            <p>Cuenta</p>
+            <nav class="profile-nav">
+                <ul>
+                    <li class="dropdown-profile">
+                        <img src="/img/icons/usuario.webp" alt="Perfil de usuario" height="35px">
+                        <p>Perfil</p>
+                        <div class="dropdown-content-profile">
+                            <a href="/acounts/profile">Perfil</a>
+                            <a href="/acounts/myTickets">Mis pedidos</a>
+                            <a href="/acounts/myEvents">Mis eventos</a>
+                            <a href="/acounts/newEvent">Nuevo evento</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
+
+    <script>
+        // Función para mostrar/ocultar el menú del perfil
+        document.getElementById('perfil').addEventListener('click', function() {
+            var profileMenu = document.getElementById('profile-menu');
+            profileMenu.style.display = (profileMenu.style.display === 'block') ? 'none' : 'block';
+        });
+
+        //si se hace click fuera del menú del perfil, se cierra el menú
+        window.addEventListener('click', function(event) {
+            var profileMenu = document.getElementById('profile-menu');
+            if (!event.target.closest('#perfil') && !event.target.closest('#profile-menu')) {
+                profileMenu.style.display = 'none';
+            }
+        });
+    </script>
 </header>
