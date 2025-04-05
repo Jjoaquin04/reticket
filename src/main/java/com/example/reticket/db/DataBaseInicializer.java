@@ -85,10 +85,10 @@ public class DataBaseInicializer {
         
         // Crear usuarios
         User_ user1 = new User_("juan", "password123", "juan@example.com");
-        User_ user2 = new User_("maria", "securepass", "maria@example.com");
-        User_ user3 = new User_("admin", "admin123", "admin@reticket.com");
+        //User_ user2 = new User_("maria", "securepass", "maria@example.com");
+        //User_ user3 = new User_("admin", "admin123", "admin@reticket.com");
         
-        userRepository.saveAll(Arrays.asList(user1, user2, user3));
+        userRepository.saveAll(Arrays.asList(user1/*, user2, user3*/));
         
     }
 }

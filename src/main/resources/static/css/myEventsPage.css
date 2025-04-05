@@ -1,0 +1,149 @@
+header{
+    position: fixed;
+    width: 98%;
+    z-index: 2;
+}
+
+form{
+    width: 850px;
+}
+
+#new-event-button{
+    background-color: #222;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-left: 20px;
+
+    transition: all 0.3s;
+
+    &:hover{
+        color: black;
+        background-color: lightblue;
+    }
+}
+
+#event-list{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.event{
+    display: flex;
+    flex-direction: row;
+    min-width: 800px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 20px;
+    margin: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.event-info{
+    flex: 1;
+    margin-left: 20px;
+}
+
+.event img{
+    max-width: 100%;
+    height: 200px;
+    width: 300px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.event-info h3{
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.event-info p.description-event{
+    font-size: 15px;
+    color: #555;
+    margin-bottom: 0px;
+}
+
+.event-info p.date-event{
+    font-size: 0.9em;
+    color: white;
+    background-color: #c5c5c5;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.event-info p.location-event{
+    font-size: 0.9em;
+    color: white;
+    background-color: #c5c5c5;
+    padding: 5px;
+    margin-left: 10px;
+    border-radius: 5px;
+}
+
+#editar-button{
+    color: black;
+    background-color: lightblue;
+    padding: 10px 20px;
+    margin-right: auto;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    transition: all 0.3s;
+
+    &:hover{
+        background-color: lightskyblue;
+    }
+}
+
+#eliminar-button{
+    color: white;
+    background-color: red;
+    padding: 10px 20px;
+    margin-right: auto;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    transition: all 0.3s;
+
+    &:hover{
+        background-color: darkred;
+    }
+}
+
+.no-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 50px auto;
+    padding: 40px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    width: 80%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.no-results i {
+    color: #999;
+    margin-bottom: 20px;
+}
+
+.no-results h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.no-results p {
+    color: #666;
+    font-size: 16px;
+}

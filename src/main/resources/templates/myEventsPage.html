@@ -7,12 +7,48 @@
 
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/cart.css">
+    <link rel="stylesheet" href="/css/myEventsPage.css">
 </head>
 <body>
     {{> header}}
 
-
+    <div id="event-list">
+        <br>
+        <br>
+        <br>
+        <br>
+        <form action="/acounts/newEvent" method="get">
+            <button id="new-event-button">Nuevo Evento</button>
+        </form>
+        {{^events}}
+        <div class="no-results">
+            <i class="fas fa-search fa-3x"></i>
+            <h3>No se encontraron resultados</h3>
+            <p>Intenta con otros filtros o términos de búsqueda</p>
+        </div>
+        {{/events}}
+        {{#events}}
+        <div class="event" data-event-id="{{id}}">
+            <img src="{{imageURL}}" alt="{{altImage}}" class="evento-imagen">
+            <div class="event-info">
+                <h3 class="title-event">{{name}}</h3>
+                <p class="description-event">{{description}}</p>
+                <div style="display: flex; flex-direction: row; justify-content: start; align-items: center;">
+                    <p class="date-event">{{date}}</p>
+                    <p class="location-event">{{venue}}, {{location}}</p>
+                </div>
+                <div class="actions_buttons">
+                    <button id="editar-button">Editar</button>
+                    <button id="eliminar-button">Eliminar</button>
+                </div>
+            </div>
+        </div>
+        {{/events}}
+    </div>
 
     {{> footer}}
+
+    <script src="/js/cart.js"></script>
 </body>
 </html>

@@ -1,1 +1,47 @@
 <!-- Este html es para crear el perfil -->
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/cart.css">
+ </head>
+ <body>
+    {{> header}}
+
+    {{#users}}
+    <!-- User:
+     
+    nombre: {{username}}
+    email: {{email}}
+    password: {{password}}
+    -->
+
+    <div>
+        <h1>Perfil</h1>
+        <form id="profile-form">
+            <p id="id-user" style="display: none;">{{id}}</p>
+
+            <label for="username">Nombre de usuario:</label>
+            <input type="text" id="username" name="username" value="{{username}}" required><br><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="{{email}}" required><br><br>
+
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="password" value="{{password}}" required><br><br>
+
+            <button type="submit">Guardar Cambios</button>
+        </form>
+    </div>
+    {{/users}}
+    
+    {{> footer}}
+
+    <script src="/js/profile.js"></script>
+ </body>
+ </html>
