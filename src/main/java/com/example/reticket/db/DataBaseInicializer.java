@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import com.example.reticket.repository.EventRepository;
-import com.example.reticket.repository.TicketRepository;
 import com.example.reticket.repository.UserRepository;
 
 import jakarta.annotation.PostConstruct;
@@ -23,8 +22,7 @@ public class DataBaseInicializer {
     @Autowired
     private UserRepository userRepository;
     
-    @Autowired
-    private TicketRepository ticketRepository;
+    
     
     @PostConstruct
     public void initDatabase() {
@@ -92,12 +90,5 @@ public class DataBaseInicializer {
         
         userRepository.saveAll(Arrays.asList(user1, user2, user3));
         
-        // Crear tickets
-        Ticket ticket1 = new Ticket(quevedo, "A1", "");
-        Ticket ticket2 = new Ticket(quevedo, "A2", user1.getId().toString());
-        Ticket ticket3 = new Ticket(cocaColaFest, "VIP1", "");
-        Ticket ticket4 = new Ticket(realMadrid, "Grada 4 - 56",user2.getId().toString());
-        
-        ticketRepository.saveAll(Arrays.asList(ticket1, ticket2, ticket3, ticket4));
     }
 }

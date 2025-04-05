@@ -13,19 +13,15 @@ public class Ticket {
     private Long id;
 
     @ManyToOne
-    private Event event;
-    
-    private String seatNumber;
-    private String userId; 
+    private Event event; 
 
     // Constructor vacío necesario para JPA
     public Ticket() {
     }
 
-    public Ticket(Event event, String seatNumber, String userId) {
+    public Ticket(Event event) {
         this.event = event;
-        this.seatNumber = seatNumber;
-        this.userId = userId;
+        
     }
     
     // Getters y setters sin cambios
@@ -37,17 +33,5 @@ public class Ticket {
     }
     public void setEvent(Event event) {
         this.event = event;
-    }
-    public String getSeatNumber() {
-        return seatNumber;
-    }
-    public void setSeatNumber(String seatNumber) {
-        this.seatNumber = seatNumber;
-    }
-    public String getUserId() {
-        return userId;
-    }
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 }

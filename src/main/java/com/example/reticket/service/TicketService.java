@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @Service
 public class TicketService {
+
     @Autowired
     private TicketRepository ticketRepository;
 
@@ -33,19 +34,11 @@ public class TicketService {
         return ticketRepository.findByEvent(event);
     }
 
-    public List<Ticket> getTicketsByUserId(String userId) {
-        return ticketRepository.findByUserId(userId);
-    }
-
-    public Optional<Ticket> getTicketByEventAndSeatNumber(Event event, String seatNumber) {
-        return ticketRepository.findByEventAndSeatNumber(event, seatNumber);
-    }
-
     // Update
     public Ticket updateTicket(Ticket ticket) {
-        return ticketRepository.saveAndFlush(ticket);
+        return ticketRepository.save(ticket);
     }
-
+    
     // Delete
     public void deleteTicket(Long id) {
         ticketRepository.deleteById(id);
