@@ -1,11 +1,11 @@
 package com.example.reticket.controller;
 
-import java.beans.EventSetDescriptor;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -16,7 +16,8 @@ import com.example.reticket.service.EventService;
 import com.example.reticket.service.TicketService;
 import com.example.reticket.service.UserService;
 
-@RestController("/acounts")
+@RestController
+@RequestMapping("/acounts")
 public class AcountsHtmlPageController {
     @Autowired
     private EventService eventService;
