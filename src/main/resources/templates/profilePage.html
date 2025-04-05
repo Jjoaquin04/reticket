@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/footer.css">
     <link rel="stylesheet" href="/css/cart.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
  </head>
  <body>
     {{> header}}
@@ -23,7 +25,7 @@
 
     <div>
         <h1>Perfil</h1>
-        <form id="profile-form">
+        <form id="profile-form" data-user-id="{{id}}">
             <p id="id-user" style="display: none;">{{id}}</p>
 
             <label for="username">Nombre de usuario:</label>

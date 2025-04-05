@@ -64,7 +64,16 @@
                         <p class="date-event">{{date}}</p>
                         <p class="location-event">{{venue}}, {{location}}</p>
                     </div>
-                    <button class="buy-button-event">Comprar</button>
+                    <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
+                        <div class="tickets-info">
+                            <p class="tickets-count">{{currenNumberOfTickets}}</p>
+                            <img src="/img/icons/ticketImage.webp" alt="",>
+                        </div>
+                        <button class="buy-button-event" {{^currenNumberOfTickets}}disabled{{/currenNumberOfTickets}}>
+                            {{#currenNumberOfTickets}}Comprar{{/currenNumberOfTickets}}
+                            {{^currenNumberOfTickets}}Agotado{{/currenNumberOfTickets}}
+                        </button>
+                    </div>
                 </div>
             </div>
             {{/events}}
@@ -73,5 +82,6 @@
     <script src="/js/filterEvent.js"></script>
     <script src="/js/main.js"></script>
     <script src="/js/cart.js"></script>
+    <script src="/js/createTicket.js"></script>
 </body>
 </html>

@@ -123,6 +123,12 @@
         background-color: lightblue;
     }
 }
+.buy-button-event:disabled {
+    background-color: lightcoral;
+    color: black;
+    border-color: #ccc;
+    cursor: not-allowed;
+}
 .tickets-info {
     font-size: 0.9em;
     color: white;
@@ -137,10 +143,7 @@
         background-color: #c0c0c0;
     }
 }
-.buy-button-event:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
+
 
 
 @media (max-width: 768px) {

@@ -76,7 +76,7 @@ public class DataBaseInicializer {
             "Imagen del teatro Lara de Madrid",
             Event.EventType.THEATER,
             Event.EventStatus.AVAILABLE,
-            50
+            0
         );
         
         // Guardar eventos

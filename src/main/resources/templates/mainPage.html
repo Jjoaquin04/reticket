@@ -17,7 +17,7 @@
         <button class="prev-btn" onclick="changeImage(-1)">❮</button>
         <img id="slide-image" alt="Imagenes">
     </div>
-
+    
     <div class="events">
         <hr>
         <h2>Los más recomendados</h2>
@@ -40,11 +40,11 @@
                     <p class="location-event">{{venue}}, {{location}}</p>
                 </div>
                 <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
-                    <p class="tickets-info">{{currenNumberOfTickets}} tickets disponibles</p>
-                    <button class="buy-button-event" {{^currenNumberOfTickets}}disabled{{/currenNumberOfTickets}}>
-                        {{#currenNumberOfTickets}}Añadir al carrito{{/currenNumberOfTickets}}
-                        {{^currenNumberOfTickets}}Agotado{{/currenNumberOfTickets}}
-                    </button>
+                    <div class="tickets-info">
+                        <p class="tickets-count">{{currenNumberOfTickets}}</p>
+                        <img src="/img/icons/ticketImage.webp" alt="",>
+                    </div>
+                    <button class="buy-button-event">Comprar</button>
                 </div>
             </div>
             {{/mainEvents}}
@@ -55,5 +55,6 @@
     <script src="/js/main.js"></script>
     <script src="/js/imageChange.js"></script>
     <script src="/js/cart.js"></script>
+    <script src="/js/createTicket.js"></script>
 </body>
 </html>

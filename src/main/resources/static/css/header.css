@@ -4,6 +4,7 @@ body{
     font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
 }
 
 header{
@@ -117,6 +118,7 @@ a{
 .div-right p {
     margin-top: 5px;
     margin-bottom: 0;
+
 }
 
 .div-right a {
@@ -124,17 +126,6 @@ a{
     line-height: 0;
 }
 
-#carrito{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-right: 20px;
-    padding: 10px;
-    &:hover{
-        background-color: #333;
-    }
-}
 
 #perfil{
     display: flex;
@@ -145,6 +136,19 @@ a{
     &:hover{
         background-color: #333;
     }
+}
+.dropdown-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.dropdown-profile p {
+    margin: 5px 0;
+    width: 100%;
+    text-align: center;
 }
 
 .profile-nav ul {
@@ -183,6 +187,8 @@ a{
         background-color: lightblue;
     }
 }
+
+
 
 @media (max-width: 920px) {
     .search-container{
