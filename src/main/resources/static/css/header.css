@@ -114,31 +114,6 @@ a{
     border: none;
 }
 
-#carrito{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-right: 20px;
-    padding: 10px;
-
-    &:hover{
-        background-color: #333;
-    }
-}
-
-#perfil{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-
-    &:hover{
-        background-color: #333;
-    }
-}
-
 .div-right p {
     margin-top: 5px;
     margin-bottom: 0;
@@ -147,6 +122,18 @@ a{
 .div-right a {
     display: block;
     line-height: 0;
+}
+
+#carrito , #perfil{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    padding: 10px;
+    &:hover{
+        background-color: #333;
+    }
 }
 
 @media (max-width: 920px) {
