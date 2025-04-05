@@ -61,5 +61,8 @@ public class User_{
             throw new RuntimeException("Error al guardar el ticket");
         }
     }
+    public User_ get(){
+        return this;
+    }
     
 }

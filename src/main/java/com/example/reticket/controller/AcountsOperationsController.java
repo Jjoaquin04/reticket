@@ -1,8 +1,6 @@
 package com.example.reticket.controller;
 
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.example.reticket.db.Event;
 import com.example.reticket.db.Event.EventStatus;
 import com.example.reticket.db.Event.EventType;
@@ -12,29 +10,26 @@ import com.example.reticket.service.UserService;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.GetMapping;
 
 
 
  
 
 @RestController
-@RequestMapping("/acounts")
 public class AcountsOperationsController {
     
     @Autowired
@@ -42,7 +37,7 @@ public class AcountsOperationsController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/newEvent")
+    @PostMapping("/submitEvent")
     public ResponseEntity<?> createEvent(
         @RequestParam(required = true) String name,
         @RequestParam(required = true) String dateTime,
@@ -78,15 +73,14 @@ public class AcountsOperationsController {
             }
 
             Event savedEvent = eventService.createEvent(newEvent);
-
             return ResponseEntity.status(HttpStatus.CREATED).body(savedEvent);
         }catch(Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error creating event: " + e.getMessage());
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteEvent(@PathVariable long id) {
+    @DeleteMapping("events/{id}")
+    public ResponseEntity<?> deleteEvent(@PathVariable Long id) {
         Optional<Event> deletedEvent = eventService.getEventById(id);
         if(deletedEvent.isPresent())    {
             eventService.deleteEvent(id);
@@ -94,8 +88,8 @@ public class AcountsOperationsController {
         }
         return ResponseEntity.notFound().build();
     }
-    @PutMapping("/{id}")
-    public ResponseEntity<?> updateEvent(@PathVariable long id, @RequestBody Event newEvent) {
+    @PutMapping("events/{id}")
+    public ResponseEntity<?> updateEvent(@PathVariable Long id, @RequestBody Event newEvent) {
         Optional<Event> event = eventService.getEventById(id);
         if(event != null)   {
             newEvent.setId(id);
@@ -105,26 +99,64 @@ public class AcountsOperationsController {
             return ResponseEntity.notFound().build();
         }
     }
-    @GetMapping("/")
-    public String getCreateEventPage() {
-        return "newEventPage";
-    }
-    
-    @GetMapping("/myEvents")
-    public ModelAndView getEvents(Model model) {
-        List<Event> allEvents = eventService.getAllEvents();
-        model.addAttribute("events", allEvents);
-        return new ModelAndView("myEventsPage");
-    }
+    @PatchMapping("/users/{id}")
+    public ResponseEntity<?> updateUser(@PathVariable Long id,@RequestBody Map<String, Object> updates) {
+        Optional<User_> existingUser = userService.getUserById(id);
+        if (!existingUser.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+        User_ user = existingUser.get();
+        
+        // Actualizar solo los campos proporcionados en la solicitud
+        if (updates.containsKey("username")) {
+            String newUsername = (String) updates.get("username");
+            
+            // Verificar que el nuevo username no exista ya
+            if (!user.getUsername().equals(newUsername) && 
+                    userService.existsByUsername(newUsername)) {
+                return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body("El nombre de usuario ya está en uso");
+            }
+            user.setUsername(newUsername);
+        }
+        
+        if (updates.containsKey("email")) {
+            String newEmail = (String) updates.get("email");
+            
+            // Verificar que el nuevo email no exista ya
+            if (!user.getEmail().equals(newEmail) && 
+                    userService.existsByEmail(newEmail)) {
+                return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body("El email ya está en uso");
+            }
+            user.setEmail(newEmail);
+        }
+        
+        if (updates.containsKey("password")) {
+            user.setPassword((String) updates.get("password"));
+        }
+        
+        // Agregar verificación de contraseña actual para cambios sensibles
+        if ((updates.containsKey("email") || updates.containsKey("password")) && 
+                updates.containsKey("currentPassword")) {
+            String currentPassword = (String) updates.get("currentPassword");
+            if (!user.getPassword().equals(currentPassword)) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("Contraseña actual incorrecta");
+            }
+        }
+        
+        User_ updatedUser = userService.updateUser(user);
 
-    @GetMapping("/users")
-    public ModelAndView getUsers(Model model) {
-        List<User_> allUsers = userService.getAllUsers();
-        model.addAttribute("users", allUsers);
-        return new ModelAndView("allUsersPage");
+        // Dont return the password
+        Map<String, Object> response = Map.of(
+            "id", updatedUser.getId(),
+            "username", updatedUser.getUsername(),
+            "email", updatedUser.getEmail()
+        );
+        
+        return ResponseEntity.ok(response);
     }
-    
-    
 
 }
     
