@@ -42,12 +42,6 @@ public class AcountsOperationsController {
     public ResponseEntity<?> createEvent(
         @RequestBody(required = true) Event event
     ){
-        Optional<Event> existingEvent = eventService.getEventById(event.getId());
-
-        if(existingEvent.isPresent()) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("error","El evento ya existe"));
-        }
-
         Event newEvent = eventService.createEvent(event);
         return ResponseEntity.status(HttpStatus.CREATED).body(newEvent);
     }

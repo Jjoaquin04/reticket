@@ -32,7 +32,7 @@
             <input type="text" id="name" name="name" placeholder="Nombre del evento" required><br>
 
             <label for="dateTime">Fecha y hora:</label>
-            <input type="datetime-local" id="dateTime" name="dateTime" required><br>
+            <input type="datetime-local" id="dateTime" name="date" required><br>
 
             <label for="location">Ubicación:</label>
             <input type="text" id="location" name="location" placeholder="Ciudad" required>
@@ -42,8 +42,8 @@
             <textarea id="description" name="description" placeholder="Descripción" required></textarea><br>
 
             <label for="imageUrl">Imagen:</label>
-            <input type="text" id="imageUrl" name="imageUrl" placeholder="URL de la imagen" required>
-            <input type="text" id="imageAltText" name="imageAltText" placeholder="Texto alternativo de la imagen" required><br>
+            <input type="text" id="imageUrl" name="imageURL" placeholder="URL de la imagen" required>
+            <input type="text" id="imageAltText" name="altImage" placeholder="Texto alternativo de la imagen" required><br>
             
             <label for="eventType">Tipo de evento:</label>
             <select id="eventType" name="eventType" required>
@@ -64,7 +64,7 @@
             <br>
 
             <label for="availableTickets">Boletos disponibles:</label>
-            <input type="number" id="availableTickets" name="availableTickets" placeholder="Boletos disponibles" required><br>
+            <input type="number" id="availableTickets" name="currenNumberOfTickets" placeholder="Boletos disponibles" required><br>
             
             <button id="create-event-button">Crear evento</button>
         </form>

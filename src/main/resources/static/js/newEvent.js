@@ -3,33 +3,23 @@ document.getElementById("new-event-form").addEventListener("submit", async funct
 
     // Obtener los datos del formulario
     const formData = new FormData(this);
-    const data = Object.fromEntries(formData.entries());
 
-    /**@RequestParam(required = true) String name,
-        @RequestParam(required = true) String dateTime,
-        @RequestParam(required = true) String location,
-        @RequestParam(required = true) String venue,
-        @RequestParam(required = true) String description,
-        @RequestParam(required = true) String imageUrl,
-        @RequestParam(required = true) String imageAltText,
-        @RequestParam(required = true) EventType eventType, : concert, festival, theater, sports
-        @RequestParam(required = true) EventStatus eventStatus, : aviable, calceled, finished, sold_out
-        @RequestParam(required = true) int availableTickets */
-
-    const eventObject = {
-        name: data.name,
-        dateTime: data.dateTime,
-        location: data.location,
-        venue: data.venue,
-        description: data.description,
-        imageUrl: data.imageUrl,
-        imageAltText: data.imageAltText,
-        eventType: data.eventType,
-        eventStatus: data.eventStatus,
-        availableTickets: data.availableTickets,
+    // Convertir FormData a objeto y adaptar tipos
+    const data = {
+        name: formData.get("name"),
+        date: new Date(formData.get("date")),
+        location: formData.get("location"),
+        venue: formData.get("venue"),
+        description: formData.get("description"),
+        imageURL: formData.get("imageURL"),
+        altImage: formData.get("altImage"),
+        eventType: formData.get("eventType"), // CONCERT, THEATER, etc.
+        eventStatus: formData.get("eventStatus"), // AVAILABLE, CANCELLED, etc.
+        currenNumberOfTickets: parseInt(formData.get("currenNumberOfTickets")) // Convertir a número
     };
 
-    console.log(eventObject); // Muestra el objeto en la consola para depuración
+    console.log(data); // Muestra el objeto en la consola para depuración
+    console.log(JSON.stringify(data)); // Muestra el objeto en la consola para depuración
 
     // Enviar la solicitud POST al servidor
     try {
@@ -38,7 +28,7 @@ document.getElementById("new-event-form").addEventListener("submit", async funct
             headers: {
                 "Content-Type": "application/json"
             },
-            body: eventObject
+            body: JSON.stringify(data)
         });
 
         const result = await response.json(); // Convierte la respuesta a JSON
