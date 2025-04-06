@@ -2,14 +2,10 @@ package com.example.reticket.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 import com.example.reticket.db.Event;
-import com.example.reticket.db.Event.EventStatus;
-import com.example.reticket.db.Event.EventType;
 import com.example.reticket.db.User_;
 import com.example.reticket.service.EventService;
 import com.example.reticket.service.UserService;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.Optional;
 
@@ -23,12 +19,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-
-
-
-
- 
 
 @RestController
 public class AcountsOperationsController {
@@ -88,13 +78,13 @@ public class AcountsOperationsController {
         }
         User_ user = existingUser.get();
         
-        // Actualizar solo los campos proporcionados en la solicitud
+        // Update only the fields provided in the request
         if (updates.containsKey("username")) {
             String newUsername = (String) updates.get("username");
             
-            // Verificar que el nuevo username no exista ya
+            // Verify that the new username does not already exist
             if (!user.getUsername().equals(newUsername) && userService.existsByUsername(newUsername)) {
-                return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("error","El nombre de usuario ya está en uso"));
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("error","The username is already in use"));
             }
             user.setUsername(newUsername);
         }
@@ -102,7 +92,7 @@ public class AcountsOperationsController {
         if (updates.containsKey("email")) {
             String newEmail = (String) updates.get("email");
             
-            // Verificar que el nuevo email no exista ya
+            // Verify that the new email does not already exist
             if (!user.getEmail().equals(newEmail) && userService.existsByEmail(newEmail)) {
                 return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("error","El email ya está en uso"));
             }
@@ -118,7 +108,7 @@ public class AcountsOperationsController {
         
         User_ updatedUser = userService.updateUser(user);
 
-        // Dont return the password
+        // Don't return the password
         Map<String, Object> response = Map.of(
             "username", updatedUser.getUsername(),
             "email", updatedUser.getEmail(),
@@ -129,4 +119,3 @@ public class AcountsOperationsController {
     }
 
 }
-    

@@ -9,6 +9,5 @@ import com.example.reticket.db.Ticket;
 
 public interface TicketRepository extends JpaRepository<Ticket,Long>{
 
-    // Buscar tickets por evento
     List<Ticket> findByEvent(Event event);
 }

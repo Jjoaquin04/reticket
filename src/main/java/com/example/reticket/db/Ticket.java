@@ -15,7 +15,6 @@ public class Ticket {
     @ManyToOne
     private Event event; 
 
-    // Constructor vacío necesario para JPA
     public Ticket() {
     }
 
@@ -24,7 +23,7 @@ public class Ticket {
         
     }
     
-    // Getters y setters sin cambios
+    // Getters and setters
     public Long getId() {
         return id;
     }

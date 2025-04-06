@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     const newCount = currentCount - 1;
                     ticketsInfo.textContent = `${newCount}`;
                     
-                    // Si ya no hay tickets, deshabilitar el botón
+                    // Disable the button if no tickets are available
                     if (newCount <= 0) {
                         this.disabled = true;
                         this.textContent = 'Agotado';
