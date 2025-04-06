@@ -26,7 +26,7 @@ public class DataBaseInicializer {
     
     @PostConstruct
     public void initDatabase() {
-        // Crear eventos de ejemplo
+        // Create events examples
         Event quevedo = new Event(
             "Concierto Quevedo", 
             LocalDateTime.of(2025, 7, 15, 21, 0),
@@ -79,11 +79,11 @@ public class DataBaseInicializer {
             0
         );
         
-        // Guardar eventos
+        // Save events
         List<Event> events = Arrays.asList(quevedo, cocaColaFest, realMadrid, teatro);
         eventRepository.saveAll(events);
         
-        // Crear usuarios
+        // Create users
         User_ user1 = new User_("juan", "password123", "juan@example.com");
         //User_ user2 = new User_("maria", "securepass", "maria@example.com");
         //User_ user3 = new User_("admin", "admin123", "admin@reticket.com");

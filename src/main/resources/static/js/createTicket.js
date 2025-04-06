@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const ticketsInfo = event.querySelector('.tickets-info .tickets-count');
         const buyButton = event.querySelector('.buy-button-event');
         
-        // Verifica si el número de tickets es 0
+        // Check if the number of tickets is 0
         if (parseInt(ticketsInfo.textContent) <= 0) {
             buyButton.disabled = true;
             buyButton.textContent = 'Agotado';
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     const newCount = currentCount - 1;
                     ticketsInfo.textContent = `${newCount}`;
                     
-                    // Si ya no hay tickets, deshabilitar el botón
+                    // Disable the button if no tickets are available
                     if (newCount <= 0) {
                         this.disabled = true;
                         this.textContent = 'Agotado';

@@ -21,14 +21,7 @@
         <hr>
         <h2>Los más recomendados</h2>
         <div class="recommended-events">
-            <!-- Event:
-                name: string
-                date: LocalDateTime
-                location: string
-                description: string
-                image: string (path to the image)
-                organizer: string (name of the organizer) 
-            -->
+            <!-- Event: -->
             {{#mainEvents}}
             <div class="event" data-event-id="{{id}}">
                 <img src="{{imageURL}}" alt="{{altImage}}" class="evento-imagen">

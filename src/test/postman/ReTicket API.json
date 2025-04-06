@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "937dd99b-7823-4177-8512-8941229b1825",
+		"_postman_id": "dd2c783b-0451-4533-a01e-e47a00ad33ac",
 		"name": "ReTicket API",
 		"description": "API para la gestión de eventos y tickets - Solo métodos implementados",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -133,61 +133,20 @@
 					"name": "POST /submitEvent - Crear evento",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "name",
-									"value": "Concierto Test",
-									"type": "text"
-								},
-								{
-									"key": "dateTime",
-									"value": "2025-08-15 20:00:00",
-									"type": "text"
-								},
-								{
-									"key": "location",
-									"value": "Madrid",
-									"type": "text"
-								},
-								{
-									"key": "venue",
-									"value": "Wizink Center",
-									"type": "text"
-								},
-								{
-									"key": "description",
-									"value": "Descripción del evento de prueba",
-									"type": "text"
-								},
-								{
-									"key": "imageUrl",
-									"value": "/img/eventos/concierto.webp",
-									"type": "text"
-								},
-								{
-									"key": "imageAltText",
-									"value": "Imagen del concierto",
-									"type": "text"
-								},
-								{
-									"key": "eventType",
-									"value": "CONCERT",
-									"type": "text"
-								},
-								{
-									"key": "eventStatus",
-									"value": "AVAILABLE",
-									"type": "text"
-								},
-								{
-									"key": "availableTickets",
-									"value": "100",
-									"type": "text"
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Concierto Test\",\n    \"date\": \"2025-08-15T20:00:00\",\n    \"venue\": \"Wizink Center\",\n    \"location\": \"Madrid\",\n    \"description\": \"Descripción del evento de prueba\",\n    \"imageURL\": \"/img/eventos/concierto.webp\",\n    \"altImage\": \"Imagen del concierto\",\n    \"eventType\": \"CONCERT\",\n    \"eventStatus\": \"AVAILABLE\",\n    \"currenNumberOfTickets\": 100\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
-							]
+							}
 						},
 						"url": {
 							"raw": "http://localhost:8080/submitEvent",

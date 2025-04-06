@@ -1,10 +1,10 @@
 document.getElementById("new-event-form").addEventListener("submit", async function(event) {
-    event.preventDefault(); // Evita el envío del formulario por defecto
+    event.preventDefault(); // Prevent default form submission
 
-    // Obtener los datos del formulario
+    // Get form data
     const formData = new FormData(this);
 
-    // Convertir FormData a objeto y adaptar tipos
+    // Convert FormData to an object and adapt types
     const data = {
         name: formData.get("name"),
         date: new Date(formData.get("date")),
@@ -15,13 +15,13 @@ document.getElementById("new-event-form").addEventListener("submit", async funct
         altImage: formData.get("altImage"),
         eventType: formData.get("eventType"), // CONCERT, THEATER, etc.
         eventStatus: formData.get("eventStatus"), // AVAILABLE, CANCELLED, etc.
-        currenNumberOfTickets: parseInt(formData.get("currenNumberOfTickets")) // Convertir a número
+        currenNumberOfTickets: parseInt(formData.get("currenNumberOfTickets")) // Convert to number
     };
 
-    console.log(data); // Muestra el objeto en la consola para depuración
-    console.log(JSON.stringify(data)); // Muestra el objeto en la consola para depuración
+    console.log(data); // Log the object to the console for debugging
+    console.log(JSON.stringify(data)); // Log the object as JSON to the console for debugging
 
-    // Enviar la solicitud POST al servidor
+    // Send the POST request to the server
     try {
         const response = await fetch("/submitEvent", {
             method: "POST",
@@ -31,19 +31,19 @@ document.getElementById("new-event-form").addEventListener("submit", async funct
             body: JSON.stringify(data)
         });
 
-        const result = await response.json(); // Convierte la respuesta a JSON
+        const result = await response.json(); // Convert the response to JSON
 
-        console.log(response); // Muestra la respuesta en la consola para depuración
-        console.log(result); // Muestra la respuesta en la consola para depuración
+        console.log(response); // Log the response to the console for debugging
+        console.log(result); // Log the result to the console for debugging
 
         if (response.ok) {
             alert("Evento creado con éxito!");
-            window.location.href = "/events"; // Redirigir a la página de eventos
+            window.location.href = "/events"; // Redirect to the events page
         } else {
-            alert(result.error || "Error al crear el evento."); // Muestra un mensaje de error
+            alert(result.error || "Error al crear el evento."); 
         }
     } catch (error) {
-        console.error("Error:", error); // Manejo de errores
+        console.error("Error:", error);
         alert("Error al crear el evento.");
     }
 });
