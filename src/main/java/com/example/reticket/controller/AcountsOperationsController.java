@@ -112,10 +112,8 @@ public class AcountsOperationsController {
             String newUsername = (String) updates.get("username");
             
             // Verificar que el nuevo username no exista ya
-            if (!user.getUsername().equals(newUsername) && 
-                    userService.existsByUsername(newUsername)) {
-                return ResponseEntity.status(HttpStatus.CONFLICT)
-                    .body("El nombre de usuario ya está en uso");
+            if (!user.getUsername().equals(newUsername) && userService.existsByUsername(newUsername)) {
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("error","El nombre de usuario ya está en uso"));
             }
             user.setUsername(newUsername);
         }
@@ -124,35 +122,26 @@ public class AcountsOperationsController {
             String newEmail = (String) updates.get("email");
             
             // Verificar que el nuevo email no exista ya
-            if (!user.getEmail().equals(newEmail) && 
-                    userService.existsByEmail(newEmail)) {
-                return ResponseEntity.status(HttpStatus.CONFLICT)
-                    .body("El email ya está en uso");
+            if (!user.getEmail().equals(newEmail) && userService.existsByEmail(newEmail)) {
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("error","El email ya está en uso"));
             }
             user.setEmail(newEmail);
         }
         
         if (updates.containsKey("password")) {
-            user.setPassword((String) updates.get("password"));
-        }
-        
-        // Agregar verificación de contraseña actual para cambios sensibles
-        if ((updates.containsKey("email") || updates.containsKey("password")) && 
-                updates.containsKey("currentPassword")) {
-            String currentPassword = (String) updates.get("currentPassword");
-            if (!user.getPassword().equals(currentPassword)) {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body("Contraseña actual incorrecta");
+            if(user.getPassword().equals(updates.get("password"))) {
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("error","La contraseña no puede ser la misma que la anterior"));
             }
+            user.setPassword((String) updates.get("password"));
         }
         
         User_ updatedUser = userService.updateUser(user);
 
         // Dont return the password
         Map<String, Object> response = Map.of(
-            "id", updatedUser.getId(),
             "username", updatedUser.getUsername(),
-            "email", updatedUser.getEmail()
+            "email", updatedUser.getEmail(),
+            "password",updatedUser.getPassword()
         );
         
         return ResponseEntity.ok(response);

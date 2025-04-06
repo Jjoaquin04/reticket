@@ -14,28 +14,19 @@
  </head>
  <body>
     {{> header}}
-
     {{#users}}
-    <!-- User:
-     
-    nombre: {{username}}
-    email: {{email}}
-    password: {{password}}
-    -->
-
     <div>
         <h1>Perfil</h1>
         <form id="profile-form" data-user-id="{{id}}">
-            <p id="id-user" style="display: none;">{{id}}</p>
 
             <label for="username">Nombre de usuario:</label>
-            <input type="text" id="username" name="username" value="{{username}}" required><br><br>
+            <input type="text" id="username" name="username" value="{{username}}" data-original="{{username}}"required><br><br>
 
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" value="{{email}}" required><br><br>
+            <input type="email" id="email" name="email" value="{{email}}" data-original="{{email}}"><br><br>
 
             <label for="password">Contraseña:</label>
-            <input type="password" id="password" name="password" value="{{password}}" required><br><br>
+            <input type="password" id="password" name="password" value="{{password}}" data-original="{{password}}"required><br><br>
 
             <button type="submit">Guardar Cambios</button>
         </form>
