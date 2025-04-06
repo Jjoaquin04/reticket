@@ -1,1 +1,78 @@
 <!-- En este html es para el form de crear nuevo evento-->
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo evento</title>
+
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/newEvent.css">
+ </head>
+ <body>
+    {{ > header }}
+
+    <div id="new-event-container">
+        <h1>Crear nuevo evento</h1>
+        <!-- 
+        @RequestParam(required = true) String name,
+        @RequestParam(required = true) String dateTime,
+        @RequestParam(required = true) String location,
+        @RequestParam(required = true) String venue,
+        @RequestParam(required = true) String description,
+        @RequestParam(required = true) String imageUrl,
+        @RequestParam(required = true) String imageAltText,
+        @RequestParam(required = true) EventType eventType, : concert, festival, theater, sports
+        @RequestParam(required = true) EventStatus eventStatus, : aviable, calceled, finished, sold_out
+        @RequestParam(required = true) int availableTickets
+        -->
+        <form id="new-event-form">
+            <label for="name">Nombre del evento:</label>
+            <input type="text" id="name" name="name" placeholder="Nombre del evento" required><br>
+
+            <label for="dateTime">Fecha y hora:</label>
+            <input type="datetime-local" id="dateTime" name="date" required><br>
+
+            <label for="location">Ubicación:</label>
+            <input type="text" id="location" name="location" placeholder="Ciudad" required>
+            <input type="text" id="venue" name="venue" placeholder="Lugar" required><br>
+
+            <label for="description">Descripción:</label>
+            <textarea id="description" name="description" placeholder="Descripción" required></textarea><br>
+
+            <label for="imageUrl">Imagen:</label>
+            <input type="text" id="imageUrl" name="imageURL" placeholder="URL de la imagen" required>
+            <input type="text" id="imageAltText" name="altImage" placeholder="Texto alternativo de la imagen" required><br>
+            
+            <label for="eventType">Tipo de evento:</label>
+            <select id="eventType" name="eventType" required>
+                <option value="CONCERT">Concierto</option>
+                <option value="THEATER">Teatro</option>
+                <option value="SPORTS">Deportes</option>
+                <option value="FESTIVAL">Festival</option>
+            </select>
+            <br>
+
+            <label for="eventStatus">Estado del evento:</label>
+            <select id="eventStatus" name="eventStatus" required>
+                <option value="AVAILABLE">Activo</option>
+                <option value="CANCELED">Cancelado</option>
+                <option value="FINISHED">Completado</option>
+                <option value="SOLD_OUT">Agotado</option>
+            </select>
+            <br>
+
+            <label for="availableTickets">Boletos disponibles:</label>
+            <input type="number" id="availableTickets" name="currenNumberOfTickets" placeholder="Boletos disponibles" required><br>
+            
+            <button id="create-event-button">Crear evento</button>
+        </form>
+
+    </div>
+
+    {{ > footer}}
+
+    <script src="/js/newEvent.js"></script>
+ </body>
+ </html>

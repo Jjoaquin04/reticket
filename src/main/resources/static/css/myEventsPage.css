@@ -86,23 +86,7 @@ form{
     border-radius: 5px;
 }
 
-#editar-button{
-    color: black;
-    background-color: lightblue;
-    padding: 10px 20px;
-    margin-right: auto;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-
-    transition: all 0.3s;
-
-    &:hover{
-        background-color: lightskyblue;
-    }
-}
-
-#eliminar-button{
+.eliminar-button{
     color: white;
     background-color: red;
     padding: 10px 20px;

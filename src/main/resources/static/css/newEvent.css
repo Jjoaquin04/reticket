@@ -1,0 +1,48 @@
+#new-event-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#new-event-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 35px;
+    margin-top: 20px;
+    width: 600px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+
+    background-color: lightblue;
+}
+
+#new-event-form input[type="text"],
+#new-event-form input[type="email"],
+#new-event-form input[type="password"],
+#new-event-form input[type="datetime-local"],
+#new-event-form input[type="number"],
+#new-event-form select,
+#new-event-form textarea{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#new-event-form button{
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover{
+        background-color: #45a049;
+    }
+}
