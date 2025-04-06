@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>myEventsPage</title>
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/myTicketsPage.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    {{> header}}
+    <div id="ticketList">
+    <h1>
+        Mis Tickets
+    </h1>
+    {{^tickets}}
+        <div class="no-results">
+            <h3>No hay tickets disponibles</h3>
+            <p>Primero debes comprar un ticket</p>
+        </div>
+    {{/tickets}}
+    {{#tickets}}
+        <div class="ticket">
+            <img src="{{event.imageURL}}" alt="{{event.altImage}}" class="evento-imagen">
+            <div class="ticket-info">
+                <div class="top-ticket">
+                    <h1 class="title-event">{{event.name}}</h1>
+                    <p class="event-status {{event.eventStatus}}">{{event.eventStatus}}</p>
+                </div>
+                <p class="description-event">{{event.description}}</p>
+                <div class="ticket-info2">
+                    <p class="ticket-id">TicketID: {{id}}</p>
+                    <p class="date-event">{{event.date}}</p>
+                    <p class="ticket-location">{{event.venue}}, {{event.location}}</p>
+                </div>
+            </div>
+        </div>
+    {{/tickets}}
+
+    </div>
+    {{> footer}}
+    <script src="/js/main.js"></script>
+</body>
+</html>
