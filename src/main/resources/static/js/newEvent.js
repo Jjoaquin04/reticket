@@ -18,8 +18,8 @@ document.getElementById("new-event-form").addEventListener("submit", async funct
         currenNumberOfTickets: parseInt(formData.get("currenNumberOfTickets")) // Convert to number
     };
 
-    console.log(data); // Log the object to the console for debugging
-    console.log(JSON.stringify(data)); // Log the object as JSON to the console for debugging
+    console.log(data); 
+    console.log(JSON.stringify(data));
 
     // Send the POST request to the server
     try {
@@ -33,8 +33,8 @@ document.getElementById("new-event-form").addEventListener("submit", async funct
 
         const result = await response.json(); // Convert the response to JSON
 
-        console.log(response); // Log the response to the console for debugging
-        console.log(result); // Log the result to the console for debugging
+        console.log(response);
+        console.log(result); 
 
         if (response.ok) {
             alert("Evento creado con éxito!");

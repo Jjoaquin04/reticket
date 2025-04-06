@@ -37,23 +37,23 @@ document.getElementById('profile-form').addEventListener('submit', async functio
         ...changedData, // Only the changed fields
     };
 
-    // Send the PATCH request to the server
+    
     try {
         const response = await fetch(`/users/${userId}`, {
-            method: 'PATCH', // PATCH method for update
+            method: 'PATCH', 
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data) // Convert the object to JSON
+            body: JSON.stringify(data) 
         });
     
-        const result = await response.json(); // Convert the response to JSON
+        const result = await response.json();
     
         if (response.ok) {
             alert('Perfil actualizado con éxito!');
 
         } else {
-            alert(result.error || 'Error al actualizar el perfil.'); // Show an error message
+            alert(result.error || 'Error al actualizar el perfil.');
         }
     }catch(error) {
         console.error('Error:', error); 
