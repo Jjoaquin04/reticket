@@ -41,7 +41,7 @@ for (let i = 0; i < update_forms.length; i++) {
         event.preventDefault();
 
         const formData = new FormData(this);
-        // Obtener solo el valor del estado
+        // Get only the value of the status
         const statusValue = formData.get('eventStatus');
 
         const eventId = this.getAttribute("key");
@@ -52,7 +52,7 @@ for (let i = 0; i < update_forms.length; i++) {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                // Enviar directamente el valor como string en JSON
+                // Send the value directly as a string in JSON
                 body: JSON.stringify(statusValue)
             });
 

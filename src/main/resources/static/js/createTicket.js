@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const ticketsInfo = event.querySelector('.tickets-info .tickets-count');
         const buyButton = event.querySelector('.buy-button-event');
         
-        // Verifica si el número de tickets es 0
+        // Check if the number of tickets is 0
         if (parseInt(ticketsInfo.textContent) <= 0 || event.dataset.eventStatus === 'SOLD_OUT' || event.dataset.eventStatus === 'CANCELLED' || event.dataset.eventStatus === 'FINISHED') {
             buyButton.disabled = true;
             buyButton.textContent = event.dataset.eventStatus === 'SOLD_OUT' ? 'Agotado' : event.dataset.eventStatus === 'CANCELLED' ? 'Cancelado' : event.dataset.eventStatus === 'FINISHED' ? 'Finalizado' : 'No disponible';
@@ -36,13 +36,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         this.disabled = true;
                         this.textContent = 'Agotado';
                     }
-                    alert('Ticket comprado con éxito!'); // Muestra un mensaje de éxito
+                    alert('Ticket comprado con éxito!'); // Show a success message
                 } else {
-                    alert('Error al comprar el ticket.'); // Muestra un mensaje de error
+                    alert('Error al comprar el ticket.'); // Show an error message
                 }
             }catch (error) {
-                console.error('Error:', error); // Manejo de errores
-                alert('Error al procesar la compra.'); // Muestra un mensaje de error
+                console.error('Error:', error); // Error handling
+                alert('Error al procesar la compra.'); // Show an error message
             }
         });
     });
