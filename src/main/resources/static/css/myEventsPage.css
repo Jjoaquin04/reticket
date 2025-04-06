@@ -86,6 +86,47 @@ form{
     border-radius: 5px;
 }
 
+.status-form{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+
+    & > label{
+        font-size: 0.9em;
+        color: #555;
+    }
+
+    & > select{
+        font-size: 0.9em;
+        padding: 5px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        color: #333;
+    }
+
+    & > select:hover{
+        background-color: #f0f0f0;
+    }
+
+    & > button{
+        font-size: 0.9em;
+        padding: 5px 10px;
+        border-radius: 4px;
+        border: none;
+        background-color: lightblue;
+        color: black;
+        cursor: pointer;
+        transition: all 0.3s;
+
+        &:hover{
+            background-color: lightskyblue;
+        }
+    }
+}
+
 .eliminar-button{
     color: white;
     background-color: red;
