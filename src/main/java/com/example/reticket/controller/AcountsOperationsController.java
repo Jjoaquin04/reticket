@@ -39,44 +39,16 @@ public class AcountsOperationsController {
 
     @PostMapping("/submitEvent")
     public ResponseEntity<?> createEvent(
-        @RequestParam(required = true) String name,
-        @RequestParam(required = true) String dateTime,
-        @RequestParam(required = true) String location,
-        @RequestParam(required = true) String venue,
-        @RequestParam(required = true) String description,
-        @RequestParam(required = true) String imageUrl,
-        @RequestParam(required = true) String imageAltText,
-        @RequestParam(required = true) EventType eventType,
-        @RequestParam(required = true) EventStatus eventStatus,
-        @RequestParam(required = true) int availableTickets
+        @RequestBody(required = true) Event event
     ){
-        try{
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            LocalDateTime date = LocalDateTime.parse(dateTime, formatter);
-            
-            Event newEvent = new Event(
-                name, 
-                date, 
-                location, 
-                venue, 
-                description, 
-                imageUrl, 
-                imageAltText, 
-                eventType, 
-                eventStatus, 
-                availableTickets
-            );
-            
-            Event existingEvent = eventService.getEventByName(name);
-            if(existingEvent != null)   {
-                return ResponseEntity.status(HttpStatus.CONFLICT).body("Event with this name already exists.");
-            }
+        Optional<Event> existingEvent = eventService.getEventById(event.getId());
 
-            Event savedEvent = eventService.createEvent(newEvent);
-            return ResponseEntity.status(HttpStatus.CREATED).body(savedEvent);
-        }catch(Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error creating event: " + e.getMessage());
+        if(existingEvent.isPresent()) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("error","El evento ya existe"));
         }
+
+        Event newEvent = eventService.createEvent(event);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newEvent);
     }
 
     @DeleteMapping("events/{id}")
