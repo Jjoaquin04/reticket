@@ -1,4 +1,3 @@
-
 const eliminar_button = document.getElementsByClassName("eliminar-button"); // Get all elements with the class "eliminar-button"
 
 // Loop through each button and add a click event listener
@@ -31,6 +30,42 @@ for (let i = 0; i < eliminar_button.length; i++) {
                 // Reload the page to reflect the changes
                 location.reload();
             }
+        }
+    });
+}
+
+const update_forms = document.getElementsByClassName("update-form");
+
+for (let i = 0; i < update_forms.length; i++) {
+    update_forms[i].addEventListener("submit", async function(event) {
+        event.preventDefault();
+
+        const formData = new FormData(this);
+        // Obtener solo el valor del estado
+        const statusValue = formData.get('eventStatus');
+
+        const eventId = this.getAttribute("key");
+
+        try {
+            const response = await fetch("/events/" + eventId, {
+                method: "PATCH",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                // Enviar directamente el valor como string en JSON
+                body: JSON.stringify(statusValue)
+            });
+
+            console.log(response);
+
+            if (!response.ok) {
+                alert("Error al actualizar el estado del evento. Por favor, inténtalo de nuevo.");
+            } else {
+                location.reload();
+            }
+        } catch (error) {
+            console.error("Error al actualizar el evento:", error);
+            alert("Ocurrió un error al intentar actualizar el evento.");
         }
     });
 }

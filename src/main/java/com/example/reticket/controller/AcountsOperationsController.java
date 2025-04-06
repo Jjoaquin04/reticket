@@ -66,6 +66,20 @@ public class AcountsOperationsController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @PatchMapping("events/{id}")
+    public ResponseEntity<?> updateEventStatus(@PathVariable Long id, @RequestBody Event.EventStatus status) {
+        Optional<Event> event = eventService.getEventById(id);
+        if(event.isPresent()){
+            Event updatedEvent = event.get();
+            updatedEvent.setEventStatus(status);
+            eventService.updateEvent(updatedEvent);
+            return ResponseEntity.ok(updatedEvent);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @PatchMapping("/users/{id}")
     public ResponseEntity<?> updateUser(@PathVariable Long id,@RequestBody Map<String, Object> updates) {
         Optional<User_> existingUser = userService.getUserById(id);

@@ -5,9 +5,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const buyButton = event.querySelector('.buy-button-event');
         
         // Verifica si el número de tickets es 0
-        if (parseInt(ticketsInfo.textContent) <= 0) {
+        if (parseInt(ticketsInfo.textContent) <= 0 || event.dataset.eventStatus === 'SOLD_OUT' || event.dataset.eventStatus === 'CANCELLED' || event.dataset.eventStatus === 'FINISHED') {
             buyButton.disabled = true;
-            buyButton.textContent = 'Agotado';
+            buyButton.textContent = event.dataset.eventStatus === 'SOLD_OUT' ? 'Agotado' : event.dataset.eventStatus === 'CANCELLED' ? 'Cancelado' : event.dataset.eventStatus === 'FINISHED' ? 'Finalizado' : 'No disponible';
         }
     });
 

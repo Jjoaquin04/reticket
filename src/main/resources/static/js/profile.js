@@ -9,8 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     inputs.forEach(input => {
         originalData[input.name] = input.value; // Guardar el valor original
     });
-}
-);
+});
 
 document.getElementById('profile-form').addEventListener('submit', async function(event) {
     event.preventDefault(); // Evita el envío del formulario por defecto

@@ -38,6 +38,17 @@
                     <p class="date-event">{{date}}</p>
                     <p class="location-event">{{venue}}, {{location}}</p>
                 </div>
+                <form key="{{id}}" class="update-form">
+                    <label for="status">Estado:</label>
+                    <select name="eventStatus" id="status">
+                        <option value="{{eventStatus}}" hidden>{{eventStatus}}</option>
+                        <option value="AVAILABLE">AVAILABLE</option>
+                        <option value="CANCELLED">CANCELED</option>
+                        <option value="FINISHED">FINISHED</option>
+                        <option value="SOLD_OUT">SOLD_OUT</option>
+                    </select>
+                    <button type="submit" class="update-button">Actualizar</button>
+                </form>
                 <div class="actions_buttons">
                     <button key="{{id}}" class="eliminar-button">Eliminar</button>
                 </div>

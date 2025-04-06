@@ -75,7 +75,7 @@ public class DataBaseInicializer {
             "/img/teatros/teatroLara.webp",
             "Imagen del teatro Lara de Madrid",
             Event.EventType.THEATER,
-            Event.EventStatus.AVAILABLE,
+            Event.EventStatus.SOLD_OUT,
             0
         );
         
