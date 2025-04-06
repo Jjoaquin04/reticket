@@ -83,27 +83,27 @@
 .date-event{
     font-size: 0.9em;
     color: white;
-    background-color: #d0d0d0;
+    background-color: #c5c5c5;
     padding: 5px;
     border-radius: 5px;
     transition: ease 0.3s;
 
     &:hover{
-        background-color: #c0c0c0;
+        background-color: #b9b9b9;
     }
 }
 
 .location-event{
     font-size: 0.9em;
     color: white;
-    background-color: #d0d0d0;
+    background-color: #b9b9b9;
     padding: 5px;
     margin-left: 10px;
     border-radius: 5px;
     transition: ease 0.3s;
 
     &:hover{
-        background-color: #c0c0c0;
+        background-color: #b9b9b9;
     }
 }
 
@@ -123,26 +123,28 @@
         background-color: lightblue;
     }
 }
+
 .buy-button-event:disabled {
     background-color: lightcoral;
     color: black;
     border-color: #ccc;
     cursor: not-allowed;
 }
+
 .tickets-info {
-    font-size: 0.9em;
-    color: white;
-    background-color: #d0d0d0;
-    padding: 5px;
-    border-radius: 5px;
-    transition: ease 0.3s;
-    margin-right: 10px;
-    text-align: center;
-    padding: 5px 10px;
-    &:hover{
-        background-color: #c0c0c0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.7em;
+
+    & > img {
+        width: 20px;
+        height: 20px;
+        margin-right: 20px;
     }
 }
+
 @media (max-width: 768px) {
     .recommended-events {
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
