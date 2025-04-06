@@ -1,6 +1,8 @@
 package com.example.reticket.db;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -8,6 +10,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.CascadeType;
 
 @Entity
 public class Event {
@@ -32,6 +36,9 @@ public class Event {
     private EventType eventType;
     @Enumerated(EnumType.STRING)
     private EventStatus eventStatus;
+
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Ticket> tickets = new ArrayList<>();
 
     private String name;
     private LocalDateTime date;
@@ -138,5 +145,19 @@ public class Event {
     }
     public void setEventStatus(EventStatus eventStatus) {
         this.eventStatus = eventStatus;
+    }
+
+    public void addTicket(Ticket ticket) {
+        tickets.add(ticket);
+        ticket.setEvent(this);
+    }
+
+    public void removeTicket(Ticket ticket) {
+        tickets.remove(ticket);
+        ticket.setEvent(null);
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
     }
 }
