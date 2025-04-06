@@ -34,8 +34,7 @@ for (let i = 0; i < eliminar_button.length; i++) {
     });
 }
 
-const update_forms = document.getElementsByClassName("update-form");
-
+const update_forms = document.getElementsByClassName("status-form");
 for (let i = 0; i < update_forms.length; i++) {
     update_forms[i].addEventListener("submit", async function(event) {
         event.preventDefault();
@@ -43,7 +42,6 @@ for (let i = 0; i < update_forms.length; i++) {
         const formData = new FormData(this);
         // Get only the value of the status
         const statusValue = formData.get('eventStatus');
-
         const eventId = this.getAttribute("key");
 
         try {
@@ -60,7 +58,9 @@ for (let i = 0; i < update_forms.length; i++) {
 
             if (!response.ok) {
                 alert("Error al actualizar el estado del evento. Por favor, inténtalo de nuevo.");
+                
             } else {
+                alert("Estado del evento actualizado con éxito!");
                 location.reload();
             }
         } catch (error) {
