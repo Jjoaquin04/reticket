@@ -20,6 +20,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+
+
+
+ 
+
 @RestController
 public class AcountsOperationsController {
     
@@ -78,13 +83,13 @@ public class AcountsOperationsController {
         }
         User_ user = existingUser.get();
         
-        // Update only the fields provided in the request
+        // Actualizar solo los campos proporcionados en la solicitud
         if (updates.containsKey("username")) {
             String newUsername = (String) updates.get("username");
             
-            // Verify that the new username does not already exist
+            // Verificar que el nuevo username no exista ya
             if (!user.getUsername().equals(newUsername) && userService.existsByUsername(newUsername)) {
-                return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("error","The username is already in use"));
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("error","El nombre de usuario ya está en uso"));
             }
             user.setUsername(newUsername);
         }
@@ -92,7 +97,7 @@ public class AcountsOperationsController {
         if (updates.containsKey("email")) {
             String newEmail = (String) updates.get("email");
             
-            // Verify that the new email does not already exist
+            // Verificar que el nuevo email no exista ya
             if (!user.getEmail().equals(newEmail) && userService.existsByEmail(newEmail)) {
                 return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("error","El email ya está en uso"));
             }
@@ -108,7 +113,7 @@ public class AcountsOperationsController {
         
         User_ updatedUser = userService.updateUser(user);
 
-        // Don't return the password
+        // Dont return the password
         Map<String, Object> response = Map.of(
             "username", updatedUser.getUsername(),
             "email", updatedUser.getEmail(),
@@ -119,3 +124,4 @@ public class AcountsOperationsController {
     }
 
 }
+    
