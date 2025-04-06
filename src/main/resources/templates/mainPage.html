@@ -30,7 +30,7 @@
                 organizer: string (name of the organizer) 
             -->
             {{#mainEvents}}
-            <div class="event" data-event-id="{{id}}">
+            <div class="event" data-event-id="{{id}}" data-event-status="{{eventStatus}}">
                 <img src="{{imageURL}}" alt="{{altImage}}" class="evento-imagen">
                 <h3 class="title-event">{{name}}</h3>
                 <p class="description-event">{{description}}</p>
