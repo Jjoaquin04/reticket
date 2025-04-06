@@ -1,64 +1,63 @@
-//guardar los datos originales del formulario
+// Save the original form data
 let originalData = {};
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Obtener los datos originales del formulario al cargar la página
+    // Get the original form data when the page loads
     const form = document.getElementById('profile-form');
     const inputs = form.querySelectorAll('input, select, textarea');
     
     inputs.forEach(input => {
-        originalData[input.name] = input.value; // Guardar el valor original
+        originalData[input.name] = input.value; // Save the original value
     });
-}
-);
+});
 
 document.getElementById('profile-form').addEventListener('submit', async function(event) {
-    event.preventDefault(); // Evita el envío del formulario por defecto
+    event.preventDefault(); // Prevent default form submission
 
-    const userId = this.getAttribute("data-user-id"); // Obtiene el ID del usuario
+    const userId = this.getAttribute("data-user-id"); // Get the user ID
 
-    // incluir solo los campos que han cambiado
+    // Include only the fields that have changed
     const changedData = {};
     const inputs = this.querySelectorAll('input, select, textarea');
 
     inputs.forEach(input => {
         if (originalData[input.name] !== input.value) {
-            changedData[input.name] = input.value; // Solo incluir campos que han cambiado
+            changedData[input.name] = input.value; // Include only changed fields
         }
     });
 
-    // Verificar si hay cambios antes de enviar la solicitud
+    // Check if there are changes before sending the request
     if (Object.keys(changedData).length === 0) {
         alert('No hay cambios para guardar.');
         return;
     }
 
-    // Crear un objeto con los datos del formulario
+    // Create an object with the form data
     const data = {
-        ...changedData, // Solo los campos que han cambiado
+        ...changedData, // Only the changed fields
     };
 
-    // Enviar la solicitud PATCH al servidor
-    try{
+    // Send the PATCH request to the server
+    try {
         const response = await fetch(`/users/${userId}`, {
-            method: 'PATCH', // Método PATCH para actualizar
+            method: 'PATCH', // PATCH method for update
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data) // Convierte el objeto a JSON
+            body: JSON.stringify(data) // Convert the object to JSON
         });
     
-        const result = await response.json(); // Convierte la respuesta a JSON
+        const result = await response.json(); // Convert the response to JSON
     
         if (response.ok) {
             alert('Perfil actualizado con éxito!');
-            
+
         } else {
-            alert(result.error || 'Error al actualizar el perfil.'); // Muestra un mensaje de error
+            alert(result.error || 'Error al actualizar el perfil.'); // Show an error message
         }
     }catch(error) {
-        console.error('Error:', error); // Manejo de errores
-        alert('Error al procesar la actualización.'); // Muestra un mensaje de error
+        console.error('Error:', error); 
+        alert('Error al procesar la actualización.'); 
     }
     window.location.href = "/acounts/profile";
 });
