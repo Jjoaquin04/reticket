@@ -36,7 +36,6 @@ public class EventsPageController {
         List<Event> filteredEvents = eventService.getAllEvents();
         
         if (searchString != null && !searchString.isEmpty()) {
-
             filteredEvents = filteredEvents.stream()
                 .filter(event -> 
                     (event.getName() != null && event.getName().toLowerCase().contains(searchString.toLowerCase()))  || 
@@ -47,17 +46,29 @@ public class EventsPageController {
         }
         
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        if (startDateTime != null && !startDateTime.isEmpty() && endDateTime != null && !endDateTime.isEmpty()) {
-            try {
-                LocalDateTime start = LocalDate.parse(startDateTime, formatter).atStartOfDay();
-                LocalDateTime end = LocalDate.parse(endDateTime, formatter).atTime(23, 59);
-                filteredEvents = filteredEvents.stream()
-                    .filter(event -> eventService.getEventsByDateRange(start, end).contains(event))
-                    .collect(Collectors.toList());
-            } catch (Exception e) {
-                System.out.println("Error al parsear fechas: " + e.getMessage());
-            }
+
+        if (startDateTime != null && !startDateTime.isEmpty()) {
+            LocalDateTime start = LocalDate.parse(startDateTime, formatter).atStartOfDay();
+            filteredEvents = filteredEvents.stream()
+                .filter(event -> {
+                    LocalDateTime eventDate = event.getDate();
+                    return (eventDate.isEqual(start) || eventDate.isAfter(start));
+                })
+                .collect(Collectors.toList());
+            System.out.println("Filtered by start date: " + start);
         }
+        
+        if (endDateTime != null && !endDateTime.isEmpty()) {
+            LocalDateTime end = LocalDate.parse(endDateTime, formatter).atTime(23, 59);
+            filteredEvents = filteredEvents.stream()
+                .filter(event -> {
+                    LocalDateTime eventDate = event.getDate();
+                    return (eventDate.isEqual(end) || eventDate.isBefore(end));
+                })
+                .collect(Collectors.toList());
+            System.out.println("Filtered by end date: " + end);
+        }
+
         if (location != null && !location.isEmpty()) {
             filteredEvents = filteredEvents.stream()
                 .filter((event -> eventService.getEventsByLocation(location).contains(event) || eventService.getEventsByVenue(location).contains(event)))

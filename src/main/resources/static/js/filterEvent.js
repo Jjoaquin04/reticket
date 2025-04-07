@@ -2,8 +2,8 @@ document.addEventListener("DOMContentLoaded",function() {
     const urlParams = new URLSearchParams(window.location.search);
     const eventType = urlParams.get("eventType");
     const location = urlParams.get("location");
-    const startDate = urlParams.get("startDate");
-    const endDate = urlParams.get("endDate");
+    const startDate = urlParams.get("startDateTime");
+    const endDate = urlParams.get("endDateTime");
     const searchString = urlParams.get("searchString");
 
     if(eventType != null)   {
