@@ -28,7 +28,12 @@ document.getElementById('profile-form').addEventListener('submit', async functio
 
     // Check if there are changes before sending the request
     if (Object.keys(changedData).length === 0) {
-        alert('No hay cambios para guardar.');
+        Swal.fire({
+            icon: 'info',
+            title: 'Sin cambios',
+            text: 'No se han realizado cambios en el perfil.',
+            confirmButtonText: 'Continuar'
+        });
         return;
     }
 
@@ -50,14 +55,38 @@ document.getElementById('profile-form').addEventListener('submit', async functio
         const result = await response.json();
     
         if (response.ok) {
-            alert('Perfil actualizado con éxito!');
-
+            Swal.fire({
+                title: '¡Éxito!',
+                text: 'Perfil actualizado correctamente',
+                icon: 'success',
+                confirmButtonText: 'Continuar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.reload(); 
+                }
+            });
         } else {
-            alert(result.error || 'Error al actualizar el perfil.');
+            Swal.fire({
+                icon: 'error',
+                title: 'Error al actualizar el perfil',
+                text: result.error || 'Verifica los datos ingresados'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.reload(); 
+                }
+            });
         }
     }catch(error) {
         console.error('Error:', error); 
-        alert('Error al procesar la actualización.'); 
+        Swal.fire({
+            icon: 'error',
+            title: 'Error al actualizar el perfil',
+            text: result.error || 'Verifica los datos ingresados'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.reload(); 
+            }
+        }); 
     }
-    window.location.href = "/acounts/profile";
+    
 });

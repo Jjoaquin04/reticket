@@ -37,13 +37,30 @@ document.getElementById("new-event-form").addEventListener("submit", async funct
         console.log(result); 
 
         if (response.ok) {
-            alert("Evento creado con éxito!");
-            window.location.href = "/events"; // Redirect to the events page
+            Swal.fire({
+                title: "¡Éxito!",
+                text: "Evento creado correctamente",
+                icon: "success",
+                confirmButtonText: "Continuar"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "/events";
+                }
+            });
         } else {
-            alert(result.error || "Error al crear el evento."); 
+            const errorData = await response.json();
+            Swal.fire({
+                icon: "error",
+                title: "Error al crear el evento",
+                text: errorData.error || "Verifica los datos ingresados"
+            });
         }
     } catch (error) {
         console.error("Error:", error);
-        alert("Error al crear el evento.");
+        Swal.fire({
+            icon: "error",
+            title: "Error de conexión",
+            text: "No se pudo conectar con el servidor"
+        });
     }
 });

@@ -21,10 +21,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
-
-
- 
-
 @RestController
 public class AcountsOperationsController {
     
@@ -34,9 +30,7 @@ public class AcountsOperationsController {
     private UserService userService;
 
     @PostMapping("/submitEvent")
-    public ResponseEntity<?> createEvent(
-        @RequestBody(required = true) Event event
-    ){
+    public ResponseEntity<?> createEvent(@RequestBody(required = true) Event event) {
         Event newEvent = eventService.createEvent(event);
         return ResponseEntity.status(HttpStatus.CREATED).body(newEvent);
     }

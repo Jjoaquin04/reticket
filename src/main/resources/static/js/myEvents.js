@@ -7,30 +7,54 @@ for (let i = 0; i < eliminar_button.length; i++) {
         const eventId = this.getAttribute("key");
 
         // Show a confirmation dialog to the user
-        const confirm = window.confirm("¿Estás seguro de que deseas eliminar este evento?");
-
-        if (confirm) {
-            try{
-                const response = await fetch("/events/" + eventId, {
-                    method: "DELETE",
-                    headers: {
-                        "Content-Type": "application/json"
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try{
+                    const response = await fetch("/events/" + eventId, {
+                        method: "DELETE",
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    });
+    
+                    console.log(response);
+    
+                    if (!response.ok) {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: "Ha ocurrido un error al eliminar el evento. Por favor, inténtalo de nuevo",
+                        });
+                    }else{
+                        Swal.fire({
+                            title: "¡Éxito!",
+                            text: "Evento eliminado correctamente",
+                            icon: "success",
+                            confirmButtonText: "Continuar"
+                        }).then((result) => {
+                            if( result.isConfirmed) {
+                                location.reload();
+                            }
+                        }); 
                     }
-                });
-
-                console.log(response);
-
-                if (!response.ok) {
-                    alert("Error al eliminar el evento. Por favor, inténtalo de nuevo.");
+                } catch (error) {
+                    console.error("Error al eliminar el evento:", error);
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Ha ocurrido un error al eliminar el evento. Por favor, inténtalo de nuevo",
+                    });
                 }
-            } catch (error) {
-                console.error("Error al eliminar el evento:", error);
-                alert("Ocurrió un error al intentar eliminar el evento. Por favor, inténtalo de nuevo más tarde.");
-            }finally {
-                // Reload the page to reflect the changes
-                location.reload();
             }
-        }
+          });
     });
 }
 
@@ -54,18 +78,27 @@ for (let i = 0; i < update_forms.length; i++) {
                 body: JSON.stringify(statusValue)
             });
 
-            console.log(response);
-
             if (!response.ok) {
-                alert("Error al actualizar el estado del evento. Por favor, inténtalo de nuevo.");
-                
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Ha ocurrido un error al actualizar el estado del evento. Por favor, inténtalo de nuevo",
+                });
             } else {
-                alert("Estado del evento actualizado con éxito!");
+                Swal.fire({
+                    title: "Estado del evento actualizado con éxito!",
+                    text: "Nuevo estado: ",
+                    icon: "success"
+                  });
                 location.reload();
             }
         } catch (error) {
             console.error("Error al actualizar el evento:", error);
-            alert("Ocurrió un error al intentar actualizar el evento.");
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Ha ocurrido un error al actualizar el estado del evento. Por favor, inténtalo de nuevo",
+            });
         }
     });
 }

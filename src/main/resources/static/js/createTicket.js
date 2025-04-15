@@ -36,13 +36,25 @@ document.addEventListener('DOMContentLoaded', function() {
                         this.disabled = true;
                         this.textContent = 'Agotado';
                     }
-                    alert('Ticket comprado con éxito!'); // Show a success message
+                    Swal.fire({
+                        title: "Ticket comprado con éxito!",
+                        text: "Seguir comprando",
+                        icon: "success"
+                      });
                 } else {
-                    alert('Error al comprar el ticket.'); // Show an error message
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Ha ocurrido un error al comprar el ticket",
+                    });
                 }
             }catch (error) {
                 console.error('Error:', error); // Error handling
-                alert('Error al procesar la compra.'); // Show an error message
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Error al procesar la compra",
+                });
             }
         });
     });
