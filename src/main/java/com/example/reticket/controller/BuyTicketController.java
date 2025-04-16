@@ -1,38 +1,25 @@
 package com.example.reticket.controller;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.example.reticket.service.EventService;
-import com.example.reticket.service.TicketService;
-import com.example.reticket.db.Event;
-import com.example.reticket.db.Ticket;
-
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.example.reticket.db.Event;
+import com.example.reticket.db.Ticket;
+import com.example.reticket.service.EventService;
+import com.example.reticket.service.TicketService;
 
 @RestController
-public class MainPageController {
-    
+public class BuyTicketController {
+
     @Autowired
     private EventService eventService;
     @Autowired
     private TicketService ticketService;
-
-    @GetMapping("/")
-    public ModelAndView mainPage(Model model)    {
-        List<Event> eventos = eventService.getAllEvents();
-        model.addAttribute("mainEvents", eventos);
-        return new ModelAndView("mainPage");
-    }
 
     @PostMapping("buyTicket/{id}")
     public ResponseEntity<?> buyTicket(@PathVariable Long id) {

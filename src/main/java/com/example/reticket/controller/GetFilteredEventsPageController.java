@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/events")
-public class EventsPageController {
+public class GetFilteredEventsPageController {
 
     @Autowired
     private EventService eventService;

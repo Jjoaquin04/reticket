@@ -18,7 +18,7 @@ import com.example.reticket.service.UserService;
 
 @RestController
 @RequestMapping("/acounts")
-public class AcountsHtmlPageController {
+public class GetAcountsOptionsPageController {
     @Autowired
     private EventService eventService;
     @Autowired

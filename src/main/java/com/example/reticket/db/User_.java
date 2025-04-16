@@ -1,11 +1,7 @@
 package com.example.reticket.db;
 
-
 import java.util.ArrayList;
 import java.util.List;
-
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -62,6 +58,12 @@ public class User_{
     }
     public void setPassword(String password) {
         this.password = password;
+    }
+    public UserType getUserType() {
+        return userType;
+    }
+    public void setUserType(UserType userType) {
+        this.userType = userType;
     }
     public List<Ticket> getTickets() {
         return tickets;
