@@ -84,4 +84,10 @@ public class LoginRegisterOperationsController {
                     .body(Map.of("error", "Error al registrar el usuario"));
         }
     }
+
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(HttpSession session) {
+        session.invalidate();
+        return ResponseEntity.ok().body(Map.of("success", "Sesión cerrada correctamente"));
+    }
 }
