@@ -34,6 +34,10 @@ public class TicketService {
         return ticketRepository.findByEvent(event);
     }
 
+    public List<Ticket> getTicketsByUserId(Long userId) {
+        return ticketRepository.findByUser_Id(userId);
+    }
+
     // Update
     public Ticket updateTicket(Ticket ticket) {
         return ticketRepository.save(ticket);

@@ -10,4 +10,6 @@ import com.example.reticket.db.Ticket;
 public interface TicketRepository extends JpaRepository<Ticket,Long>{
 
     List<Ticket> findByEvent(Event event);
+
+    List<Ticket> findByUser_Id(Long userId);
 }

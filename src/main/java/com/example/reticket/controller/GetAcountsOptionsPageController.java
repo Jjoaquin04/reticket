@@ -1,6 +1,9 @@
 package com.example.reticket.controller;
 
 import java.util.List;
+import java.util.Optional;
+
+import jakarta.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -33,16 +36,26 @@ public class GetAcountsOptionsPageController {
         return new ModelAndView("myEventsPage");
     }
     @GetMapping("/profile")
-    public ModelAndView getProfile(Model model) {
-        List<User_> allUsers = userService.getAllUsers();
-        model.addAttribute("users", allUsers);
-        return new ModelAndView("profilePage");
+    public ModelAndView getProfile(Model model, HttpSession session) {
+        Long userId = (Long) session.getAttribute("userId");
+        if (userId != null) {
+            Optional<User_> user = userService.getUserById(userId);
+            if (user.isPresent()) {
+                model.addAttribute("users", List.of(user.get()));
+                return new ModelAndView("profilePage");
+            }
+        }
+        return new ModelAndView("redirect:/");
     }
     @GetMapping("/myTickets")
-    public ModelAndView getTickets(Model model) {
-        List<Ticket> allTickets = ticketService.getAllTickets();
-        model.addAttribute("tickets",allTickets);
-        return new ModelAndView("myTicketsPage");
+    public ModelAndView getTickets(Model model, HttpSession session) {
+        Long userId = (Long) session.getAttribute("userId");
+        if (userId != null) {
+            List<Ticket> userTickets = ticketService.getTicketsByUserId(userId);
+            model.addAttribute("tickets", userTickets);
+            return new ModelAndView("myTicketsPage");
+        }
+        return new ModelAndView("redirect:/");
     }
     @GetMapping("/newEvent")
     public ModelAndView getNewEventPage() {

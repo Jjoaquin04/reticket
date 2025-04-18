@@ -72,6 +72,7 @@ public class User_{
         if(!tickets.add(ticket))    {
             throw new RuntimeException("Error al guardar el ticket");
         }
+        ticket.setUser(this);
     }
     public User_ get(){
         return this;

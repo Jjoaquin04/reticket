@@ -13,24 +13,36 @@ public class Ticket {
     private Long id;
 
     @ManyToOne
-    private Event event; 
+    private Event event;
+    
+    @ManyToOne
+    private User_ user;
 
     public Ticket() {
     }
 
     public Ticket(Event event) {
         this.event = event;
-        
     }
     
-    // Getters and setters
+    // Getters y setters
     public Long getId() {
         return id;
     }
+    
     public Event getEvent() {
         return event;
     }
+    
     public void setEvent(Event event) {
         this.event = event;
+    }
+    
+    public User_ getUser() {
+        return user;
+    }
+    
+    public void setUser(User_ user) {
+        this.user = user;
     }
 }
