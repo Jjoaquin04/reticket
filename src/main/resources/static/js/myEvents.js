@@ -8,13 +8,14 @@ for (let i = 0; i < eliminar_button.length; i++) {
 
         // Show a confirmation dialog to the user
         Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
+            title: "Estás seguro?",
+            text: "No se podra revertir la acción!",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
+            confirmButtonText: "Sí, borralo",
+            cancelButtonText: "Cancelar"
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try{
