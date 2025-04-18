@@ -73,11 +73,29 @@ document.addEventListener('DOMContentLoaded', function() {
     })
     document.getElementById("register-form").addEventListener('submit',async function (e) {
         e.preventDefault();
-        const formData = {
-            username: document.getElementById("username-register").value,
-            email: document.getElementById("email-register").value,
-            password: document.getElementById("password-register").value
+        
+        const username = document.getElementById("username-register").value;
+        const email = document.getElementById("email-register").value;
+        const password = document.getElementById("password-register").value;
+        const confirmPassword = document.getElementById("confirm-password-register").value;
+        
+        // Verificar que las contraseñas coinciden
+        if (password !== confirmPassword) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Las contraseñas no coinciden',
+                text: 'Por favor, asegúrate de que ambas contraseñas sean iguales.',
+                heightAuto: false,
+            });
+            return;
         }
+        
+        const formData = {
+            username: username,
+            email: email,
+            password: password
+        }
+        
         if(!formData.username || !formData.password || !formData.email) {
             Swal.fire({
                 icon: 'error',
@@ -87,6 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             return;
         }
+        
         try{
             const response = await fetch('/auth/register', {
                 method: 'POST',
