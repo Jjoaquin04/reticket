@@ -40,7 +40,6 @@ public class LoginRegisterOperationsController {
             User_ user = userOptional.get();
             if(passwordEncoder.matches(password, user.getPassword())){
                 session.setAttribute("userId", user.getId());
-                session.setAttribute("username", user.getUsername());
                 return ResponseEntity.ok().body(Map.of("success","Login exitoso"));
             }
         }
@@ -75,6 +74,7 @@ public class LoginRegisterOperationsController {
                 newUser.setUserType(User_.UserType.USER);
             }
             User_ savedUser = userService.createUser(newUser);
+            session.setAttribute("userId", savedUser.getId());
             return ResponseEntity.status(HttpStatus.CREATED).body(Map.of(
                 "success","Usuario registrado exitosamente",
                 "username" ,savedUser.getUsername()

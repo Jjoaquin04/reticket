@@ -13,6 +13,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +29,8 @@ public class AcountsOperationsController {
     private EventService eventService;
     @Autowired
     private UserService userService;
+
+    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @PostMapping("/submitEvent")
     public ResponseEntity<?> createEvent(@RequestBody(required = true) Event event) {
@@ -99,10 +102,12 @@ public class AcountsOperationsController {
         }
         
         if (updates.containsKey("password")) {
-            if(user.getPassword().equals(updates.get("password"))) {
+            String newPassword = (String) updates.get("password");
+            if(passwordEncoder.matches(newPassword, user.getPassword())) {
                 return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("error","La contraseña no puede ser la misma que la anterior"));
             }
-            user.setPassword((String) updates.get("password"));
+            
+            user.setPassword(passwordEncoder.encode(newPassword));
         }
         
         User_ updatedUser = userService.updateUser(user);
@@ -110,8 +115,7 @@ public class AcountsOperationsController {
         // Don't return the password
         Map<String, Object> response = Map.of(
             "username", updatedUser.getUsername(),
-            "email", updatedUser.getEmail(),
-            "password",updatedUser.getPassword()
+            "email", updatedUser.getEmail()
         );
         
         return ResponseEntity.ok(response);

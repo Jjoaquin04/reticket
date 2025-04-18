@@ -10,21 +10,59 @@ document.addEventListener('DOMContentLoaded', function() {
         originalData[input.name] = input.value; // Save the original value
     });
 });
-
+document.querySelectorAll('.toggle-password').forEach(eyeIcon => {
+    eyeIcon.addEventListener('click', function() {
+        // Obtener ambos campos de contraseña
+        const newPasswordInput = document.getElementById('new-password');
+        const confirmPasswordInput = document.getElementById('confirm-password');
+        
+        // Cambiar el tipo de ambos campos
+        const type = newPasswordInput.getAttribute('type');
+        if(type === 'password') {
+            newPasswordInput.setAttribute('type', 'text');
+            confirmPasswordInput.setAttribute('type', 'text');
+        } else {
+            newPasswordInput.setAttribute('type', 'password');
+            confirmPasswordInput.setAttribute('type', 'password');
+        }
+        // Cambiar el ícono
+        this.classList.toggle('fa-eye');
+        this.classList.toggle('fa-eye-slash');
+    });
+});
 document.getElementById('profile-form').addEventListener('submit', async function(event) {
     event.preventDefault(); // Prevent default form submission
 
     const userId = this.getAttribute("data-user-id"); // Get the user ID
+    const newPassword = document.getElementById('new-password').value;
+    const confirmPassword = document.getElementById('confirm-password').value;
+
+    // Validate passwords match if any password field is filled
+    if (newPassword || confirmPassword) {
+        if (newPassword !== confirmPassword) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Las contraseñas no coinciden'
+            });
+            return;
+        }
+    }
 
     // Include only the fields that have changed
     const changedData = {};
-    const inputs = this.querySelectorAll('input, select, textarea');
+    const inputs = this.querySelectorAll('input[type="text"], input[type="email"]');
 
     inputs.forEach(input => {
         if (originalData[input.name] !== input.value) {
             changedData[input.name] = input.value; // Include only changed fields
         }
     });
+
+    // Add password if it was filled and validated
+    if (newPassword) {
+        changedData.password = newPassword;
+    }
 
     // Check if there are changes before sending the request
     if (Object.keys(changedData).length === 0) {
@@ -37,19 +75,13 @@ document.getElementById('profile-form').addEventListener('submit', async functio
         return;
     }
 
-    // Create an object with the form data
-    const data = {
-        ...changedData, // Only the changed fields
-    };
-
-    
     try {
         const response = await fetch(`/users/${userId}`, {
             method: 'PATCH', 
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data) 
+            body: JSON.stringify(changedData) 
         });
     
         const result = await response.json();
@@ -76,17 +108,16 @@ document.getElementById('profile-form').addEventListener('submit', async functio
                 }
             });
         }
-    }catch(error) {
+    } catch(error) {
         console.error('Error:', error); 
         Swal.fire({
             icon: 'error',
             title: 'Error al actualizar el perfil',
-            text: result.error || 'Verifica los datos ingresados'
+            text: 'Ha ocurrido un error al procesar tu solicitud'
         }).then((result) => {
             if (result.isConfirmed) {
                 window.location.reload(); 
             }
-        }); 
+        });
     }
-    
 });
