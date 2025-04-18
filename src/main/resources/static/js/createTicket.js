@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-
     document.querySelectorAll('.event').forEach(event => {
         const ticketsInfo = event.querySelector('.tickets-info .tickets-count');
         const buyButton = event.querySelector('.buy-button-event');
@@ -24,7 +23,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
 
                 if (response.ok) {
-
                     const ticketsInfo = this.closest('.event').querySelector('.tickets-info .tickets-count');
                     const currentText = ticketsInfo.textContent;
                     const currentCount = parseInt(currentText);
@@ -41,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         text: "Seguir comprando",
                         icon: "success"
                       });
+                    
                 } else {
                     Swal.fire({
                         icon: "error",
@@ -53,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 Swal.fire({
                     icon: "error",
                     title: "Oops...",
-                    text: "Error al procesar la compra",
+                    text: "Ha ocurrido un error al procesar la compra",
                 });
             }
         });

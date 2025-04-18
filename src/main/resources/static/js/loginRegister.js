@@ -27,7 +27,8 @@ document.addEventListener('DOMContentLoaded', function() {
             Swal.fire({
                 icon: 'error',
                 title: 'Campos requeridos',
-                text: 'Por favor, completa todos los campos.'
+                text: 'Por favor, completa todos los campos.',
+                heightAuto: false,
             })
             return;
         }
@@ -47,7 +48,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     title: 'Inicio de sesión exitoso',
                     text: 'Redirigiendo...',
                     timer: 1500,
-                    showConfirmButton: false
+                    showConfirmButton: false,
+                    heightAuto: false,
                 }).then(() => {
                     window.location.href = '/home';
                 });
@@ -55,7 +57,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
-                    text: data.error
+                    text: data.error,
+                    heightAuto: false,
                 })
             }
         }catch(error) {
@@ -63,7 +66,8 @@ document.addEventListener('DOMContentLoaded', function() {
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'Ocurrió un error al procesar la solicitud.'
+                text: 'Ocurrió un error al procesar la solicitud.',
+                heightAuto: false,
             })
         }
     })
@@ -78,7 +82,8 @@ document.addEventListener('DOMContentLoaded', function() {
             Swal.fire({
                 icon: 'error',
                 title: 'Campos requeridos',
-                text: 'Por favor, completa todos los campos.'
+                text: 'Por favor, completa todos los campos.',
+                heightAuto: false,
             })
             return;
         }
@@ -98,7 +103,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     title: 'Registro exitoso, bienvenido ' + data.username,
                     text: 'Redirigiendo...',
                     timer: 1500,
-                    showConfirmButton: false
+                    showConfirmButton: false,
+                    heightAuto: false
                 }).then(() => {
                     window.location.href = '/home';
                 });
@@ -106,7 +112,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
-                    text: data.error
+                    text: data.error,
+                    heightAuto: false,
                 })
             }
         }catch(error) { 
@@ -114,7 +121,8 @@ document.addEventListener('DOMContentLoaded', function() {
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'Ocurrió un error al procesar la solicitud.'
+                text: 'Ocurrió un error al procesar la solicitud.',
+                heightAuto: false,
             })
         }
     }) 

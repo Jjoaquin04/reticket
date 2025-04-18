@@ -17,7 +17,7 @@ body{
     width: 100vw;
     align-items: center;
     justify-content: center;
-
+    overflow: hidden;
     background-image: url('/img/icons/FondoLoginRegisterPage.webp');
     background-size: cover;
     background-position: center;
@@ -126,3 +126,4 @@ a{
 .flip {
     transform: rotateY(180deg);
 }
+
