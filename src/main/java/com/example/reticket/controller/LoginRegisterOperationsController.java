@@ -6,7 +6,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,27 +29,38 @@ public class LoginRegisterOperationsController {
     @Autowired
     private UserService userService;
 
-    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Map<String,String> credentials,HttpSession session){
+    public ResponseEntity<?> login(@RequestBody Map<String,String> credentials, HttpSession session) {
         String username = credentials.get("username");
         String password = credentials.get("password");
 
-        if(username == null || password == null || username.isEmpty() || password.isEmpty())    {
-            return ResponseEntity.badRequest().body(Map.of("error","El usuario y la contraseña son obligatorios"));
+        if(username == null || password == null || username.isEmpty() || password.isEmpty()) {
+            return ResponseEntity.badRequest().body(Map.of("error", "El usuario y la contraseña son obligatorios"));
         }
 
-        Optional<User_>  userOptional = userService.getUserByName(username);
-        if(userOptional.isPresent())    {
+        Optional<User_> userOptional = userService.getUserByName(username);
+        if(userOptional.isPresent()) {
             User_ user = userOptional.get();
-            if(passwordEncoder.matches(password, user.getPassword())){
+            if(passwordEncoder.matches(password, user.getPassword())) {
                 session.setAttribute("userId", user.getId());
-                return ResponseEntity.ok().body(Map.of("success","Login exitoso"));
+                
+                // Autenticación con Spring Security
+                Authentication auth = new UsernamePasswordAuthenticationToken(
+                    username, password, 
+                    AuthorityUtils.createAuthorityList(user.getUserType().toString())
+                );
+                SecurityContextHolder.getContext().setAuthentication(auth);
+                session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, 
+                                     SecurityContextHolder.getContext());
+                
+                return ResponseEntity.ok().body(Map.of("success", "Login exitoso"));
             }
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of(
-            "error","Usuario o contraseña incorrectos"
+            "error", "Usuario o contraseña incorrectos"
         ));
     }
 
