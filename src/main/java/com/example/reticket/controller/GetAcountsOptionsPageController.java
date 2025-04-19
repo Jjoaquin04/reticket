@@ -74,4 +74,18 @@ public class GetAcountsOptionsPageController {
     public ModelAndView getNewEventPage() {
         return new ModelAndView("newEventPage");
     }
+    
+    @GetMapping("/manageProfiles")
+    public ModelAndView manageProfiles(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (!auth.getAuthorities().contains(new SimpleGrantedAuthority("ADMIN"))) {
+            return new ModelAndView("redirect:/");
+        }
+        
+        List<User_> allUsers = userService.getAllUsers();
+        model.addAttribute("users", allUsers);
+        model.addAttribute("userTypes", User_.UserType.values());
+        
+        return new ModelAndView("manageProfilesPage");
+    }
 }
