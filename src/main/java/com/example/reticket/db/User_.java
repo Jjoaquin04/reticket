@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.CascadeType;
 
 @Entity
@@ -29,6 +30,8 @@ public class User_{
     private String email;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Ticket> tickets = new ArrayList<>();
+    @OneToOne(cascade = CascadeType.ALL,mappedBy = "user",orphanRemoval = true)
+    private ShoppingCart shoppingCart;
 
     public User_() {
     }
@@ -37,6 +40,7 @@ public class User_{
         this.username = username;
         this.password = password;
         this.email = email;
+        this.shoppingCart = new ShoppingCart(this);
     }
     public Long getId() {
         return id;

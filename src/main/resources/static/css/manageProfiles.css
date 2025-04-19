@@ -1,3 +1,5 @@
+
+
 .admin-container {
     max-width: 1200px;
     margin: 30px auto;
@@ -5,6 +7,7 @@
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    
 }
 
 h1, h2 {
@@ -13,7 +16,7 @@ h1, h2 {
 }
 
 .create-user-form {
-    background-color: #f9f9f9;
+    background-color: lightblue;
     padding: 20px;
     border-radius: 5px;
     margin-bottom: 30px;
@@ -60,6 +63,10 @@ button {
 .btn-create, .btn-save {
     background-color: #4CAF50;
     color: white;
+    transition: all 0.3s;
+    &:hover{
+        background-color: #45a049;
+    }
 }
 
 .filter-container {
@@ -83,7 +90,7 @@ button {
 
 .filter-options button {
     padding: 8px 15px;
-    background-color: #007bff;
+    background-color: black;
     color: white;
 }
 
@@ -104,7 +111,7 @@ th, td {
 }
 
 th {
-    background-color: #007bff;
+    background-color: black;
     color: white;
 }
 
@@ -120,11 +127,19 @@ tbody tr:hover {
 .btn-edit {
     background-color: #FFC107;
     color: #333;
+    transition: all 0.3s;
+    &:hover {
+        background-color: #FFA000;
+    }
 }
 
 .btn-delete {
     background-color: #dc3545;
     color: white;
+    transition: all 0.3s;
+    &:hover {
+        background-color: darkred;
+    }
 }
 
 /* Estilos del modal */
