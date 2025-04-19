@@ -158,6 +158,11 @@ public class Event {
         tickets.add(ticket);
         ticket.setEvent(this);
     }
+    public void addListOfTickets(List<Ticket> tickets) {
+        for (Ticket ticket : tickets) {
+            addTicket(ticket);
+        }
+    }
 
     public void removeTicket(Ticket ticket) {
         tickets.remove(ticket);

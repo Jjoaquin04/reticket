@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.querySelectorAll('.buy-button-event').forEach(button => {
         button.addEventListener('click', async function() {
-
             const eventId = this.closest(".event").dataset.eventId;
             try{
                 const response = await fetch(`/buyTicket/${eventId}`, {

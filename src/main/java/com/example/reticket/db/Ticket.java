@@ -21,8 +21,9 @@ public class Ticket {
     public Ticket() {
     }
 
-    public Ticket(Event event) {
+    public Ticket(Event event,User_ user) {
         this.event = event;
+        this.user = user;
     }
     
     // Getters y setters

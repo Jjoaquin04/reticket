@@ -10,6 +10,7 @@ import com.example.reticket.repository.TicketRepository;
 import java.util.List;
 import java.util.Optional;
 
+
 @Service
 public class TicketService {
 
@@ -46,5 +47,9 @@ public class TicketService {
     // Delete
     public void deleteTicket(Long id) {
         ticketRepository.deleteById(id);
+    }
+
+    public List<Ticket> saveAllTickets(List<Ticket> tickets) {
+        return ticketRepository.saveAll(tickets);
     }
 }

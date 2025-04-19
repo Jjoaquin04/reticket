@@ -78,8 +78,19 @@ public class User_{
         }
         ticket.setUser(this);
     }
+    public void addListOfTickets(List<Ticket> tickets) {
+        for (Ticket ticket : tickets) {
+            addTicket(ticket);
+        }
+    }
     public User_ get(){
         return this;
+    }
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
+    }
+    public void setShoppingCart(ShoppingCart shoppingCart) {
+        this.shoppingCart = shoppingCart;
     }
     
 }
