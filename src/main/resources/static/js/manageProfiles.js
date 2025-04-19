@@ -115,10 +115,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (password) {
             userData.password = password;
         }
-
         try {
             const response = await fetch(`/admin/users/${userId}`, {
-                method: 'PUT',
+                method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
                 },

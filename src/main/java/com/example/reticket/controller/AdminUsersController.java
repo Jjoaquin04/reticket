@@ -96,7 +96,7 @@ public class AdminUsersController {
         }
     }
 
-    @PutMapping("/users/{id}")
+    @PatchMapping("/users/{id}")
     public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody Map<String, String> updates) {
         // Verificar permisos
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -142,10 +142,8 @@ public class AdminUsersController {
                 return ResponseEntity.badRequest().body(Map.of("error", "Tipo de usuario no válido"));
             }
         }
-
-        User_ updatedUser = userService.updateUser(user);
-        updatedUser.setPassword(null); // No devolver la contraseña
-        return ResponseEntity.ok(updatedUser);
+        userService.updateUser(user);
+        return ResponseEntity.ok().body(Map.of("success", "Usuario actualizado con éxito"));
     }
 
     @DeleteMapping("/users/{id}")
