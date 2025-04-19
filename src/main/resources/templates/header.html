@@ -33,9 +33,12 @@
                         <img src="/img/icons/usuario.webp" alt="Perfil de usuario" height="35px">
                         <p>Cuenta</p>
                         <div class="dropdown-content-profile">
+                            {{^isAdmin}}
                             <a href="/acounts/profile">Perfil</a>
                             <a href="/acounts/myTickets">Mis tickets</a>
+                            {{/isAdmin}}
                             {{#isAdmin}}
+                            <a href="/acounts/manageProfiles">Administrar Perfiles</a>
                             <a href="/acounts/myEvents">Mis eventos</a>
                             <a href="/acounts/newEvent">Nuevo evento</a>
                             {{/isAdmin}}
