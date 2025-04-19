@@ -10,6 +10,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.CascadeType;
 
@@ -39,6 +41,10 @@ public class Event {
 
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Ticket> tickets = new ArrayList<>();
+    
+    @ManyToOne
+    @JoinColumn(name = "creator_id")
+    private User_ creator;
 
     private String name;
     private LocalDateTime date;
@@ -49,12 +55,12 @@ public class Event {
     private String altImage;
     private int currenNumberOfTickets;
     
-
     public Event() {
     }
     
-    public Event(String name, LocalDateTime date,String venue, String location, String description, 
-                 String imageURL,String altImage,EventType eventType,EventStatus eventStatus,int currenNumberOfTickets) {
+    public Event(String name, LocalDateTime date, String venue, String location, String description, 
+                 String imageURL, String altImage, EventType eventType, EventStatus eventStatus, 
+                 int currenNumberOfTickets, User_ creator) {
         this.name = name;
         this.date = date;
         this.venue = venue;
@@ -65,6 +71,7 @@ public class Event {
         this.eventType = eventType;
         this.eventStatus = eventStatus;
         this.currenNumberOfTickets = currenNumberOfTickets;
+        this.creator = creator;
     }
 
     public Long getId() {
@@ -159,5 +166,13 @@ public class Event {
 
     public List<Ticket> getTickets() {
         return tickets;
+    }
+
+    public User_ getCreator() {
+        return creator;
+    }
+    
+    public void setCreator(User_ creator) {
+        this.creator = creator;
     }
 }

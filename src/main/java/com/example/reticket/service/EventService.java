@@ -48,6 +48,10 @@ public class EventService {
         return eventRepository.findByEventType(eventType);
     }
 
+    public List<Event> getEventsByCreatorId(Long creatorId) {
+        return eventRepository.findByCreatorId(creatorId);
+    }
+
     // Update
     public Event updateEvent(Event event) {
         return eventRepository.save(event);

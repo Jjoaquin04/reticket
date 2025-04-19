@@ -20,6 +20,8 @@ public class SecurityConfig {
                 // Permitir acceso a la página de login/registro y recursos necesarios
                 .requestMatchers("/", "/auth/login", "/auth/register", "/auth/logout").permitAll()
                 .requestMatchers("/css/**", "/js/**", "/img/**", "/favicon.ico").permitAll()
+                // Rutas específicas para administradores
+                .requestMatchers("/acounts/myEvents", "/acounts/newEvent").hasAuthority("ADMIN")
                 // Cualquier otra ruta requiere autenticación
                 .anyRequest().authenticated()
             )

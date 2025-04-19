@@ -9,6 +9,7 @@ import com.example.reticket.service.UserService;
 import java.util.Map;
 import java.util.Optional;
 
+import jakarta.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +22,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
 @RestController
 public class AcountsOperationsController {
     
@@ -33,7 +33,20 @@ public class AcountsOperationsController {
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @PostMapping("/submitEvent")
-    public ResponseEntity<?> createEvent(@RequestBody(required = true) Event event) {
+    public ResponseEntity<?> createEvent(@RequestBody(required = true) Event event, HttpSession session) {
+        Long userId = (Long) session.getAttribute("userId");
+        if (userId == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "Usuario no autenticado"));
+        }
+        
+        Optional<User_> creatorOpt = userService.getUserById(userId);
+        if (!creatorOpt.isPresent()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "Usuario no encontrado"));
+        }
+        
+        // Asignar el creador al evento
+        event.setCreator(creatorOpt.get());
+        
         Event newEvent = eventService.createEvent(event);
         return ResponseEntity.status(HttpStatus.CREATED).body(newEvent);
     }

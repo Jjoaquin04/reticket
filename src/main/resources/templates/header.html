@@ -35,8 +35,10 @@
                         <div class="dropdown-content-profile">
                             <a href="/acounts/profile">Perfil</a>
                             <a href="/acounts/myTickets">Mis tickets</a>
+                            {{#isAdmin}}
                             <a href="/acounts/myEvents">Mis eventos</a>
                             <a href="/acounts/newEvent">Nuevo evento</a>
+                            {{/isAdmin}}
                             <a href="#" id="logout-link">Cerrar sesión</a>
                         </div>
                     </li>

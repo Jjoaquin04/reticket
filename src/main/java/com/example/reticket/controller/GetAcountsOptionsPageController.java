@@ -6,6 +6,9 @@ import java.util.Optional;
 import jakarta.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,10 +33,20 @@ public class GetAcountsOptionsPageController {
     private TicketService ticketService;
    
     @GetMapping("/myEvents")
-    public ModelAndView getEvents(Model model) {
-        List<Event> allEvents = eventService.getAllEvents();
-        model.addAttribute("events", allEvents);
-        return new ModelAndView("myEventsPage");
+    public ModelAndView getEvents(Model model, HttpSession session) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (!auth.getAuthorities().contains(new SimpleGrantedAuthority("ADMIN"))) {
+            return new ModelAndView("redirect:/");
+        }
+        
+        Long userId = (Long) session.getAttribute("userId");
+        if (userId != null) {
+            List<Event> userEvents = eventService.getEventsByCreatorId(userId);
+            model.addAttribute("events", userEvents);
+            return new ModelAndView("myEventsPage");
+        }
+        
+        return new ModelAndView("redirect:/");
     }
     @GetMapping("/profile")
     public ModelAndView getProfile(Model model, HttpSession session) {
