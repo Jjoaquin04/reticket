@@ -16,32 +16,61 @@ document.addEventListener('DOMContentLoaded', function() {
         flipper.classList.remove('flip');
     });
 
-    document.getElementById("login-form").addEventListener('submit',async function (e) {
-        e.preventDefault();
+    // Función reutilizable para manejar estados de carga
+    function handleLoadingState(button, isLoading) {
+        if (!button) return;
+        
+        // Guardar texto original si aún no se ha guardado
+        if (!button.hasAttribute('data-original-text') && button.textContent) {
+            button.setAttribute('data-original-text', button.textContent);
+        }
+        
+        const originalText = button.getAttribute('data-original-text') || button.textContent;
+        
+        if (isLoading) {
+            button.disabled = true;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
+        } else {
+            button.disabled = false;
+            button.textContent = originalText;
+        }
+    }
 
+    // Manejador para el formulario de inicio de sesión
+    document.getElementById("login-form").addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const submitButton = this.querySelector('button[type="submit"]');
+        
         const formData = {
             username: document.getElementById("username-login").value,
             password: document.getElementById("password-login").value
-        }
+        };
+        
         if(!formData.username || !formData.password) {
             Swal.fire({
                 icon: 'error',
                 title: 'Campos requeridos',
                 text: 'Por favor, completa todos los campos.',
                 heightAuto: false,
-            })
+            });
             return;
         }
-        try{
+        
+        try {
+            handleLoadingState(submitButton, true);
+            
             const response = await fetch('/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(formData)
-            })
+            });
+            
             const data = await response.json();
-
+            
+            handleLoadingState(submitButton, false);
+            
             if(response.ok) {
                 Swal.fire({
                     icon: 'success',
@@ -53,26 +82,30 @@ document.addEventListener('DOMContentLoaded', function() {
                 }).then(() => {
                     window.location.href = '/home';
                 });
-            }else{
+            } else {
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
                     text: data.error,
                     heightAuto: false,
-                })
+                });
             }
-        }catch(error) {
+        } catch(error) {
             console.error('Error:', error);
+            handleLoadingState(submitButton, false);
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
                 text: 'Ocurrió un error al procesar la solicitud.',
                 heightAuto: false,
-            })
+            });
         }
-    })
-    document.getElementById("register-form").addEventListener('submit',async function (e) {
+    });
+    
+    // Manejador para el formulario de registro
+    document.getElementById("register-form").addEventListener('submit', async function(e) {
         e.preventDefault();
+        const submitButton = this.querySelector('button[type="submit"]');
         
         const username = document.getElementById("username-register").value;
         const email = document.getElementById("email-register").value;
@@ -94,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
             username: username,
             email: email,
             password: password
-        }
+        };
         
         if(!formData.username || !formData.password || !formData.email) {
             Swal.fire({
@@ -102,20 +135,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 title: 'Campos requeridos',
                 text: 'Por favor, completa todos los campos.',
                 heightAuto: false,
-            })
+            });
             return;
         }
         
-        try{
+        try {
+            handleLoadingState(submitButton, true);
+            
             const response = await fetch('/auth/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(formData)
-            })
+            });
+            
             const data = await response.json();
-
+            
+            handleLoadingState(submitButton, false);
+            
             if(response.ok) {
                 Swal.fire({
                     icon: 'success',
@@ -127,24 +165,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 }).then(() => {
                     window.location.href = '/home';
                 });
-            }else{
+            } else {
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
                     text: data.error,
                     heightAuto: false,
-                })
+                });
             }
-        }catch(error) { 
+        } catch(error) {
             console.error('Error:', error);
+            handleLoadingState(submitButton, false);
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
                 text: 'Ocurrió un error al procesar la solicitud.',
                 heightAuto: false,
-            })
+            });
         }
-    }) 
+    });
 });
 
 
