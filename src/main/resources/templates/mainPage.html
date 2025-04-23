@@ -11,44 +11,48 @@
 </head>
 <body>
     {{> header}}
-    <div class="image-slider">
-        <button class="next-btn" onclick="changeImage(1)">❯</button>
-        <button class="prev-btn" onclick="changeImage(-1)">❮</button>
-        <img id="slide-image" alt="Imagenes">
-    </div>
-    
-    <div class="events">
-        <hr>
-        <h2>Los más recomendados</h2>
-        <div class="recommended-events">
-            <!-- Event:
-                name: string
-                date: LocalDateTime
-                location: string
-                description: string
-                image: string (path to the image)
-                organizer: string (name of the organizer) 
-            -->
-            {{#mainEvents}}
-            <div class="event" data-event-id="{{id}}" data-event-status="{{eventStatus}}">
-                <img src="{{imageURL}}" alt="{{altImage}}" class="evento-imagen">
-                <h3 class="title-event">{{name}}</h3>
-                <p class="description-event">{{description}}</p>
-                <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
-                    <p class="date-event">{{date}}</p>
-                    <p class="location-event">{{venue}}, {{location}}</p>
-                </div>
-                <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
-                    <div class="tickets-info">
-                        <p class="tickets-count">{{currenNumberOfTickets}}</p>
-                        <img src="/img/icons/ticketImage.webp" alt="tickets count",>
+
+    <div class="content">
+        <div class="image-slider">
+            <button class="next-btn" onclick="changeImage(1)">❯</button>
+            <button class="prev-btn" onclick="changeImage(-1)">❮</button>
+            <img id="slide-image" alt="Imagenes">
+        </div>
+        
+        <div class="events">
+            <hr>
+            <h2>Los más recomendados</h2>
+            <div class="recommended-events">
+                <!-- Event:
+                    name: string
+                    date: LocalDateTime
+                    location: string
+                    description: string
+                    image: string (path to the image)
+                    organizer: string (name of the organizer) 
+                -->
+                {{#mainEvents}}
+                <div class="event" data-event-id="{{id}}" data-event-status="{{eventStatus}}">
+                    <img src="{{imageURL}}" alt="{{altImage}}" class="evento-imagen">
+                    <h3 class="title-event">{{name}}</h3>
+                    <p class="description-event">{{description}}</p>
+                    <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
+                        <p class="date-event">{{date}}</p>
+                        <p class="location-event">{{venue}}, {{location}}</p>
                     </div>
-                    <button class="buy-button-event">Comprar</button>
+                    <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
+                        <div class="tickets-info">
+                            <p class="tickets-count">{{currenNumberOfTickets}}</p>
+                            <img src="/img/icons/ticketImage.webp" alt="tickets count",>
+                        </div>
+                        <button class="buy-button-event">Comprar</button>
+                    </div>
                 </div>
+                {{/mainEvents}}
             </div>
-            {{/mainEvents}}
         </div>
     </div>
+
     {{> footer}}
     <script src="/js/main.js"></script>
     <script src="/js/imageChange.js"></script>

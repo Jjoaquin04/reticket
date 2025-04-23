@@ -12,33 +12,34 @@
 </head>
 <body>
     {{> header}}
+    
     <div id="ticketList">
-    <h1>
-        Mis Tickets
-    </h1>
-    {{^tickets}}
-        <div class="no-results">
-            <h3>No hay tickets disponibles</h3>
-            <p>Primero debes comprar un ticket</p>
-        </div>
-    {{/tickets}}
-    {{#tickets}}
-        <div class="ticket">
-            <img src="{{event.imageURL}}" alt="{{event.altImage}}" class="evento-imagen">
-            <div class="ticket-info">
-                <div class="top-ticket">
-                    <h1 class="title-event">{{event.name}}</h1>
-                    <p class="event-status {{event.eventStatus}}">{{event.eventStatus}}</p>
-                </div>
-                <p class="description-event">{{event.description}}</p>
-                <div class="ticket-info2">
-                    <p class="ticket-id">TicketID: {{id}}</p>
-                    <p class="date-event">{{event.date}}</p>
-                    <p class="ticket-location">{{event.venue}}, {{event.location}}</p>
+        <h1>
+            Mis Tickets
+        </h1>
+        {{^tickets}}
+            <div class="no-results">
+                <h3>No hay tickets disponibles</h3>
+                <p>Primero debes comprar un ticket</p>
+            </div>
+        {{/tickets}}
+        {{#tickets}}
+            <div class="ticket">
+                <img src="{{event.imageURL}}" alt="{{event.altImage}}" class="evento-imagen">
+                <div class="ticket-info">
+                    <div class="top-ticket">
+                        <h1 class="title-event">{{event.name}}</h1>
+                        <p class="event-status {{event.eventStatus}}">{{event.eventStatus}}</p>
+                    </div>
+                    <p class="description-event">{{event.description}}</p>
+                    <div class="ticket-info2">
+                        <p class="ticket-id">TicketID: {{id}}</p>
+                        <p class="date-event">{{event.date}}</p>
+                        <p class="ticket-location">{{event.venue}}, {{event.location}}</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    {{/tickets}}
+        {{/tickets}}
 
     </div>
     {{> footer}}

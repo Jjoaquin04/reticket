@@ -1,9 +1,16 @@
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
 #profile-container{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin-top: 20px;
+    flex: 1;
 }
 
 #profile-form{
