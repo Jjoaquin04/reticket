@@ -21,7 +21,8 @@ public class SecurityConfig {
                 .requestMatchers("/", "/auth/login", "/auth/register", "/auth/logout").permitAll()
                 .requestMatchers("/css/**", "/js/**", "/img/**", "/favicon.ico").permitAll()
                 // Rutas específicas para administradores
-                .requestMatchers("/acounts/myEvents", "/acounts/newEvent").hasAuthority("ADMIN")
+                .requestMatchers("/acounts/myEvents", "/acounts/newEvent", "/acounts/manageProfiles").hasAuthority("ADMIN")
+                .requestMatchers("/admin/**").hasAuthority("ADMIN")
                 // Cualquier otra ruta requiere autenticación
                 .anyRequest().authenticated()
             )

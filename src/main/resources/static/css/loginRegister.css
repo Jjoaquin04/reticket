@@ -72,6 +72,10 @@ button{
         color: black;
         border: 1px solid black;
     }
+    &:disabled{
+        opacity: 0,7;
+        cursor: not-allowed;
+    }
 }
 
 a{

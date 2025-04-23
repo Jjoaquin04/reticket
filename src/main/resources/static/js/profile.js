@@ -17,14 +17,10 @@ document.querySelectorAll('.toggle-password').forEach(eyeIcon => {
         const confirmPasswordInput = document.getElementById('confirm-password');
         
         // Cambiar el tipo de ambos campos
-        const type = newPasswordInput.getAttribute('type');
-        if(type === 'password') {
-            newPasswordInput.setAttribute('type', 'text');
-            confirmPasswordInput.setAttribute('type', 'text');
-        } else {
-            newPasswordInput.setAttribute('type', 'password');
-            confirmPasswordInput.setAttribute('type', 'password');
-        }
+        const type = newPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        newPasswordInput.setAttribute('type', type);
+        confirmPasswordInput.setAttribute('type', type);
+        
         // Cambiar el ícono
         this.classList.toggle('fa-eye');
         this.classList.toggle('fa-eye-slash');
