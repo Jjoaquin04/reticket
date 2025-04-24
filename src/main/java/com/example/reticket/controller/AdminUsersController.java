@@ -56,9 +56,7 @@ public class AdminUsersController {
             String hashedPassword = passwordEncoder.encode(password);
             User_ newUser = new User_(username, hashedPassword, email);
             newUser.setUserType(userType);
-            
-            User_ savedUser = userService.createUser(newUser);
-            return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
+            return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("success", "Usuario actualizado con éxito"));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(Map.of("error", "Error al crear el usuario: " + e.getMessage()));
