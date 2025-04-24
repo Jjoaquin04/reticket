@@ -14,7 +14,7 @@
     {{> header}}
 
     <div class="content">
-        <h1>Carrito de la compra</h1>
+        <h1 id="title">Carrito de la compra</h1>
         <div class="carrito-container">
             <!-- 
             - cardItem:
@@ -31,25 +31,41 @@
                 - quantity
             -->
 
-            {{#shoppingCart}}
-            <div class="card-item" data-event-id="{{event.id}}">
-                <img src="{{event.imageURL}}" alt="{{event.name}}" class="evento-imagen">
-                <div class="event-info">
-                    <h3 class="title-event">{{event.name}}</h3>
-                    <p class="event-date">{{event.date}}</p>
-                    <p class="event-location">{{event.location}}</p>
-                    <p class="event-venue">{{event.venue}}</p>
-                    <p class="event-price">Precio: {{event.price}} €</p>
-                    <button class="remove-button" data-event-id="{{event.id}}">Eliminar</button>
+            {{#cartItems}}
+            <div class="card-item">
+                <div class="card-item-image">
+                    <img src="{{event.imageURL}}" alt="{{event.altImage}}" height="200" width="200" style="object-fit: cover;">
+                </div>
+                <div class="card-item-info">
+                    <h2>{{event.name}}</h2>
+                    <p>{{event.description}}</p>
+                    <div style="display: flex; flex-direction: row; align-items: center; gap: 10px; justify-content: center;">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <p>{{event.location}}</p>
+                        <p>{{event.venue}}</p>
+                    </div>
+                    <p>{{event.date}}</p>
+                    <!-- <p> precio: ${event.price}</p> -->
+                </div>
+                <div class="card-item-actions">
+                    <a href="/removeFromCart/{{id}}" class="remove-button"><i class="fa fa-trash"></i></a>
+                    <div style="display: flex; flex-direction: row; align-items: center; gap: 10px; justify-content: center;">
+                        <p>Entradas: {{quantity}}</p>
+                        <button class="less-button">-</button>
+                    </div>
                 </div>
             </div>
-            {{/shoppingCart}}
-            {{^shoppingCart}}
+            {{/cartItems}}
+            {{^cartItems}}
             <div class="no-results">
                 <h3>Tu carrito está vacío</h3>
                 <p>Cuando compres algún ticket aparecerán aquí</p>
             </div>
-            {{/shoppingCart}}
+            {{/cartItems}}
+        </div>
+        <div class="total-price-container" style="display: flex; flex-direction: row; align-items: center; gap: 10px;">
+            <h2>Total: ${totalPrice}</h2>
+            <button class="checkout-button">Pagar</button>
         </div>
     </div>
 

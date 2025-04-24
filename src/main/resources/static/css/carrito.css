@@ -8,12 +8,29 @@ content{
     flex: 1;
 }
 
-h1{
+a{
+    text-decoration: none;
+    color: black;
+}
+
+#title{
     margin: 30px 0 15px 20px;
     font-size: 2em;
 }
 
-.carrito-container{
+.card-item{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    text-align: center;
+    padding: 20px;
+    margin: 20px 200px;
+    background-color: lightgray;
+    border-radius: 15px;
+}
+
+.no-results{
     display: flex;
     flex-direction: column;
     align-items: center;
