@@ -91,6 +91,17 @@ public class LoginRegisterOperationsController {
             }
             User_ savedUser = userService.createUser(newUser);
             session.setAttribute("userId", savedUser.getId());
+            
+            // Autenticación con Spring Security
+            Authentication auth = new UsernamePasswordAuthenticationToken(
+                savedUser.getUsername(), 
+                password, // No uses la contraseña hasheada aquí
+                AuthorityUtils.createAuthorityList(savedUser.getUserType().toString())
+            );
+            SecurityContextHolder.getContext().setAuthentication(auth);
+            session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, 
+                                 SecurityContextHolder.getContext());
+            
             return ResponseEntity.status(HttpStatus.CREATED).body(Map.of(
                 "success","Usuario registrado exitosamente",
                 "username" ,savedUser.getUsername()
