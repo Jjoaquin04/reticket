@@ -9,6 +9,6 @@ public class GetCustomErrorPageController implements ErrorController {
 
     @RequestMapping("/error")
     public String handleError() {
-        return "error-404";
+        return "error-404Page";
     }
 }

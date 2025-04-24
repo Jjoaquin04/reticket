@@ -25,6 +25,7 @@
                     - date
                     - location
                     - imageURL
+                    - venue
             -->
 
             {{#shoppingCart}}
@@ -34,6 +35,7 @@
                     <h3 class="title-event">{{event.name}}</h3>
                     <p class="event-date">{{event.date}}</p>
                     <p class="event-location">{{event.location}}</p>
+                    <p class="event-venue">{{event.venue}}</p>
                     <p class="event-price">Precio: {{event.price}} €</p>
                     <button class="remove-button" data-event-id="{{event.id}}">Eliminar</button>
                 </div>

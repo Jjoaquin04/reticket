@@ -3,19 +3,19 @@ package com.example.reticket.controller;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.reticket.db.CartItem;
 import com.example.reticket.db.ShoppingCart;
 import com.example.reticket.db.User_;
+import com.example.reticket.service.CartItemService;
 import com.example.reticket.service.ShoppingCartService;
 import com.example.reticket.service.UserService;
-
 import jakarta.servlet.http.HttpSession;
 
+import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
@@ -25,9 +25,11 @@ public class GetShoppingCartPage {
     private ShoppingCartService shoppingCartService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private CartItemService cartItemService;
     
     @GetMapping("/shoppingCart")
-    public ModelAndView getMethodName(HttpSession session, Model model) {
+    public ModelAndView mainPage(HttpSession session,Model model)    {
         Long userId = (Long) session.getAttribute("userId");
         if (userId == null) {
             return new ModelAndView("redirect:/auth/login");
@@ -37,8 +39,9 @@ public class GetShoppingCartPage {
             return new ModelAndView("redirect:/auth/register");
         }
         ShoppingCart shoppingCart = shoppingCartService.getShoppingCartByUser(user.get());
-        model.addAttribute("shoppingCart", shoppingCart);
-        return new ModelAndView("carrito");
+        List<CartItem> cartItems = cartItemService.getAllByShoppingCart(shoppingCart);
+        model.addAttribute("cartItems", cartItems);
+        return new ModelAndView("carritoPage");
     }
     
 }

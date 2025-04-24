@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 Swal.fire({
                     icon: 'success',
                     title: 'Usuario actualizado',
-                    text: 'Los cambios han sido guardados'
+                    text: 'Los cambios han sido guardados',
                 }).then(() => {
                     window.location.reload();
                 });

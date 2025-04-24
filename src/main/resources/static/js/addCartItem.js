@@ -34,11 +34,12 @@ document.addEventListener('DOMContentLoaded', function() {
                         this.textContent = 'Agotado';
                     }
                     Swal.fire({
-                        title: "Ticket comprado con éxito!",
-                        text: "Seguir comprando",
-                        icon: "success"
+                        position: "bottom-start",
+                        icon: "success",
+                        title: "Ticket añadido al carrito",
+                        showConfirmButton: false,
+                        timer: 1500
                       });
-                    
                 } else {
                     Swal.fire({
                         icon: "error",

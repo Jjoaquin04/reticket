@@ -78,6 +78,7 @@ for (let i = 0; i < update_forms.length; i++) {
                 // Send the value directly as a string in JSON
                 body: JSON.stringify(statusValue)
             });
+            const data = await response.json();
 
             if (!response.ok) {
                 Swal.fire({
@@ -88,10 +89,13 @@ for (let i = 0; i < update_forms.length; i++) {
             } else {
                 Swal.fire({
                     title: "Estado del evento actualizado con éxito!",
-                    text: "Nuevo estado: ",
-                    icon: "success"
-                  });
-                location.reload();
+                    text: "Nuevo estado: " + data.status,
+                    icon: "success",
+                    timer: 1500,
+                    showConfirmButton: false
+                }).then(() => {
+                    location.reload();
+                });
             }
         } catch (error) {
             console.error("Error al actualizar el evento:", error);

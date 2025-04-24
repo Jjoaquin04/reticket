@@ -24,7 +24,7 @@ public class ShoppingCartService {
         return shoppingCartRepository.findById(id);
     }
     public ShoppingCart getShoppingCartByUser(User_ user) {
-        return shoppingCartRepository.findShoppingCartByUser(user);
+        return shoppingCartRepository.findShoppingCartByUserId(user.getId());
     }
     public ShoppingCart updateShoppingCart(ShoppingCart shoppingCart) {
         return shoppingCartRepository.save(shoppingCart);

@@ -5,7 +5,10 @@ import com.example.reticket.db.Event;
 import com.example.reticket.db.User_;
 import com.example.reticket.service.EventService;
 import com.example.reticket.service.UserService;
+import com.example.reticket.db.CartItem;
+import com.example.reticket.service.CartItemService;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -29,6 +32,8 @@ public class AcountsOperationsController {
     private EventService eventService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private CartItemService cartItemService;
 
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -77,12 +82,38 @@ public class AcountsOperationsController {
         Optional<Event> event = eventService.getEventById(id);
         if(event.isPresent()){
             Event updatedEvent = event.get();
+            Event.EventStatus oldStatus = updatedEvent.getEventStatus();
+            
+            // Si el evento se cancela o finaliza, limpiar los CartItems relacionados
+            if ((status == Event.EventStatus.CANCELLED || status == Event.EventStatus.FINISHED) && 
+                oldStatus != Event.EventStatus.CANCELLED && oldStatus != Event.EventStatus.FINISHED) {
+                
+                // Eliminar los CartItems y actualizar el contador de tickets
+                removeCartItemsAndRestoreTickets(updatedEvent);
+            }
+            
             updatedEvent.setEventStatus(status);
             eventService.updateEvent(updatedEvent);
-            return ResponseEntity.ok(updatedEvent);
+            return ResponseEntity.ok().body(Map.of("status", updatedEvent.getEventStatus().toString()));
         }else{
             return ResponseEntity.notFound().build();
         }
+    }
+
+    /*
+    Delete all CartItems related to the event and restore the tickets to the event.
+    */
+    private void removeCartItemsAndRestoreTickets(Event event) {
+        // Obtener todos los CartItems para este evento
+        List<CartItem> cartItems = cartItemService.getAllByEvent(event);
+        
+        // Calcular cuántos tickets hay que devolver al inventario
+        int ticketsToReturn = 0;
+        for (CartItem item : cartItems) {
+            ticketsToReturn += item.getQuantity();
+        }
+        event.setCurrenNumberOfTickets(event.getCurrenNumberOfTickets() + ticketsToReturn);
+        cartItemService.deleteAllByEvent(event);
     }
 
     @PatchMapping("/users/{id}")
