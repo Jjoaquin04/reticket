@@ -188,7 +188,7 @@ a{
     font-size: 20px;
     z-index: 2000;
     right: -10px;
-    top: 60px;
+    top: 70px;
     
     & > a{
         color: black;

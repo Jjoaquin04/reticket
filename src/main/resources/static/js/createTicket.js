@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', async function() {
             const eventId = this.closest(".event").dataset.eventId;
             try{
-                const response = await fetch(`/buyTicket/${eventId}`, {
+                const response = await fetch(`/addShoppingCart/${eventId}`, {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json'

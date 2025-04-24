@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/footer.css">
     <link rel="stylesheet" href="/css/carrito.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
     {{> header}}
@@ -15,7 +16,35 @@
     <div class="content">
         <h1>Carrito de la compra</h1>
         <div class="carrito-container">
-            
+            <!-- 
+            shoppingCart:
+            - user
+            - cardItem:
+                - event:
+                    - name
+                    - date
+                    - location
+                    - imageURL
+            -->
+
+            {{#shoppingCart}}
+            <div class="card-item" data-event-id="{{event.id}}">
+                <img src="{{event.imageURL}}" alt="{{event.name}}" class="evento-imagen">
+                <div class="event-info">
+                    <h3 class="title-event">{{event.name}}</h3>
+                    <p class="event-date">{{event.date}}</p>
+                    <p class="event-location">{{event.location}}</p>
+                    <p class="event-price">Precio: {{event.price}} €</p>
+                    <button class="remove-button" data-event-id="{{event.id}}">Eliminar</button>
+                </div>
+            </div>
+            {{/shoppingCart}}
+            {{^shoppingCart}}
+            <div class="no-results">
+                <h3>Tu carrito está vacío</h3>
+                <p>Cuando compres algún ticket aparecerán aquí</p>
+            </div>
+            {{/shoppingCart}}
         </div>
     </div>
 
