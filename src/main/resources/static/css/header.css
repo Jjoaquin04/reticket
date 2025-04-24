@@ -110,6 +110,8 @@ a{
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
+    margin-right: 20px;
     transition: all 0.3s;
     border: none;
 }
@@ -132,10 +134,26 @@ a{
     align-items: center;
     justify-content: center;
     padding: 10px 0 10px 0;
+    user-select: none;
     &:hover{
         background-color: #333;
     }
 }
+
+#carrito{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0 10px 0;
+    margin-right: 30px;
+    user-select: none;
+    cursor: pointer;
+    &:hover{
+        background-color: #333;
+    }
+}
+
 .dropdown-profile {
     display: flex;
     flex-direction: column;
@@ -150,15 +168,10 @@ a{
     text-align: center;
 }
 
-.profile-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding-inline-start: 0px;
-}
-
-.profile-nav li {
-    position: relative;
-    margin-right: 20px;
+#carrito p{
+    margin : 5px 0;
+    width: 100%;
+    text-align: center;
 }
 
 #perfil:hover .dropdown-content-profile {

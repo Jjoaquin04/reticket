@@ -26,29 +26,39 @@
         </form>
     </div>
     <div class="div-right">
+
+        <div id="carrito">
+            <img src="/img/icons/carrito.webp" alt="Carrito de la compra" height="35px">
+            <p>Carrito</p>
+        </div>
+
         <div id="perfil" style="position: relative;">
-            <nav class="profile-nav">
-                <ul>
-                    <li class="dropdown-profile">
-                        <img src="/img/icons/usuario.webp" alt="Perfil de usuario" height="35px">
-                        <p>Cuenta</p>
-                        <div class="dropdown-content-profile">
-                            {{^isAdmin}}
-                            <a href="/acounts/profile">Perfil</a>
-                            <a href="/acounts/myTickets">Mis tickets</a>
-                            {{/isAdmin}}
-                            {{#isAdmin}}
-                            <a href="/acounts/manageProfiles">Perfiles</a>
-                            <a href="/acounts/myEvents">Eventos</a>
-                            <a href="/acounts/newEvent">Nuevo evento</a>
-                            {{/isAdmin}}
-                            <a href="#" id="logout-link">Cerrar sesión</a>
-                        </div>
-                    </li>
-                </ul>
-            </nav>
+            <div class="dropdown-profile">
+                <img src="/img/icons/usuario.webp" alt="Perfil de usuario" height="35px">
+                <p>Cuenta</p>
+                <div class="dropdown-content-profile">
+                    {{^isAdmin}}
+                    <a href="/acounts/profile">Perfil</a>
+                    <a href="/acounts/myTickets">Mis tickets</a>
+                    {{/isAdmin}}
+                    {{#isAdmin}}
+                    <a href="/acounts/manageProfiles">Perfiles</a>
+                    <a href="/acounts/myEvents">Eventos</a>
+                    <a href="/acounts/newEvent">Nuevo evento</a>
+                    {{/isAdmin}}
+                    <a href="#" id="logout-link">Cerrar sesión</a>
+                </div>
+            </div>
+        
         </div>
     </div>
 </header>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/js/logout.js"></script>
+<script>
+    const carrito = document.getElementById('carrito');
+
+    carrito.addEventListener('click', function() {
+        window.location.href = '/shioppingCart';
+    });
+</script>
