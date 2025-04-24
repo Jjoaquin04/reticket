@@ -18,6 +18,7 @@
         <div class="carrito-container">
             <!-- 
             - cardItem:
+                - id
                 - event:
                     - name
                     - date
@@ -39,20 +40,22 @@
                 <div class="card-item-info">
                     <h2>{{event.name}}</h2>
                     <p>{{event.description}}</p>
-                    <div style="display: flex; flex-direction: row; align-items: center; gap: 10px; justify-content: center;">
-                        <i class="fa-solid fa-location-dot"></i>
-                        <p>{{event.location}}</p>
-                        <p>{{event.venue}}</p>
+                    <div style="display: flex; flex-direction: row; gap: 40px; justify-content: center;">
+                        <div style="display: flex; flex-direction: row; align-items: center; gap: 10px; justify-content: center;">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <p>{{event.location}}</p>
+                            <p>{{event.venue}}</p>
+                        </div>
+                        <p>{{event.date}}</p>
                     </div>
-                    <p>{{event.date}}</p>
                     <!-- <p> precio: ${event.price}</p> -->
                 </div>
                 <div class="card-item-actions">
-                    <a href="/removeFromCart/{{id}}" class="remove-button"><i class="fa fa-trash"></i></a>
                     <div style="display: flex; flex-direction: row; align-items: center; gap: 10px; justify-content: center;">
-                        <p>Entradas: {{quantity}}</p>
-                        <button class="less-button">-</button>
+                        <p>Entradas: <button data-q="{{quantity}}" data-i="{{id}}" class="less-button">-</button> {{quantity}} <button data-q="{{quantity}}" data-i="{{id}}" class="add-button">+</button></p>
+                        
                     </div>
+                    <button key="{{id}}" class="remove-button"><i class="fa fa-trash"></i></button>
                 </div>
             </div>
             {{/cartItems}}
@@ -70,5 +73,7 @@
     </div>
 
     {{> footer}}
+
+    <script src="/js/carrito.js"></script>
 </body>
 </html>

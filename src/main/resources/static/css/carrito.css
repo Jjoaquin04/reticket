@@ -4,13 +4,8 @@ body{
     min-height: 100vh;
 }
 
-content{
+.content{
     flex: 1;
-}
-
-a{
-    text-decoration: none;
-    color: black;
 }
 
 #title{
