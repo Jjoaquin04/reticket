@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import com.example.reticket.db.Event;
 import com.example.reticket.service.EventService;
+
+import jakarta.transaction.Transactional;
+
 import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
@@ -24,6 +27,8 @@ public class GetFilteredEventsPageController {
     @Autowired
     private EventService eventService;
 
+
+    @Transactional
     @GetMapping("")
     public ModelAndView getFilteredEvents(
         @RequestParam(required = false) String startDateTime,
@@ -84,7 +89,7 @@ public class GetFilteredEventsPageController {
     }
 
     @GetMapping("/")
-    public ModelAndView mainPage(Model model) {
+    public ModelAndView eventsPage(Model model) {
         List<Event> allEventos = eventService.getAllEvents();
         model.addAttribute("events",allEventos);
         return new ModelAndView("eventsPage");

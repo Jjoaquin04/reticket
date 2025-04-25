@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import com.example.reticket.db.User_;
 import com.example.reticket.service.UserService;
 
+import jakarta.transaction.Transactional;
+
 @RestController
 @RequestMapping("/admin")
 public class AdminUsersController {
@@ -26,6 +28,7 @@ public class AdminUsersController {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
+    @Transactional
     @PostMapping("/users")
     public ResponseEntity<?> createUser(@RequestBody Map<String, String> userData) {
         // Verificar que el usuario actual es un administrador
@@ -63,6 +66,7 @@ public class AdminUsersController {
         }
     }
 
+    @Transactional
     @GetMapping("/users/{id}")
     public ResponseEntity<?> getUserById(@PathVariable Long id) {
         // Verificar permisos
@@ -94,6 +98,7 @@ public class AdminUsersController {
         }
     }
 
+    @Transactional
     @PatchMapping("/users/{id}")
     public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody Map<String, String> updates) {
         // Verificar permisos
@@ -144,6 +149,7 @@ public class AdminUsersController {
         return ResponseEntity.ok().body(Map.of("success", "Usuario actualizado con éxito"));
     }
 
+    @Transactional
     @DeleteMapping("/users/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Long id) {
         // Verificar permisos

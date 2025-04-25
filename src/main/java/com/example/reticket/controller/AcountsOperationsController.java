@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,6 +38,7 @@ public class AcountsOperationsController {
 
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
+    @Transactional
     @PostMapping("/submitEvent")
     public ResponseEntity<?> createEvent(@RequestBody(required = true) Event event, HttpSession session) {
         Long userId = (Long) session.getAttribute("userId");
@@ -56,6 +58,7 @@ public class AcountsOperationsController {
         return ResponseEntity.status(HttpStatus.CREATED).body(newEvent);
     }
 
+    @Transactional
     @DeleteMapping("events/{id}")
     public ResponseEntity<?> deleteEvent(@PathVariable Long id) {
         Optional<Event> deletedEvent = eventService.getEventById(id);
@@ -65,6 +68,8 @@ public class AcountsOperationsController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @Transactional
     @PutMapping("events/{id}")
     public ResponseEntity<?> updateEvent(@PathVariable Long id, @RequestBody Event newEvent) {
         Optional<Event> event = eventService.getEventById(id);
@@ -77,6 +82,7 @@ public class AcountsOperationsController {
         }
     }
 
+    @Transactional
     @PatchMapping("events/{id}")
     public ResponseEntity<?> updateEventStatus(@PathVariable Long id, @RequestBody Event.EventStatus status) {
         Optional<Event> event = eventService.getEventById(id);
@@ -116,6 +122,7 @@ public class AcountsOperationsController {
         cartItemService.deleteAllByEvent(event);
     }
 
+    @Transactional
     @PatchMapping("/users/{id}")
     public ResponseEntity<?> updateUser(@PathVariable Long id,@RequestBody Map<String, Object> updates) {
         Optional<User_> existingUser = userService.getUserById(id);

@@ -21,6 +21,7 @@ import com.example.reticket.db.User_;
 import com.example.reticket.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
 
 @RestController
 @RequestMapping("/auth")
@@ -32,6 +33,7 @@ public class LoginRegisterOperationsController {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
+    @Transactional
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Map<String,String> credentials, HttpSession session) {
         String username = credentials.get("username");
@@ -64,6 +66,7 @@ public class LoginRegisterOperationsController {
         ));
     }
 
+    @Transactional
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody Map<String, String> userData,HttpSession session) {
         

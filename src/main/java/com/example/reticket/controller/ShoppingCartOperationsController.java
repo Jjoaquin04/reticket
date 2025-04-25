@@ -22,8 +22,10 @@ import com.example.reticket.service.ShoppingCartService;
 import com.example.reticket.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
 
 @RestController
+@Transactional
 public class ShoppingCartOperationsController {
 
     @Autowired
@@ -78,6 +80,7 @@ public class ShoppingCartOperationsController {
             shoppingCart.addCartItem(cartItem);
             shoppingCartService.updateShoppingCart(shoppingCart); 
         }
+
         existingEvent.get().setCurrenNumberOfTickets(existingEvent.get().getCurrenNumberOfTickets() - 1);
         // Actualizar el estado del evento si es necesario
         if (existingEvent.get().getCurrenNumberOfTickets() <= 0) {
@@ -87,6 +90,7 @@ public class ShoppingCartOperationsController {
         
         return ResponseEntity.ok(Map.of("message", "Evento añadido al carrito de compras"));
     }
+
 
     @DeleteMapping("/cartItems/{cartItemId}")
     public ResponseEntity<?> deleteCartItem(@PathVariable Long cartItemId, HttpSession session) {
@@ -123,20 +127,19 @@ public class ShoppingCartOperationsController {
         shoppingCartService.updateShoppingCart(shoppingCart);
         return ResponseEntity.ok(Map.of("message", "Item eliminado del carrito de compras"));
     }
-
     @PatchMapping("/cartItems/{cartItemId}/{quantity}")
     public ResponseEntity<?> updateCartItem(@PathVariable Long cartItemId, @PathVariable int quantity, HttpSession session) {
+        // Optimización: si la cantidad es 0, usar el método de eliminar directamente
+        if (quantity <= 0) {
+            return deleteCartItem(cartItemId, session);
+        }
+        
         Long userId = (Long) session.getAttribute("userId");
         if (userId == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error","Usuario no autenticado"));
         }
         
-        Optional<User_> user = userService.getUserById(userId);
-        ShoppingCart shoppingCart = shoppingCartService.getShoppingCartByUser(user.get());
-        if (shoppingCart == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "Carrito de compras no encontrado"));
-        }
-        
+        // Optimización: cargar solo lo necesario
         CartItem item = cartItemService.getCartItemById(cartItemId);
         if (item == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "Item no encontrado en el carrito"));
@@ -147,27 +150,37 @@ public class ShoppingCartOperationsController {
         int diff = oldQuantity - quantity;
         
         Event event = item.getEvent();
+        int newTicketsAvailable = event.getCurrenNumberOfTickets() + diff;
         
         // Verificar si hay suficientes tickets disponibles para aumentar la cantidad
-        if (diff < 0 && Math.abs(diff) > event.getCurrenNumberOfTickets()) {
+        if (diff < 0 && newTicketsAvailable < 0) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", 
                 "No hay suficientes tickets disponibles. Disponibles: " + event.getCurrenNumberOfTickets()));
         }
         
         // Actualizar el número de tickets disponibles en el evento
-        event.setCurrenNumberOfTickets(event.getCurrenNumberOfTickets() + diff);
+        event.setCurrenNumberOfTickets(newTicketsAvailable);
         
         // Actualizar el estado del evento si es necesario
-        if (diff > 0 && event.getEventStatus() == Event.EventStatus.SOLD_OUT && event.getCurrenNumberOfTickets() > 0) {
+        if (diff > 0 && event.getEventStatus() == Event.EventStatus.SOLD_OUT && newTicketsAvailable > 0) {
             event.setEventStatus(Event.EventStatus.AVAILABLE);
-        } else if (diff < 0 && event.getCurrenNumberOfTickets() <= 0) {
+        } else if (diff < 0 && newTicketsAvailable <= 0) {
             event.setEventStatus(Event.EventStatus.SOLD_OUT);
         }
         
-        eventService.updateEvent(event);
-        
+        // Actualizar la cantidad del item primero
         item.setQuantity(quantity);
-        cartItemService.updateCartItem(item);
-        return ResponseEntity.ok(Map.of("message", "Cantidad actualizada"));
+        
+        // Guardar los cambios en una sola transacción
+        try {
+            cartItemService.updateCartItem(item);
+            eventService.updateEvent(event);
+            return ResponseEntity.ok(Map.of("message", "Cantidad actualizada"));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(Map.of("error", "Error al actualizar: " + e.getMessage()));
+        }
     }
+
+    
 }

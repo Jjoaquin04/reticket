@@ -39,6 +39,10 @@ public class GetShoppingCartPage {
             return new ModelAndView("redirect:/auth/register");
         }
         ShoppingCart shoppingCart = shoppingCartService.getShoppingCartByUser(user.get());
+        if (shoppingCart == null) {
+            shoppingCart = new ShoppingCart(user.get());
+            shoppingCartService.createShoppingCart(shoppingCart);
+        }
         List<CartItem> cartItems = cartItemService.getAllByShoppingCart(shoppingCart);
         model.addAttribute("cartItems", cartItems);
         return new ModelAndView("carritoPage");
