@@ -34,7 +34,7 @@ lessbutton.forEach(button => {
             })
             .then(response => {
                 if (response.ok) {
-                    location.reload(); // Recargar la página para actualizar el carrito
+                    location.reload(); 
                 } else {
                     console.error('Error al eliminar el producto del carrito');
                 }
@@ -49,7 +49,7 @@ lessbutton.forEach(button => {
         })
         .then(response => {
             if (response.ok) {
-                location.reload(); // Recargar la página para actualizar el carrito
+                location.reload(); 
             } else {
                 console.error('Error al eliminar el producto del carrito');
             }
@@ -72,9 +72,9 @@ addbutton.forEach(button => {
         })
         .then(response => {
             if (response.ok) {
-                location.reload(); // Recargar la página para actualizar el carrito
+                location.reload();
             } else {
-                console.error('Error al eliminar el producto del carrito');
+                console.error('Error al añadir el producto al carrito');
             }
         })
         .catch(error => console.error('Error:', error));

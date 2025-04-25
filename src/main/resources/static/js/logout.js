@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (logoutLink) {
         logoutLink.addEventListener('click', async function(e) {
             e.preventDefault();
+            
             Swal.fire({ 
                 title: "Cerrar sesión",
                 text: "Estas a punto de cerrar sesión!",
@@ -16,6 +17,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }).then(async (result) => {
                 if(result.isConfirmed) {
                     try {
+                        const loadingSwal = RequestFeedback.showLoading({
+                            title: 'Cerrando sesión',
+                            text: 'Procesando...'
+                        });
+                        
                         const response = await fetch('/auth/logout', {
                             method: 'POST',
                             headers: {
@@ -23,9 +29,10 @@ document.addEventListener('DOMContentLoaded', function() {
                             }
                         });
                         
+                        loadingSwal.close();
+                        
                         if (response.ok) {
-                            Swal.fire({
-                                icon: 'success',
+                            RequestFeedback.showSuccess({
                                 title: 'Sesión cerrada',
                                 text: 'Has cerrado sesión correctamente',
                                 timer: 1500,
@@ -36,8 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                     } catch (error) {
                         console.error('Error al cerrar sesión:', error);
-                        Swal.fire({
-                            icon: 'error',
+                        RequestFeedback.showError({
                             title: 'Error',
                             text: 'Ocurrió un error al cerrar sesión'
                         });

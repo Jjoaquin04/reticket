@@ -7,17 +7,20 @@ for (let i = 0; i < eliminar_button.length; i++) {
         const eventId = this.getAttribute("key");
 
         // Show a confirmation dialog to the user
-        Swal.fire({
-            title: "Estás seguro?",
-            text: "No se podra revertir la acción!",
+        RequestFeedback.showConfirm({
+            title: "¿Estás seguro?",
+            text: "No se podrá revertir la acción!",
             icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Sí, borralo",
+            confirmButtonText: "Sí, bórralo",
             cancelButtonText: "Cancelar"
         }).then(async (result) => {
             if (result.isConfirmed) {
+                // Mostrar mensaje de carga
+                const loadingSwal = RequestFeedback.showLoading({
+                    title: 'Eliminando evento',
+                    text: 'Por favor espere...'
+                });
+                
                 try{
                     const response = await fetch("/events/" + eventId, {
                         method: "DELETE",
@@ -26,32 +29,32 @@ for (let i = 0; i < eliminar_button.length; i++) {
                         }
                     });
     
-                    console.log(response);
+                    // Cerrar mensaje de carga
+                    loadingSwal.close();
     
                     if (!response.ok) {
-                        Swal.fire({
-                            icon: "error",
-                            title: "Oops...",
-                            text: "Ha ocurrido un error al eliminar el evento. Por favor, inténtalo de nuevo",
+                        RequestFeedback.showError({
+                            title: "Error al eliminar",
+                            text: "Ha ocurrido un error al eliminar el evento. Por favor, inténtalo de nuevo"
                         });
-                    }else{
-                        Swal.fire({
+                    } else {
+                        RequestFeedback.showSuccess({
                             title: "¡Éxito!",
                             text: "Evento eliminado correctamente",
-                            icon: "success",
-                            confirmButtonText: "Continuar"
-                        }).then((result) => {
-                            if( result.isConfirmed) {
-                                location.reload();
-                            }
+                            timer: 1500,
+                            showConfirmButton: false
+                        }).then(() => {
+                            location.reload();
                         }); 
                     }
                 } catch (error) {
                     console.error("Error al eliminar el evento:", error);
-                    Swal.fire({
-                        icon: "error",
-                        title: "Oops...",
-                        text: "Ha ocurrido un error al eliminar el evento. Por favor, inténtalo de nuevo",
+                    // Cerrar mensaje de carga si aún está abierto
+                    loadingSwal.close();
+                    
+                    RequestFeedback.showError({
+                        title: "Error de conexión",
+                        text: "Ha ocurrido un error al eliminar el evento. Por favor, inténtalo de nuevo"
                     });
                 }
             }
@@ -69,6 +72,12 @@ for (let i = 0; i < update_forms.length; i++) {
         const statusValue = formData.get('eventStatus');
         const eventId = this.getAttribute("key");
 
+        // Mostrar mensaje de carga
+        const loadingSwal = RequestFeedback.showLoading({
+            title: 'Actualizando estado',
+            text: 'Guardando cambios...'
+        });
+        
         try {
             const response = await fetch("/events/" + eventId, {
                 method: "PATCH",
@@ -80,17 +89,18 @@ for (let i = 0; i < update_forms.length; i++) {
             });
             const data = await response.json();
 
+            // Cerrar mensaje de carga
+            loadingSwal.close();
+            
             if (!response.ok) {
-                Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: "Ha ocurrido un error al actualizar el estado del evento. Por favor, inténtalo de nuevo",
+                RequestFeedback.showError({
+                    title: "Error al actualizar",
+                    text: "Ha ocurrido un error al actualizar el estado del evento. Por favor, inténtalo de nuevo"
                 });
             } else {
-                Swal.fire({
-                    title: "Estado del evento actualizado con éxito!",
+                RequestFeedback.showSuccess({
+                    title: "Estado actualizado",
                     text: "Nuevo estado: " + data.status,
-                    icon: "success",
                     timer: 1500,
                     showConfirmButton: false
                 }).then(() => {
@@ -99,10 +109,13 @@ for (let i = 0; i < update_forms.length; i++) {
             }
         } catch (error) {
             console.error("Error al actualizar el evento:", error);
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Ha ocurrido un error al actualizar el estado del evento. Por favor, inténtalo de nuevo",
+            
+            // Cerrar mensaje de carga si aún está abierto
+            loadingSwal.close();
+            
+            RequestFeedback.showError({
+                title: "Error de conexión",
+                text: "Ha ocurrido un error al actualizar el estado del evento. Por favor, inténtalo de nuevo"
             });
         }
     });

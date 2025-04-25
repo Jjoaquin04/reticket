@@ -14,12 +14,20 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', async function() {
             const eventId = this.closest(".event").dataset.eventId;
             try{
+                const loadingSwal = RequestFeedback.showLoading({
+                    title: "Añadiendo ticket al carrito",
+                    text: "Por favor, espere...",
+                    allowOutsideClick: false
+                })
+                
                 const response = await fetch(`/addShoppingCart/${eventId}`, {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json'
                     },
                 });
+
+                loadingSwal.close(); 
 
                 if (response.ok) {
                     const ticketsInfo = this.closest('.event').querySelector('.tickets-info .tickets-count');
@@ -33,26 +41,23 @@ document.addEventListener('DOMContentLoaded', function() {
                         this.disabled = true;
                         this.textContent = 'Agotado';
                     }
-                    Swal.fire({
-                        position: "bottom-start",
-                        icon: "success",
+                    RequestFeedback.showSuccess({
                         title: "Ticket añadido al carrito",
+                        timer: 1500,
                         showConfirmButton: false,
-                        timer: 1500
-                      });
+                        position: "bottom-start"
+                    });
                 } else {
-                    Swal.fire({
-                        icon: "error",
+                    RequestFeedback.showError({
                         title: "Oops...",
-                        text: "Ha ocurrido un error al comprar el ticket",
+                        text: "Ha ocurrido un error al comprar el ticket"
                     });
                 }
             }catch (error) {
                 console.error('Error:', error); // Error handling
-                Swal.fire({
-                    icon: "error",
+                RequestFeedback.showError({
                     title: "Oops...",
-                    text: "Ha ocurrido un error al procesar la compra",
+                    text: "Ha ocurrido un error al procesar la compra"
                 });
             }
         });

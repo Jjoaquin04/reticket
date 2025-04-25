@@ -18,11 +18,14 @@ document.getElementById("new-event-form").addEventListener("submit", async funct
         currenNumberOfTickets: parseInt(formData.get("currenNumberOfTickets")) // Convert to number
     };
 
-    console.log(data); 
-    console.log(JSON.stringify(data));
-
     // Send the POST request to the server
     try {
+        // Mostrar mensaje de carga
+        const loadingSwal = RequestFeedback.showLoading({
+            title: 'Creando evento',
+            text: 'Guardando información del evento...'
+        });
+        
         const response = await fetch("/submitEvent", {
             method: "POST",
             headers: {
@@ -31,16 +34,13 @@ document.getElementById("new-event-form").addEventListener("submit", async funct
             body: JSON.stringify(data)
         });
 
-        const result = await response.json(); // Convert the response to JSON
-
-        console.log(response);
-        console.log(result); 
+        // Cerrar mensaje de carga
+        loadingSwal.close();
 
         if (response.ok) {
-            Swal.fire({
+            RequestFeedback.showSuccess({
                 title: "¡Éxito!",
                 text: "Evento creado correctamente",
-                icon: "success",
                 confirmButtonText: "Continuar"
             }).then((result) => {
                 if (result.isConfirmed) {
@@ -49,16 +49,14 @@ document.getElementById("new-event-form").addEventListener("submit", async funct
             });
         } else {
             const errorData = await response.json();
-            Swal.fire({
-                icon: "error",
+            RequestFeedback.showError({
                 title: "Error al crear el evento",
                 text: errorData.error || "Verifica los datos ingresados"
             });
         }
     } catch (error) {
         console.error("Error:", error);
-        Swal.fire({
-            icon: "error",
+        RequestFeedback.showError({
             title: "Error de conexión",
             text: "No se pudo conectar con el servidor"
         });

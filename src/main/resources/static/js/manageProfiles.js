@@ -38,6 +38,12 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         try {
+            // Mostrar indicador de carga
+            const loadingSwal = RequestFeedback.showLoading({
+                title: 'Creando usuario',
+                text: 'Por favor espere...'
+            });
+            
             const response = await fetch('/admin/users', {
                 method: 'POST',
                 headers: {
@@ -47,26 +53,26 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             const result = await response.json();
+            
+            // Cerrar indicador de carga
+            loadingSwal.close();
 
             if (response.ok) {
-                Swal.fire({
-                    icon: 'success',
+                RequestFeedback.showSuccess({
                     title: 'Usuario creado',
                     text: 'El usuario ha sido creado exitosamente'
                 }).then(() => {
                     window.location.reload();
                 });
             } else {
-                Swal.fire({
-                    icon: 'error',
+                RequestFeedback.showError({
                     title: 'Error',
                     text: result.error || 'Error al crear el usuario'
                 });
             }
         } catch (error) {
             console.error('Error:', error);
-            Swal.fire({
-                icon: 'error',
+            RequestFeedback.showError({
                 title: 'Error',
                 text: 'Ha ocurrido un error en la operación'
             });
@@ -78,9 +84,18 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', async function() {
             const userId = this.getAttribute('data-id');
             
+            // Mostrar indicador de carga
+            const loadingSwal = RequestFeedback.showLoading({
+                title: 'Cargando datos',
+                text: 'Obteniendo información del usuario...'
+            });
+            
             try {
                 const response = await fetch(`/admin/users/${userId}`);
                 const user = await response.json();
+                
+                // Cerrar indicador de carga
+                loadingSwal.close();
                 
                 document.getElementById('edit-user-id').value = user.id;
                 document.getElementById('edit-username').value = user.username;
@@ -91,8 +106,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 modal.style.display = 'block';
             } catch (error) {
                 console.error('Error:', error);
-                Swal.fire({
-                    icon: 'error',
+                
+                // Cerrar indicador de carga
+                loadingSwal.close();
+                
+                RequestFeedback.showError({
                     title: 'Error',
                     text: 'Error al cargar los datos del usuario'
                 });
@@ -115,7 +133,14 @@ document.addEventListener('DOMContentLoaded', function() {
         if (password) {
             userData.password = password;
         }
+        
         try {
+            // Mostrar indicador de carga
+            const loadingSwal = RequestFeedback.showLoading({
+                title: 'Actualizando usuario',
+                text: 'Guardando cambios...'
+            });
+            
             const response = await fetch(`/admin/users/${userId}`, {
                 method: 'PATCH',
                 headers: {
@@ -125,26 +150,26 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             const result = await response.json();
+            
+            // Cerrar indicador de carga
+            loadingSwal.close();
 
             if (response.ok) {
-                Swal.fire({
-                    icon: 'success',
+                RequestFeedback.showSuccess({
                     title: 'Usuario actualizado',
                     text: 'Los cambios han sido guardados',
                 }).then(() => {
                     window.location.reload();
                 });
             } else {
-                Swal.fire({
-                    icon: 'error',
+                RequestFeedback.showError({
                     title: 'Error',
                     text: result.error || 'Error al actualizar el usuario'
                 });
             }
         } catch (error) {
             console.error('Error:', error);
-            Swal.fire({
-                icon: 'error',
+            RequestFeedback.showError({
                 title: 'Error',
                 text: 'Ha ocurrido un error en la operación'
             });
@@ -156,25 +181,30 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', function() {
             const userId = this.getAttribute('data-id');
             
-            Swal.fire({
+            RequestFeedback.showConfirm({
                 title: '¿Estás seguro?',
                 text: "No podrás revertir esta acción",
                 icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
                 confirmButtonText: 'Sí, eliminar',
                 cancelButtonText: 'Cancelar'
             }).then(async (result) => {
                 if (result.isConfirmed) {
                     try {
+                        // Mostrar indicador de carga
+                        const loadingSwal = RequestFeedback.showLoading({
+                            title: 'Eliminando usuario',
+                            text: 'Procesando...'
+                        });
+                        
                         const response = await fetch(`/admin/users/${userId}`, {
                             method: 'DELETE'
                         });
                         
+                        // Cerrar indicador de carga
+                        loadingSwal.close();
+                        
                         if (response.ok) {
-                            Swal.fire({
-                                icon: 'success',
+                            RequestFeedback.showSuccess({
                                 title: 'Usuario eliminado',
                                 text: 'El usuario ha sido eliminado exitosamente'
                             }).then(() => {
@@ -182,16 +212,14 @@ document.addEventListener('DOMContentLoaded', function() {
                             });
                         } else {
                             const error = await response.json();
-                            Swal.fire({
-                                icon: 'error',
+                            RequestFeedback.showError({
                                 title: 'Error',
                                 text: error.error || 'Error al eliminar el usuario'
                             });
                         }
                     } catch (error) {
                         console.error('Error:', error);
-                        Swal.fire({
-                            icon: 'error',
+                        RequestFeedback.showError({
                             title: 'Error',
                             text: 'Ha ocurrido un error en la operación'
                         });

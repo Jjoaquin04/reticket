@@ -16,25 +16,6 @@ document.addEventListener('DOMContentLoaded', function() {
         flipper.classList.remove('flip');
     });
 
-    // Función reutilizable para manejar estados de carga
-    function handleLoadingState(button, isLoading) {
-        if (!button) return;
-        
-        // Guardar texto original si aún no se ha guardado
-        if (!button.hasAttribute('data-original-text') && button.textContent) {
-            button.setAttribute('data-original-text', button.textContent);
-        }
-        
-        const originalText = button.getAttribute('data-original-text') || button.textContent;
-        
-        if (isLoading) {
-            button.disabled = true;
-            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
-        } else {
-            button.disabled = false;
-            button.textContent = originalText;
-        }
-    }
 
     // Manejador para el formulario de inicio de sesión
     document.getElementById("login-form").addEventListener('submit', async function(e) {
@@ -47,17 +28,18 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         
         if(!formData.username || !formData.password) {
-            Swal.fire({
-                icon: 'error',
+            RequestFeedback.showError({
                 title: 'Campos requeridos',
-                text: 'Por favor, completa todos los campos.',
-                heightAuto: false,
+                text: 'Por favor, completa todos los campos.'
             });
             return;
         }
         
         try {
-            handleLoadingState(submitButton, true);
+            const loadingSwal = RequestFeedback.showLoading({
+                title: 'Iniciando sesión',
+                text: 'Verificando credenciales...'
+            });
             
             const response = await fetch('/auth/login', {
                 method: 'POST',
@@ -69,35 +51,32 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const data = await response.json();
             
-            handleLoadingState(submitButton, false);
+            loadingSwal.close();
             
             if(response.ok) {
-                Swal.fire({
-                    icon: 'success',
+                RequestFeedback.showSuccess({
                     title: 'Inicio de sesión exitoso',
                     text: 'Redirigiendo...',
                     timer: 1500,
                     showConfirmButton: false,
-                    heightAuto: false,
+                    height: 'false'
                 }).then(() => {
                     window.location.href = '/home';
                 });
             } else {
-                Swal.fire({
-                    icon: 'error',
+                RequestFeedback.showError({
                     title: 'Error',
                     text: data.error,
-                    heightAuto: false,
+                    height: 'false'
                 });
             }
         } catch(error) {
             console.error('Error:', error);
             handleLoadingState(submitButton, false);
-            Swal.fire({
-                icon: 'error',
+            RequestFeedback.showError({
                 title: 'Error',
                 text: 'Ocurrió un error al procesar la solicitud.',
-                heightAuto: false,
+                height: 'false'
             });
         }
     });
@@ -114,11 +93,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Verificar que las contraseñas coinciden
         if (password !== confirmPassword) {
-            Swal.fire({
-                icon: 'error',
+            RequestFeedback.showError({
                 title: 'Las contraseñas no coinciden',
-                text: 'Por favor, asegúrate de que ambas contraseñas sean iguales.',
-                heightAuto: false,
+                text: 'Por favor, asegúrate de que ambas contraseñas sean iguales.'
             });
             return;
         }
@@ -130,17 +107,19 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         
         if(!formData.username || !formData.password || !formData.email) {
-            Swal.fire({
-                icon: 'error',
+            RequestFeedback.showError({
                 title: 'Campos requeridos',
-                text: 'Por favor, completa todos los campos.',
-                heightAuto: false,
+                text: 'Por favor, completa todos los campos.'
             });
             return;
         }
         
         try {
-            handleLoadingState(submitButton, true);
+            
+            const loadingSwal = RequestFeedback.showLoading({
+                title: 'Creando cuenta',
+                text: 'Registrando usuario...'
+            });
             
             const response = await fetch('/auth/register', {
                 method: 'POST',
@@ -152,35 +131,31 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const data = await response.json();
             
-            handleLoadingState(submitButton, false);
+            loadingSwal.close();
             
             if(response.ok) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Registro exitoso, bienvenido ' + data.username,
+                RequestFeedback.showSuccess({
+                    title: 'Registro exitoso, bienvenido ' + username,
                     text: 'Redirigiendo...',
                     timer: 1500,
                     showConfirmButton: false,
-                    heightAuto: false
+                    height: 'false'
                 }).then(() => {
                     window.location.href = '/home';
                 });
             } else {
-                Swal.fire({
-                    icon: 'error',
+                RequestFeedback.showError({
                     title: 'Error',
                     text: data.error,
-                    heightAuto: false,
+                    height: 'false'
                 });
             }
         } catch(error) {
             console.error('Error:', error);
-            handleLoadingState(submitButton, false);
-            Swal.fire({
-                icon: 'error',
+            RequestFeedback.showError({
                 title: 'Error',
                 text: 'Ocurrió un error al procesar la solicitud.',
-                heightAuto: false,
+                height: 'false'
             });
         }
     });

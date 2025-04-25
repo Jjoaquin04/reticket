@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
         originalData[input.name] = input.value; // Save the original value
     });
 });
+
 document.querySelectorAll('.toggle-password').forEach(eyeIcon => {
     eyeIcon.addEventListener('click', function() {
         // Obtener ambos campos de contraseña
@@ -26,6 +27,7 @@ document.querySelectorAll('.toggle-password').forEach(eyeIcon => {
         this.classList.toggle('fa-eye-slash');
     });
 });
+
 document.getElementById('profile-form').addEventListener('submit', async function(event) {
     event.preventDefault(); // Prevent default form submission
 
@@ -36,8 +38,7 @@ document.getElementById('profile-form').addEventListener('submit', async functio
     // Validate passwords match if any password field is filled
     if (newPassword || confirmPassword) {
         if (newPassword !== confirmPassword) {
-            Swal.fire({
-                icon: 'error',
+            RequestFeedback.showError({
                 title: 'Error',
                 text: 'Las contraseñas no coinciden'
             });
@@ -62,16 +63,20 @@ document.getElementById('profile-form').addEventListener('submit', async functio
 
     // Check if there are changes before sending the request
     if (Object.keys(changedData).length === 0) {
-        Swal.fire({
-            icon: 'info',
+        RequestFeedback.showInfo({
             title: 'Sin cambios',
-            text: 'No se han realizado cambios en el perfil.',
-            confirmButtonText: 'Continuar'
+            text: 'No se han realizado cambios en el perfil.'
         });
         return;
     }
 
     try {
+        
+        const loadingSwal = RequestFeedback.showLoading({
+            title: 'Actualizando perfil',
+            text: 'Guardando cambios...'
+        });
+        
         const response = await fetch(`/users/${userId}`, {
             method: 'PATCH', 
             headers: {
@@ -81,39 +86,30 @@ document.getElementById('profile-form').addEventListener('submit', async functio
         });
     
         const result = await response.json();
+        
+        // Cerrar mensaje de carga
+        loadingSwal.close();
     
         if (response.ok) {
-            Swal.fire({
+            RequestFeedback.showSuccess({
                 title: '¡Éxito!',
-                text: 'Perfil actualizado correctamente',
-                icon: 'success',
-                confirmButtonText: 'Continuar'
+                text: 'Perfil actualizado correctamente'
             }).then((result) => {
                 if (result.isConfirmed) {
                     window.location.reload(); 
                 }
             });
         } else {
-            Swal.fire({
-                icon: 'error',
+            RequestFeedback.showError({
                 title: 'Error al actualizar el perfil',
                 text: result.error || 'Verifica los datos ingresados'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.reload(); 
-                }
             });
         }
     } catch(error) {
         console.error('Error:', error); 
-        Swal.fire({
-            icon: 'error',
+        RequestFeedback.showError({
             title: 'Error al actualizar el perfil',
             text: 'Ha ocurrido un error al procesar tu solicitud'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.reload(); 
-            }
         });
     }
 });
