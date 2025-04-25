@@ -5,13 +5,15 @@ const RequestFeedback = {
         const config = {
             title: options.title || 'Procesando',
             text: options.text || 'Por favor espere...',
-            allowOutsideClick: options.allowOutsideClick || false
+            allowOutsideClick: options.allowOutsideClick || false,
+            
         };
         
         return Swal.fire({
             title: config.title,
             text: config.text,
             allowOutsideClick: config.allowOutsideClick,
+            heightAuto: false,
             didOpen: () => {
                 Swal.showLoading();
             }
@@ -25,7 +27,6 @@ const RequestFeedback = {
             timer: options.timer,
             showConfirmButton: options.showConfirmButton !== false,
             position: options.position || 'center',
-            height: options.height || 'auto',
         };
         
         return Swal.fire({
@@ -35,7 +36,7 @@ const RequestFeedback = {
             timer: config.timer,
             showConfirmButton: config.showConfirmButton,
             position: config.position,
-            heightAuto: config.height,
+            heightAuto: false,
         });
     },
     
@@ -44,7 +45,6 @@ const RequestFeedback = {
             title: options.title || 'Error',
             text: options.text || 'Ha ocurrido un error',
             showConfirmButton: options.showConfirmButton !== false,
-            height: options.height || 'auto',
         };
         
         return Swal.fire({
@@ -52,7 +52,7 @@ const RequestFeedback = {
             title: config.title,
             text: config.text,
             showConfirmButton: config.showConfirmButton,
-            heightAuto: config.height,
+            heightAuto: false,
         });
     },
 
@@ -67,7 +67,7 @@ const RequestFeedback = {
             icon: 'info',
             title: config.title,
             text: config.text,
-            showConfirmButton: config.showConfirmButton
+            showConfirmButton: config.showConfirmButton,
         });
     },
 

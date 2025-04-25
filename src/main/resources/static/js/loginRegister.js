@@ -38,7 +38,9 @@ document.addEventListener('DOMContentLoaded', function() {
         try {
             const loadingSwal = RequestFeedback.showLoading({
                 title: 'Iniciando sesión',
-                text: 'Verificando credenciales...'
+                text: 'Verificando credenciales...',
+                allowOutsideClick: false,
+                
             });
             
             const response = await fetch('/auth/login', {
@@ -59,7 +61,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     text: 'Redirigiendo...',
                     timer: 1500,
                     showConfirmButton: false,
-                    height: 'false'
                 }).then(() => {
                     window.location.href = '/home';
                 });
@@ -67,16 +68,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 RequestFeedback.showError({
                     title: 'Error',
                     text: data.error,
-                    height: 'false'
                 });
             }
         } catch(error) {
             console.error('Error:', error);
-            handleLoadingState(submitButton, false);
             RequestFeedback.showError({
                 title: 'Error',
                 text: 'Ocurrió un error al procesar la solicitud.',
-                height: 'false'
+
             });
         }
     });
@@ -118,7 +117,9 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const loadingSwal = RequestFeedback.showLoading({
                 title: 'Creando cuenta',
-                text: 'Registrando usuario...'
+                text: 'Registrando usuario...',
+                allowOutsideClick: false,
+            
             });
             
             const response = await fetch('/auth/register', {
@@ -139,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     text: 'Redirigiendo...',
                     timer: 1500,
                     showConfirmButton: false,
-                    height: 'false'
+                    
                 }).then(() => {
                     window.location.href = '/home';
                 });
@@ -147,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 RequestFeedback.showError({
                     title: 'Error',
                     text: data.error,
-                    height: 'false'
+                   
                 });
             }
         } catch(error) {
@@ -155,7 +156,6 @@ document.addEventListener('DOMContentLoaded', function() {
             RequestFeedback.showError({
                 title: 'Error',
                 text: 'Ocurrió un error al procesar la solicitud.',
-                height: 'false'
             });
         }
     });
