@@ -54,13 +54,14 @@ public class Event {
     private String imageURL;
     private String altImage;
     private int currenNumberOfTickets;
+    private double price;
     
     public Event() {
     }
     
     public Event(String name, LocalDateTime date, String venue, String location, String description, 
                  String imageURL, String altImage, EventType eventType, EventStatus eventStatus, 
-                 int currenNumberOfTickets, User_ creator) {
+                 int currenNumberOfTickets, User_ creator,Double price) {
         this.name = name;
         this.date = date;
         this.venue = venue;
@@ -72,6 +73,7 @@ public class Event {
         this.eventStatus = eventStatus;
         this.currenNumberOfTickets = currenNumberOfTickets;
         this.creator = creator;
+        this.price = price;
     }
 
     public Long getId() {
@@ -179,5 +181,11 @@ public class Event {
     
     public void setCreator(User_ creator) {
         this.creator = creator;
+    }
+    public double getPrice() {
+        return price;
+    }
+    public void setPrice(double price) {
+        this.price = price;
     }
 }

@@ -2,7 +2,6 @@ package com.example.reticket.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.example.reticket.db.CartItem;
 import com.example.reticket.db.ShoppingCart;
 import com.example.reticket.db.User_;
@@ -10,7 +9,7 @@ import com.example.reticket.service.CartItemService;
 import com.example.reticket.service.ShoppingCartService;
 import com.example.reticket.service.UserService;
 import jakarta.servlet.http.HttpSession;
-
+import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +27,7 @@ public class GetShoppingCartPage {
     @Autowired
     private CartItemService cartItemService;
     
+    @Transactional
     @GetMapping("/shoppingCart")
     public ModelAndView mainPage(HttpSession session,Model model)    {
         Long userId = (Long) session.getAttribute("userId");
@@ -44,6 +44,11 @@ public class GetShoppingCartPage {
             shoppingCartService.createShoppingCart(shoppingCart);
         }
         List<CartItem> cartItems = cartItemService.getAllByShoppingCart(shoppingCart);
+        double totalPrice = 0.0;
+        for (CartItem cartItem : cartItems) {
+            totalPrice += cartItem.getEvent().getPrice() * cartItem.getQuantity();
+        }
+        model.addAttribute("totalPrice", totalPrice);
         model.addAttribute("cartItems", cartItems);
         return new ModelAndView("carritoPage");
     }
