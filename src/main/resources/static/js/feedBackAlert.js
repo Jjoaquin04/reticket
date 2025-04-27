@@ -86,5 +86,3 @@ const RequestFeedback = {
         return Swal.fire(config);
     }
 };
-
-export default RequestFeedback;

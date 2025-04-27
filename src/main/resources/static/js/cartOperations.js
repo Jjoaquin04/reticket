@@ -1,5 +1,3 @@
-import RequestFeedback from './feedBackAlert.js';
-
 const eliminarbutton = document.querySelectorAll('.remove-button');
 
 eliminarbutton.forEach(button => {
