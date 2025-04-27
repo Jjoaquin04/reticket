@@ -107,7 +107,7 @@ checkoutButton.addEventListener('click', function() {
                 timer: 1500,
                 showConfirmButton: false,
             }).then(() => {
-                location.reload(); // Recargar la página para mostrar el carrito
+                location.reload();
             });
         } else {
             RequestFeedback.showError({

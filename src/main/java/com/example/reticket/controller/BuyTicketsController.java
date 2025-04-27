@@ -80,6 +80,8 @@ public class BuyTicketsController {
             }
             userService.updateUser(user.get());
             // Limpiar el carrito después de la compra
+            cart.getCartItems().clear();
+            shoppingCartService.updateShoppingCart(cart);
             cartItemService.deleteAllByShoppingCart(cart);
             return ResponseEntity.ok(Map.of("message", "Compra realizada con éxito"));
             
