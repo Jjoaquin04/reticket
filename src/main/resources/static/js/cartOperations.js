@@ -120,3 +120,16 @@ checkoutButton.addEventListener('click', function() {
     })
     .catch(error => console.error('Error:', error));
 });
+
+const precios = document.querySelectorAll('.precio');
+
+total = 0;
+precios.forEach(precio => {
+    const quantity = parseInt(precio.getAttribute('data-n'));
+    // Multiplicar el precio por la cantidad
+    const valor = parseFloat(precio.innerText.replace('$', ''));
+    total += valor * quantity;
+});
+
+const totalPrice = document.querySelector('.total-price');
+totalPrice.innerText = '$' + total;

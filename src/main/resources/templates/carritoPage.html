@@ -49,7 +49,7 @@
                         </div>
                         <p>{{event.date}}</p>
                     </div>
-                    <p style="font-size: large;"><strong>${{event.price}}</strong></p>
+                    <p class="precio" style="font-size: large;" data-n="{{quantity}}"><strong>${{event.price}}</strong></p>
                 </div>
                 <div class="card-item-actions">
                     <div style="display: flex; flex-direction: row; align-items: center; gap: 10px; justify-content: center;">
@@ -68,7 +68,7 @@
             {{/cartItems}}
         </div>
         <div class="total-price-container" style="display: flex; flex-direction: row; align-items: center; gap: 10px;">
-            <h2>Total: ${totalPrice}</h2>
+            <h2 style="margin-left: 50px;" class="total-price">Total: ${totalPrice}</h2>
             <button class="checkout-button">Pagar</button>
         </div>
     </div>
