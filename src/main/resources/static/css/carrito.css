@@ -37,3 +37,54 @@ body{
     border-radius: 15px;
 }
 
+.less-button{
+    background-color: lightcoral; /* Red */
+    border: none;
+    color: white;
+    padding: 1px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+.add-button{
+    background-color: lightgreen; /* Green */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+.remove-button{
+    border: none;
+    background-color: transparent;
+    font-size: large;
+    cursor: pointer;
+}
+
+.checkout-button{
+    background-color: lightblue; /* Blue */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+
+    &:hover{
+        background-color: blue; /* Dark Blue */
+    }
+}

@@ -1,3 +1,5 @@
+import RequestFeedback from './feedBackAlert.js';
+
 const eliminarbutton = document.querySelectorAll('.remove-button');
 
 eliminarbutton.forEach(button => {
@@ -74,9 +76,49 @@ addbutton.forEach(button => {
             if (response.ok) {
                 location.reload();
             } else {
+                RequestFeedback.showError({
+                    title: 'Error',
+                    text: 'No se pudo añadir el producto al carrito',
+                    showConfirmButton: true,
+                });
                 console.error('Error al añadir el producto al carrito');
             }
         })
         .catch(error => console.error('Error:', error));
     });
+});
+
+const checkoutButton = document.querySelector('.checkout-button');
+
+checkoutButton.addEventListener('click', function() {
+    RequestFeedback.showLoading({
+        title: 'Procesando',
+        text: 'Por favor espere...',
+        allowOutsideClick: false,
+    });
+
+    const url = '/checkout';
+    fetch(url, {
+        method: 'POST'
+    })
+    .then(response => {
+        if (response.ok) {
+            RequestFeedback.showSuccess({
+                title: 'Éxito',
+                text: 'Checkout procesado correctamente',
+                timer: 1500,
+                showConfirmButton: false,
+            }).then(() => {
+                location.reload(); // Recargar la página para mostrar el carrito
+            });
+        } else {
+            RequestFeedback.showError({
+                title: 'Error',
+                text: 'No se pudo procesar el checkout',
+                showConfirmButton: true,
+            });
+            console.error('Error al procesar el checkout');
+        }
+    })
+    .catch(error => console.error('Error:', error));
 });
