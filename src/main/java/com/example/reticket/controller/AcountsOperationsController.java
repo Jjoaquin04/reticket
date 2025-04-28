@@ -112,7 +112,7 @@ public class AcountsOperationsController {
     }
 
     /*
-    Delete all CartItems related to the event and restore the tickets to the event.
+    Borrar todos los cartItems si el evento se cancela o finaliza
     */
     private void removeCartItemsAndRestoreTickets(Event event) {
         // Obtener todos los CartItems para este evento
@@ -136,11 +136,10 @@ public class AcountsOperationsController {
         }
         User_ user = existingUser.get();
         
-        // Update only the fields provided in the request
         if (updates.containsKey("username")) {
             String newUsername = (String) updates.get("username");
             
-            // Verify that the new username doesn't already exist
+            // Verificar que el nuevo username no exista ya
             if (!user.getUsername().equals(newUsername) && userService.existsByUsername(newUsername)) {
                 return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("error","El nombre de usuario ya está en uso"));
             }
@@ -150,7 +149,7 @@ public class AcountsOperationsController {
         if (updates.containsKey("email")) {
             String newEmail = (String) updates.get("email");
             
-            // Verify that the new email doesn't already exist
+            // Verificar que el nuevo email no exista ya
             if (!user.getEmail().equals(newEmail) && userService.existsByEmail(newEmail)) {
                 return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("error","El email ya está en uso"));
             }
@@ -168,7 +167,7 @@ public class AcountsOperationsController {
         
         User_ updatedUser = userService.updateUser(user);
 
-        // Don't return the password
+        // No retornar la contraseña por seguridad
         Map<String, Object> response = Map.of(
             "username", updatedUser.getUsername(),
             "email", updatedUser.getEmail()

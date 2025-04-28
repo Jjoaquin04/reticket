@@ -86,7 +86,6 @@ public class BuyTicketsController {
             return ResponseEntity.ok(Map.of("message", "Compra realizada con éxito"));
             
         } catch (Exception e) {
-            // Manejo de errores, rollback de la transacción
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("error", "Error al procesar la compra"));
         }
     }

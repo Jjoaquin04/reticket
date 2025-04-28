@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         try {
-            // Mostrar indicador de carga
+
             const loadingSwal = RequestFeedback.showLoading({
                 title: 'Creando usuario',
                 text: 'Por favor espere...'
@@ -54,7 +54,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const result = await response.json();
             
-            // Cerrar indicador de carga
             loadingSwal.close();
 
             if (response.ok) {
@@ -84,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', async function() {
             const userId = this.getAttribute('data-id');
             
-            // Mostrar indicador de carga
+            
             const loadingSwal = RequestFeedback.showLoading({
                 title: 'Cargando datos',
                 text: 'Obteniendo información del usuario...'
@@ -94,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const response = await fetch(`/admin/users/${userId}`);
                 const user = await response.json();
                 
-                // Cerrar indicador de carga
+                
                 loadingSwal.close();
                 
                 document.getElementById('edit-user-id').value = user.id;
@@ -107,7 +106,6 @@ document.addEventListener('DOMContentLoaded', function() {
             } catch (error) {
                 console.error('Error:', error);
                 
-                // Cerrar indicador de carga
                 loadingSwal.close();
                 
                 RequestFeedback.showError({
@@ -135,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         try {
-            // Mostrar indicador de carga
+
             const loadingSwal = RequestFeedback.showLoading({
                 title: 'Actualizando usuario',
                 text: 'Guardando cambios...'
@@ -150,8 +148,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             const result = await response.json();
-            
-            // Cerrar indicador de carga
+        
             loadingSwal.close();
 
             if (response.ok) {
@@ -190,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }).then(async (result) => {
                 if (result.isConfirmed) {
                     try {
-                        // Mostrar indicador de carga
+                        
                         const loadingSwal = RequestFeedback.showLoading({
                             title: 'Eliminando usuario',
                             text: 'Procesando...'
@@ -200,7 +197,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             method: 'DELETE'
                         });
                         
-                        // Cerrar indicador de carga
+                    
                         loadingSwal.close();
                         
                         if (response.ok) {

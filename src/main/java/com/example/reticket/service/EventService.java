@@ -16,12 +16,11 @@ public class EventService {
     @Autowired
     private EventRepository eventRepository;
 
-    // Create
+    
     public Event createEvent(Event event) {
         return eventRepository.save(event);
     }
 
-    // Read
     public Optional<Event> getEventById(Long id) {
         return eventRepository.findById(id);
     }
@@ -52,12 +51,10 @@ public class EventService {
         return eventRepository.findByCreatorId(creatorId);
     }
 
-    // Update
     public Event updateEvent(Event event) {
         return eventRepository.save(event);
     }
 
-    // Delete
     public void deleteEvent(Long id) {
         eventRepository.deleteById(id);
     }

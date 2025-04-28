@@ -16,7 +16,6 @@ public class ShoppingCartService {
     @Autowired
     private ShoppingCartRepository shoppingCartRepository;
 
-    // Create
     public ShoppingCart createShoppingCart(ShoppingCart shoppingCart) {
         return shoppingCartRepository.save(shoppingCart);
     }

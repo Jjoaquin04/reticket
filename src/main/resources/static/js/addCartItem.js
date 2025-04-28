@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const ticketsInfo = event.querySelector('.tickets-info .tickets-count');
         const buyButton = event.querySelector('.buy-button-event');
         
-        // Check if the number of tickets is 0
+        // Comprobar si el numero de tickets es menor o igual a 0
         if (parseInt(ticketsInfo.textContent) <= 0 || event.dataset.eventStatus === 'SOLD_OUT' || event.dataset.eventStatus === 'CANCELLED' || event.dataset.eventStatus === 'FINISHED') {
             buyButton.disabled = true;
             buyButton.textContent = event.dataset.eventStatus === 'SOLD_OUT' ? 'Agotado' : event.dataset.eventStatus === 'CANCELLED' ? 'Cancelado' : event.dataset.eventStatus === 'FINISHED' ? 'Finalizado' : 'No disponible';
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     const newCount = currentCount - 1;
                     ticketsInfo.textContent = `${newCount}`;
                     
-                    // Disable the button if no tickets are available
+                    // Desabilitar el botón si no hay más tickets disponibles
                     if (newCount <= 0) {
                         this.disabled = true;
                         this.textContent = 'Agotado';
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
                 }
             }catch (error) {
-                console.error('Error:', error); // Error handling
+                console.error('Error:', error);
                 RequestFeedback.showError({
                     title: "Oops...",
                     text: "Ha ocurrido un error al procesar la compra"

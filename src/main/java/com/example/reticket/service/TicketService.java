@@ -17,12 +17,10 @@ public class TicketService {
     @Autowired
     private TicketRepository ticketRepository;
 
-    // Create
     public Ticket createTicket(Ticket ticket) {
         return ticketRepository.save(ticket);
     }
 
-    // Read
     public Optional<Ticket> getTicketById(Long id) {
         return ticketRepository.findById(id);
     }
@@ -39,12 +37,10 @@ public class TicketService {
         return ticketRepository.findByUser_Id(userId);
     }
 
-    // Update
     public Ticket updateTicket(Ticket ticket) {
         return ticketRepository.save(ticket);
     }
     
-    // Delete
     public void deleteTicket(Long id) {
         ticketRepository.deleteById(id);
     }

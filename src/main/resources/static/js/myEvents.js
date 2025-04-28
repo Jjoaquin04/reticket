@@ -1,12 +1,12 @@
 const eliminar_button = document.getElementsByClassName("eliminar-button"); // Get all elements with the class "eliminar-button"
 
-// Loop through each button and add a click event listener
+
 for (let i = 0; i < eliminar_button.length; i++) {
     eliminar_button[i].addEventListener("click", async function() {
-        // Get the ID of the event to be deleted from the button's data attribute
+        //Obtener el id del evento desde el atributo "key" del elemento padre
         const eventId = this.getAttribute("key");
 
-        // Show a confirmation dialog to the user
+        // Mostrar mensaje de confirmación
         RequestFeedback.showConfirm({
             title: "¿Estás seguro?",
             text: "No se podrá revertir la acción!",
@@ -15,7 +15,7 @@ for (let i = 0; i < eliminar_button.length; i++) {
             cancelButtonText: "Cancelar"
         }).then(async (result) => {
             if (result.isConfirmed) {
-                // Mostrar mensaje de carga
+                
                 const loadingSwal = RequestFeedback.showLoading({
                     title: 'Eliminando evento',
                     text: 'Por favor espere...'
@@ -29,7 +29,7 @@ for (let i = 0; i < eliminar_button.length; i++) {
                         }
                     });
     
-                    // Cerrar mensaje de carga
+                    
                     loadingSwal.close();
     
                     if (!response.ok) {
@@ -49,7 +49,7 @@ for (let i = 0; i < eliminar_button.length; i++) {
                     }
                 } catch (error) {
                     console.error("Error al eliminar el evento:", error);
-                    // Cerrar mensaje de carga si aún está abierto
+                    
                     loadingSwal.close();
                     
                     RequestFeedback.showError({
@@ -68,11 +68,10 @@ for (let i = 0; i < update_forms.length; i++) {
         event.preventDefault();
 
         const formData = new FormData(this);
-        // Get only the value of the status
         const statusValue = formData.get('eventStatus');
         const eventId = this.getAttribute("key");
 
-        // Mostrar mensaje de carga
+        
         const loadingSwal = RequestFeedback.showLoading({
             title: 'Actualizando estado',
             text: 'Guardando cambios...'
@@ -84,12 +83,12 @@ for (let i = 0; i < update_forms.length; i++) {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                // Send the value directly as a string in JSON
+                
                 body: JSON.stringify(statusValue)
             });
             const data = await response.json();
 
-            // Cerrar mensaje de carga
+          
             loadingSwal.close();
             
             if (!response.ok) {
@@ -109,8 +108,6 @@ for (let i = 0; i < update_forms.length; i++) {
             }
         } catch (error) {
             console.error("Error al actualizar el evento:", error);
-            
-            // Cerrar mensaje de carga si aún está abierto
             loadingSwal.close();
             
             RequestFeedback.showError({

@@ -1,10 +1,10 @@
 document.getElementById("new-event-form").addEventListener("submit", async function(event) {
-    event.preventDefault(); // Prevent default form submission
+    event.preventDefault(); 
 
-    // Get form data
+   
     const formData = new FormData(this);
 
-    // Convert FormData to an object and adapt types
+    // Converir los datos del formulario a un objeto
     const data = {
         name: formData.get("name"),
         date: new Date(formData.get("date")),
@@ -15,12 +15,12 @@ document.getElementById("new-event-form").addEventListener("submit", async funct
         altImage: formData.get("altImage"),
         eventType: formData.get("eventType"), // CONCERT, THEATER, etc.
         eventStatus: formData.get("eventStatus"), // AVAILABLE, CANCELLED, etc.
-        currenNumberOfTickets: parseInt(formData.get("currenNumberOfTickets")) // Convert to number
+        currenNumberOfTickets: parseInt(formData.get("currenNumberOfTickets")) 
     };
 
-    // Send the POST request to the server
+ 
     try {
-        // Mostrar mensaje de carga
+       
         const loadingSwal = RequestFeedback.showLoading({
             title: 'Creando evento',
             text: 'Guardando información del evento...'
@@ -34,7 +34,7 @@ document.getElementById("new-event-form").addEventListener("submit", async funct
             body: JSON.stringify(data)
         });
 
-        // Cerrar mensaje de carga
+        
         loadingSwal.close();
 
         if (response.ok) {

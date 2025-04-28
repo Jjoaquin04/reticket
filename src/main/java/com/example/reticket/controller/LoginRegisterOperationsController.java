@@ -51,7 +51,8 @@ public class LoginRegisterOperationsController {
                 
                 // Autenticación con Spring Security
                 Authentication auth = new UsernamePasswordAuthenticationToken(
-                    username, password, 
+                    username, 
+                    password, 
                     AuthorityUtils.createAuthorityList(user.getUserType().toString())
                 );
                 SecurityContextHolder.getContext().setAuthentication(auth);
@@ -95,10 +96,10 @@ public class LoginRegisterOperationsController {
             User_ savedUser = userService.createUser(newUser);
             session.setAttribute("userId", savedUser.getId());
             
-            // Autenticación con Spring Security
+            
             Authentication auth = new UsernamePasswordAuthenticationToken(
                 savedUser.getUsername(), 
-                password, // No uses la contraseña hasheada aquí
+                password, 
                 AuthorityUtils.createAuthorityList(savedUser.getUserType().toString())
             );
             SecurityContextHolder.getContext().setAuthentication(auth);

@@ -7,6 +7,7 @@ import io.github.cdimascio.dotenv.Dotenv;
 @SpringBootApplication
 public class ReticketApplication {
         public static void main(String[] args) {
+                
                 // Load environment variables from .env
                 Dotenv dotenv = Dotenv.configure().load();
                 System.setProperty("MYSQL_URL_JDBC", dotenv.get("MYSQL_URL_JDBC"));

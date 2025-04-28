@@ -1,13 +1,13 @@
-// Save the original form data
+// Guardar los datos originales del formulario
 let originalData = {};
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Get the original form data when the page loads
+    // Obtener los datos originales del formulario cuando se carga la página
     const form = document.getElementById('profile-form');
     const inputs = form.querySelectorAll('input, select, textarea');
     
     inputs.forEach(input => {
-        originalData[input.name] = input.value; // Save the original value
+        originalData[input.name] = input.value; // Guardar el valor original
     });
 });
 
@@ -29,13 +29,13 @@ document.querySelectorAll('.toggle-password').forEach(eyeIcon => {
 });
 
 document.getElementById('profile-form').addEventListener('submit', async function(event) {
-    event.preventDefault(); // Prevent default form submission
+    event.preventDefault(); // Prevenir el envío predeterminado del formulario
 
-    const userId = this.getAttribute("data-user-id"); // Get the user ID
+    const userId = this.getAttribute("data-user-id"); // Obtener el ID del usuario
     const newPassword = document.getElementById('new-password').value;
     const confirmPassword = document.getElementById('confirm-password').value;
 
-    // Validate passwords match if any password field is filled
+    // Validar que las contraseñas coincidan si se ha completado algún campo de contraseña
     if (newPassword || confirmPassword) {
         if (newPassword !== confirmPassword) {
             RequestFeedback.showError({
@@ -46,22 +46,22 @@ document.getElementById('profile-form').addEventListener('submit', async functio
         }
     }
 
-    // Include only the fields that have changed
+    // Incluir solo los campos que han cambiado
     const changedData = {};
     const inputs = this.querySelectorAll('input[type="text"], input[type="email"]');
 
     inputs.forEach(input => {
         if (originalData[input.name] !== input.value) {
-            changedData[input.name] = input.value; // Include only changed fields
+            changedData[input.name] = input.value; // Incluir solo campos modificados
         }
     });
 
-    // Add password if it was filled and validated
+    // Añadir contraseña si fue completada y validada
     if (newPassword) {
         changedData.password = newPassword;
     }
 
-    // Check if there are changes before sending the request
+    // Verificar si hay cambios antes de enviar la solicitud
     if (Object.keys(changedData).length === 0) {
         RequestFeedback.showInfo({
             title: 'Sin cambios',
