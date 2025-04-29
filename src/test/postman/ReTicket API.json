@@ -1,364 +1,663 @@
 {
-	"info": {
-		"_postman_id": "dd2c783b-0451-4533-a01e-e47a00ad33ac",
-		"name": "ReTicket API",
-		"description": "API para la gestión de eventos y tickets - Solo métodos implementados",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "43800788"
-	},
-	"item": [
-		{
-			"name": "MainPageController",
-			"item": [
-				{
-					"name": "GET / - Página principal",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								""
-							]
-						},
-						"description": "Obtiene la página principal con los eventos destacados"
-					},
-					"response": []
-				},
-				{
-					"name": "POST /buyTicket/{id} - Comprar ticket",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/buyTicket/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"buyTicket",
-								"1"
-							]
-						},
-						"description": "Compra un ticket para el evento con el ID especificado"
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "EventsPageController",
-			"item": [
-				{
-					"name": "GET /events - Eventos filtrados",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/events?searchString=Madrid&eventType=CONCERT&startDateTime=2025-01-01&endDateTime=2025-12-31&location=Madrid",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"events"
-							],
-							"query": [
-								{
-									"key": "searchString",
-									"value": "Madrid",
-									"description": "Término de búsqueda para nombre, ubicación o recinto"
-								},
-								{
-									"key": "eventType",
-									"value": "CONCERT",
-									"description": "Tipo de evento (CONCERT, FESTIVAL, THEATER, SPORTS)"
-								},
-								{
-									"key": "startDateTime",
-									"value": "2025-01-01",
-									"description": "Fecha de inicio (formato yyyy-MM-dd)"
-								},
-								{
-									"key": "endDateTime",
-									"value": "2025-12-31",
-									"description": "Fecha de fin (formato yyyy-MM-dd)"
-								},
-								{
-									"key": "location",
-									"value": "Madrid",
-									"description": "Ubicación del evento"
-								}
-							]
-						},
-						"description": "Obtiene eventos filtrados por diferentes criterios"
-					},
-					"response": []
-				},
-				{
-					"name": "GET /events/ - Todos los eventos",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/events/",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"events",
-								""
-							]
-						},
-						"description": "Obtiene todos los eventos disponibles"
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "AcountsOperationsController",
-			"item": [
-				{
-					"name": "POST /submitEvent - Crear evento",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\": \"Concierto Test\",\n    \"date\": \"2025-08-15T20:00:00\",\n    \"venue\": \"Wizink Center\",\n    \"location\": \"Madrid\",\n    \"description\": \"Descripción del evento de prueba\",\n    \"imageURL\": \"/img/eventos/concierto.webp\",\n    \"altImage\": \"Imagen del concierto\",\n    \"eventType\": \"CONCERT\",\n    \"eventStatus\": \"AVAILABLE\",\n    \"currenNumberOfTickets\": 100\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/submitEvent",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"submitEvent"
-							]
-						},
-						"description": "Crea un nuevo evento"
-					},
-					"response": []
-				},
-				{
-					"name": "DELETE /events/{id} - Eliminar evento",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/events/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"events",
-								"1"
-							]
-						},
-						"description": "Elimina un evento por su ID"
-					},
-					"response": []
-				},
-				{
-					"name": "PUT /events/{id} - Actualizar evento",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\": \"Concierto Actualizado\",\n    \"date\": \"2025-09-20T21:00:00\",\n    \"venue\": \"Palacio de Deportes\",\n    \"location\": \"Barcelona\",\n    \"description\": \"Descripción actualizada\",\n    \"imageURL\": \"/img/eventos/concierto_nuevo.webp\",\n    \"altImage\": \"Imagen actualizada\",\n    \"eventType\": \"CONCERT\",\n    \"eventStatus\": \"AVAILABLE\",\n    \"currenNumberOfTickets\": 150\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/events/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"events",
-								"1"
-							]
-						},
-						"description": "Actualiza un evento completo por su ID"
-					},
-					"response": []
-				},
-				{
-					"name": "PATCH /users/{id} - Actualizar usuario parcialmente",
-					"request": {
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"username\": \"nuevo_nombre\",\n    \"email\": \"nuevo@email.com\",\n    \"password\": \"nueva_contraseña\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/users/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"users",
-								"1"
-							]
-						},
-						"description": "Actualiza parcialmente los datos de un usuario"
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "AcountsHtmlPageController",
-			"item": [
-				{
-					"name": "GET /acounts/myEvents - Página de mis eventos",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/acounts/myEvents",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"acounts",
-								"myEvents"
-							]
-						},
-						"description": "Obtiene la página con todos los eventos del usuario"
-					},
-					"response": []
-				},
-				{
-					"name": "GET /acounts/profile - Página de perfil",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/acounts/profile",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"acounts",
-								"profile"
-							]
-						},
-						"description": "Obtiene la página de perfil del usuario"
-					},
-					"response": []
-				},
-				{
-					"name": "GET /acounts/myTickets - Página de mis tickets",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/acounts/myTickets",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"acounts",
-								"myTickets"
-							]
-						},
-						"description": "Obtiene la página con todos los tickets del usuario"
-					},
-					"response": []
-				},
-				{
-					"name": "GET /acounts/newEvent - Página de creación de evento",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/acounts/newEvent",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"acounts",
-								"newEvent"
-							]
-						},
-						"description": "Obtiene la página para crear un nuevo evento"
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "CustomErrorController",
-			"item": [
-				{
-					"name": "GET /error - Página de error",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/error",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"error"
-							]
-						},
-						"description": "Página de error 404"
-					},
-					"response": []
-				}
-			]
-		}
-	]
+    "info": {
+        "_postman_id": "dd2c783b-0451-4533-a01e-e47a00ad33ac",
+        "name": "ReTicket API",
+        "description": "API para la gestión de eventos y tickets - Colección completa con operaciones CRUD+PATCH",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "_exporter_id": "43800788"
+    },
+    "item": [
+        {
+            "name": "Usuario",
+            "item": [
+                {
+                    "name": "Crear Usuario (Registro)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"username\": \"usuario_nuevo\",\n    \"email\": \"nuevo@example.com\",\n    \"password\": \"contraseña123\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:8080/auth/register",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "auth",
+                                "register"
+                            ]
+                        },
+                        "description": "Registra un nuevo usuario en el sistema"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Login Usuario",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"username\": \"usuario_nuevo\",\n    \"password\": \"contraseña123\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:8080/auth/login",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "auth",
+                                "login"
+                            ]
+                        },
+                        "description": "Inicia sesión con un usuario existente"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Obtener Usuario por ID (Admin)",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:8080/admin/users/1",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "admin",
+                                "users",
+                                "1"
+                            ]
+                        },
+                        "description": "Obtiene los datos de un usuario por su ID (requiere permisos de administrador)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Actualizar Usuario Parcial (PATCH)",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"username\": \"nuevo_nombre\",\n    \"email\": \"nuevo@email.com\",\n    \"password\": \"nueva_contraseña\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:8080/users/1",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "users",
+                                "1"
+                            ]
+                        },
+                        "description": "Actualiza parcialmente los datos de un usuario"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Actualizar Usuario Admin (PATCH)",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"username\": \"admin_actualizado\",\n    \"email\": \"admin_nuevo@email.com\",\n    \"password\": \"nueva_contraseña\",\n    \"userType\": \"ADMIN\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:8080/admin/users/1",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "admin",
+                                "users",
+                                "1"
+                            ]
+                        },
+                        "description": "Actualiza parcialmente datos de un usuario (vista admin)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Crear Usuario (Admin)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"username\": \"nuevo_admin\",\n    \"email\": \"admin@example.com\",\n    \"password\": \"contraseña123\",\n    \"userType\": \"ADMIN\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:8080/admin/users",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "admin",
+                                "users"
+                            ]
+                        },
+                        "description": "Crea un nuevo usuario con rol específico (requiere permisos de administrador)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Eliminar Usuario (Admin)",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:8080/admin/users/2",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "admin",
+                                "users",
+                                "2"
+                            ]
+                        },
+                        "description": "Elimina un usuario por su ID (requiere permisos de administrador)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Logout Usuario",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:8080/auth/logout",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "auth",
+                                "logout"
+                            ]
+                        },
+                        "description": "Cierra la sesión del usuario actual"
+                    },
+                    "response": []
+                }
+            ],
+            "description": "Operaciones relacionadas con usuarios"
+        },
+        {
+            "name": "Evento",
+            "item": [
+                {
+                    "name": "Crear Evento",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Concierto Test\",\n    \"date\": \"2025-08-15T20:00:00\",\n    \"venue\": \"Wizink Center\",\n    \"location\": \"Madrid\",\n    \"description\": \"Descripción del evento de prueba\",\n    \"imageURL\": \"/img/eventos/concierto.webp\",\n    \"altImage\": \"Imagen del concierto\",\n    \"eventType\": \"CONCERT\",\n    \"eventStatus\": \"AVAILABLE\",\n    \"currenNumberOfTickets\": 100,\n    \"price\": 25.99\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:8080/submitEvent",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "submitEvent"
+                            ]
+                        },
+                        "description": "Crea un nuevo evento"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Obtener Todos los Eventos",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:8080/events/",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "events",
+                                ""
+                            ]
+                        },
+                        "description": "Obtiene todos los eventos disponibles"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Obtener Eventos Filtrados",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:8080/events?searchString=Madrid&eventType=CONCERT&startDateTime=2025-01-01&endDateTime=2025-12-31&location=Madrid",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "events"
+                            ],
+                            "query": [
+                                {
+                                    "key": "searchString",
+                                    "value": "Madrid",
+                                    "description": "Término de búsqueda para nombre, ubicación o recinto"
+                                },
+                                {
+                                    "key": "eventType",
+                                    "value": "CONCERT",
+                                    "description": "Tipo de evento (CONCERT, FESTIVAL, THEATER, SPORTS)"
+                                },
+                                {
+                                    "key": "startDateTime",
+                                    "value": "2025-01-01",
+                                    "description": "Fecha de inicio (formato yyyy-MM-dd)"
+                                },
+                                {
+                                    "key": "endDateTime",
+                                    "value": "2025-12-31",
+                                    "description": "Fecha de fin (formato yyyy-MM-dd)"
+                                },
+                                {
+                                    "key": "location",
+                                    "value": "Madrid",
+                                    "description": "Ubicación del evento"
+                                }
+                            ]
+                        },
+                        "description": "Obtiene eventos filtrados por diferentes criterios"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Actualizar Evento (PUT)",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Concierto Actualizado\",\n    \"date\": \"2025-09-20T21:00:00\",\n    \"venue\": \"Palacio de Deportes\",\n    \"location\": \"Barcelona\",\n    \"description\": \"Descripción actualizada\",\n    \"imageURL\": \"/img/eventos/concierto_nuevo.webp\",\n    \"altImage\": \"Imagen actualizada\",\n    \"eventType\": \"CONCERT\",\n    \"eventStatus\": \"AVAILABLE\",\n    \"currenNumberOfTickets\": 150,\n    \"price\": 29.99\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:8080/events/1",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "events",
+                                "1"
+                            ]
+                        },
+                        "description": "Actualiza un evento completo por su ID"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Actualizar Estado del Evento (PATCH)",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "\"CANCELLED\""
+                        },
+                        "url": {
+                            "raw": "http://localhost:8080/events/1",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "events",
+                                "1"
+                            ]
+                        },
+                        "description": "Actualiza el estado de un evento (AVAILABLE, CANCELLED, FINISHED, SOLD_OUT)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Eliminar Evento",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:8080/events/1",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "events",
+                                "1"
+                            ]
+                        },
+                        "description": "Elimina un evento por su ID"
+                    },
+                    "response": []
+                }
+            ],
+            "description": "Operaciones relacionadas con eventos"
+        },
+        {
+            "name": "Carrito de Compras",
+            "item": [
+                {
+                    "name": "Añadir Ítem al Carrito",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:8080/addShoppingCart/1",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "addShoppingCart",
+                                "1"
+                            ]
+                        },
+                        "description": "Añade un evento al carrito de compras"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Actualizar Cantidad (PATCH)",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:8080/cartItems/1/2",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "cartItems",
+                                "1",
+                                "2"
+                            ]
+                        },
+                        "description": "Actualiza la cantidad de un ítem en el carrito (2 tickets)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Eliminar Ítem del Carrito",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:8080/cartItems/1",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "cartItems",
+                                "1"
+                            ]
+                        },
+                        "description": "Elimina un ítem del carrito de compras"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Realizar Checkout",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:8080/checkout",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "checkout"
+                            ]
+                        },
+                        "description": "Procesa todos los ítems del carrito de compras para realizar la compra"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Ver Carrito (HTML)",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:8080/cart",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "cart"
+                            ]
+                        },
+                        "description": "Obtiene la página del carrito de compras"
+                    },
+                    "response": []
+                }
+            ],
+            "description": "Operaciones relacionadas con el carrito de compras"
+        },
+        {
+            "name": "Tickets",
+            "item": [
+                {
+                    "name": "Ver Mis Tickets (HTML)",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:8080/acounts/myTickets",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "acounts",
+                                "myTickets"
+                            ]
+                        },
+                        "description": "Obtiene la página con todos los tickets del usuario"
+                    },
+                    "response": []
+                }
+            ],
+            "description": "Operaciones relacionadas con tickets"
+        },
+        {
+            "name": "Páginas HTML",
+            "item": [
+                {
+                    "name": "GET / - Página principal",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:8080/",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                ""
+                            ]
+                        },
+                        "description": "Obtiene la página principal con los eventos destacados"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "GET /acounts/myEvents - Página de mis eventos",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:8080/acounts/myEvents",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "acounts",
+                                "myEvents"
+                            ]
+                        },
+                        "description": "Obtiene la página con todos los eventos del usuario"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "GET /acounts/profile - Página de perfil",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:8080/acounts/profile",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "acounts",
+                                "profile"
+                            ]
+                        },
+                        "description": "Obtiene la página de perfil del usuario"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "GET /acounts/newEvent - Página de creación de evento",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:8080/acounts/newEvent",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "acounts",
+                                "newEvent"
+                            ]
+                        },
+                        "description": "Obtiene la página para crear un nuevo evento"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "GET /error - Página de error",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:8080/error",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "error"
+                            ]
+                        },
+                        "description": "Página de error 404"
+                    },
+                    "response": []
+                }
+            ],
+            "description": "Endpoints que devuelven páginas HTML"
+        }
+    ]
 }
