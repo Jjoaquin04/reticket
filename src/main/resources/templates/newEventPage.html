@@ -45,15 +45,18 @@
             <label for="eventStatus">Estado del evento:</label>
             <select id="eventStatus" name="eventStatus" required>
                 <option value="AVAILABLE">Activo</option>
-                <option value="CANCELED">Cancelado</option>
+                <option value="CANCELLED">Cancelado</option>
                 <option value="FINISHED">Completado</option>
                 <option value="SOLD_OUT">Agotado</option>
             </select>
             <br>
 
-            <label for="availableTickets">Boletos disponibles:</label>
-            <input type="number" id="availableTickets" name="currenNumberOfTickets" placeholder="Boletos disponibles" required><br>
+            <label for="availableTickets">Tickets disponibles:</label>
+            <input type="number" id="availableTickets" name="currenNumberOfTickets" placeholder="Tickets disponibles" required><br>
             
+            <label for="price">Precio:</label>
+            <input type="number" id="price" name="price" placeholder="Precio por ticket" step="0.01" min="0" required><br>
+
             <button id="create-event-button">Crear evento</button>
         </form>
 

@@ -46,7 +46,7 @@ public class AcountsOperationsController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "Usuario no autenticado"));
         }
         
-        if (event.getPrice() < 0) {
+        if (event.getPrice() < 0.0) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
             .body(Map.of("error", "El precio no puede ser negativo"));
         }

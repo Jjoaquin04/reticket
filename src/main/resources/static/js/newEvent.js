@@ -15,10 +15,9 @@ document.getElementById("new-event-form").addEventListener("submit", async funct
         altImage: formData.get("altImage"),
         eventType: formData.get("eventType"), // CONCERT, THEATER, etc.
         eventStatus: formData.get("eventStatus"), // AVAILABLE, CANCELLED, etc.
-        currenNumberOfTickets: parseInt(formData.get("currenNumberOfTickets")) 
+        currenNumberOfTickets: parseInt(formData.get("currenNumberOfTickets")),
+        price: parseFloat(formData.get("price")),
     };
-
- 
     try {
        
         const loadingSwal = RequestFeedback.showLoading({
