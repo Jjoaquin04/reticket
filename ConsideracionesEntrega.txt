@@ -1,0 +1,9 @@
+- En esta segunda parte de la práctica hemos usado una db mySQL de Railway
+para que podamos trabajar cada uno de forma remota.
+
+- Este es el enlace de invitación por si quieres ver como se añaden/borran 
+entidades de la base de datos al moverte por la web: 
+
+https://railway.com/invite/YQ7mQXnwApp
+
+- La colección de operaciones Postman esta dentro de la carpeta test

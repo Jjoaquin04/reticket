@@ -655,6 +655,67 @@
                         "description": "Página de error 404"
                     },
                     "response": []
+                },
+                {
+                    "name": "GET /events - Página de eventos",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:8080/events",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "events"
+                            ]
+                        },
+                        "description": "Obtiene la página con todos los eventos disponibles para compra"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "GET /shoppingCart - Página de carrito",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:8080/shoppingCart",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "shoppingCart"
+                            ]
+                        },
+                        "description": "Obtiene la página del carrito de compras con los items seleccionados"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "GET /acounts/manageProfiles - Página de gestión de usuarios",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:8080/acounts/manageProfiles",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "acounts",
+                                "manageProfiles"
+                            ]
+                        },
+                        "description": "Obtiene la página para administrar usuarios (solo para administradores)"
+                    },
+                    "response": []
                 }
             ],
             "description": "Endpoints que devuelven páginas HTML"
