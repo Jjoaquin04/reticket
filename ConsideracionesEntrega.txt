@@ -7,3 +7,7 @@ entidades de la base de datos al moverte por la web:
 https://railway.com/invite/YQ7mQXnwApp
 
 - La colección de operaciones Postman esta dentro de la carpeta test
+
+- Si quieres entrar con un usuario de tipo ADMIN escribe:
+
+    - user1 contraseña: 1234        

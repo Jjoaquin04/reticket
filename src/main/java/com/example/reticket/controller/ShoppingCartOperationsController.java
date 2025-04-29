@@ -61,7 +61,8 @@ public class ShoppingCartOperationsController {
         // Obtener el carrito de compras si existe
         ShoppingCart shoppingCart = shoppingCartService.getShoppingCartByUser(user.get());
         if (shoppingCart == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "Carrito de compras no encontrado"));
+            shoppingCart = new ShoppingCart(user.get());
+            shoppingCartService.createShoppingCart(shoppingCart);
         }
         
         CartItem existingCartItem = cartItemService.getCartItemByEventAndShoppingCart(existingEvent.get(),shoppingCart);
